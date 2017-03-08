@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+
+
+    >
+
+
+
+<android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    >
+
+</android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+           android:layout_height="match_parent"
+           android:layout_width="match_parent"
+           android:background="@drawable/back"
+           android:orientation="vertical"
+          >
+
+
+        <ImageView
+            android:layout_width="153dp"
+            android:layout_height="133dp"
+            app:srcCompat="@drawable/andriod"
+
+            android:id="@+id/imageView2"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+
+
+            />
+
+        <TextView
+            android:text="Andriod project: Smart Home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+
+
+
+        />
+
+        <TextView
+            android:text="\n\n\nThis projetc is about the smart home setting\n please click the toolbar to select different functions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
+
+            />
+
+
+        <TextView
+            android:text="\n\n\n Zhen Qu \n Sizhe Chen \n Qiuju Zhu\n Bo Yang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <item
+        android:id="@+id/person"
+        android:title="member"
+        app:showAsAction="always"
+        android:orderInCategory="200"
+        android:icon="@drawable/people" />
+
+    <item
+        android:id="@+id/living"
+        android:title="Living Room"
+
+        />
+    <!--android:orderInCategory="100"-->
+
+        <!--app:showAsAction="always"-->
+        <!--android:icon="@mipmap/ic_launcher" />-->
+
+    <item
+        android:id="@+id/kitchen"
+        android:title="Kitchen"/>
+        <!--app:showAsAction="always"-->
+        <!--android:orderInCategory="200"-->
+        <!--android:icon="@mipmap/ic_launcher" />-->
+
+    <item
+        android:id="@+id/house"
+        android:title="House Setting"
+
+        />
+        <!--app:showAsAction="always"-->
+        <!--android:orderInCategory="300"-->
+
+
+        <!--android:icon="@mipmap/ic_launcher" -->
+
+    <item
+        android:id="@+id/car"
+        android:title="Automobile"
+
+        />
+        <!--android:icon="@mipmap/ic_launcher" -->
+
+</menu>
