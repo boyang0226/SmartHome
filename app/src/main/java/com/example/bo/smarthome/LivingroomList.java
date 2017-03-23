@@ -24,42 +24,39 @@ import java.util.ArrayList;
 
 public class LivingroomList extends AppCompatActivity {
     protected static final String ACTIVITY_NAME = "StartActivity";
-    private ArrayList<String> messages = new ArrayList<>();
+    private ArrayList<String> devices = new ArrayList<>();
     Cursor results;
-    public LivingroomDatabaseHelper dbHelper;
+    public LivingroomDBHelper dbHelper;
     public SQLiteDatabase db;
-    private ChatAdapter messageAdapter;
+    private DeviceAdapter deviceAdapter;
     FragmentTransaction fragTransaction;
     LivingroomFragment frag;
-    private class ChatAdapter extends ArrayAdapter<String>{
-        public ChatAdapter(Context ctx) {
+
+    private class DeviceAdapter extends ArrayAdapter<String>{
+        public DeviceAdapter(Context ctx) {
             super(ctx, 0);
         }
 
         @Override
         public int getCount(){
-            return messages.size();
+            return devices.size();
         }
 
         public long getItemId(int position)
         {
             results.moveToPosition(position);
-            return results.getLong(results.getColumnIndex(LivingroomDatabaseHelper.KEY_ID));
+            return results.getLong(results.getColumnIndex(LivingroomDBHelper.KEY_ID));
         }
         @Override
         public String getItem(int position){
-            return messages.get(position);
+            return devices.get(position);
         }
         public View getView(int position, View convertView, ViewGroup parent){
             LayoutInflater inflater = LivingroomList.this.getLayoutInflater();
-            View result = null ;
-            if (position %2  == 0)
-                result = inflater.inflate(R.layout.chat_row_outgoing, null);
-            else
-                result = inflater.inflate(R.layout.chat_row_incoming, null);
+            View result = inflater.inflate(R.layout.list_item_template, null);
 
-            TextView message = (TextView)result.findViewById(R.id.message_text);
-            message.setText(getItem(position)); // get the string at position
+            TextView deviceName = (TextView)result.findViewById(R.id.item_text);
+            deviceName.setText(getItem(position)); // get the string at position
 
             return result;
 
@@ -68,27 +65,44 @@ public class LivingroomList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_window);
+        setContentView(R.layout.activity_livingroom_list);
 
         final ListView listView = (ListView) findViewById(R.id.list_view);
-        Button SendButton = (Button) findViewById(R.id.Send_button);
-        final EditText editText = (EditText)findViewById(R.id.editText);
+        Button addButton = (Button) findViewById(R.id.lr_list_add);
 
         final boolean isTablet = findViewById(R.id.fragment_holder) != null;
 
-        messageAdapter = new ChatAdapter(this);
-        listView.setAdapter(messageAdapter);
+        deviceAdapter = new DeviceAdapter(this);
+        listView.setAdapter(deviceAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView view, View arg1, int position, long id) {
-                String message = (String)(listView.getItemAtPosition(position));
-                Bundle bun = new Bundle();
-                if (isTablet) {
+                String deviceName = (String)(listView.getItemAtPosition(position));
 
-                    bun.putLong("id", id);
-                    bun.putString("text", message);
+                Bundle bun = new Bundle();
+                bun.putLong("id", id);
+                bun.putString("deviceName", deviceName);
+
+                results.moveToPosition(position);
+
+                String deviceType = results.getString(results.getColumnIndex(LivingroomDBHelper.KEY_Type));
+                int deviceSwitch = results.getInt(results.getColumnIndex(LivingroomDBHelper.KEY_Switch));
+                int brightness = results.getInt(results.getColumnIndex(LivingroomDBHelper.KEY_Brightness));
+                String color = results.getString(results.getColumnIndex(LivingroomDBHelper.KEY_Color));
+                int channel = results.getInt(results.getColumnIndex(LivingroomDBHelper.KEY_Channel));
+                int volume = results.getInt(results.getColumnIndex(LivingroomDBHelper.Key_Volume));
+                int height = results.getInt(results.getColumnIndex(LivingroomDBHelper.KEY_Height));
+
+                bun.putString("deviceType", deviceType);
+                bun.putBoolean("switch", deviceSwitch!=0);
+                bun.putInt("brightness", brightness);
+                bun.putString("color", color);
+                bun.putInt("channel", channel);
+                bun.putInt("volume", volume);
+                bun.putInt("height", height);
+
+                if (isTablet) {
                     bun.putBoolean("isTablet", true);
                     frag = new LivingroomFragment(LivingroomList.this);
                     frag.setArguments( bun );
@@ -100,34 +114,47 @@ public class LivingroomList extends AppCompatActivity {
                     intent.putExtras(bun);
                     startActivityForResult(intent, 5);
                 }
+
+                int frequency = results.getInt(results.getColumnIndex(LivingroomDBHelper.KEY_Frequency));
+                updateDbDeviceFrequency(id, frequency + 1);
             }
         });
 
         refreshMessages();
 
-        SendButton.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ContentValues values = new ContentValues();
-
-                values.put(LivingroomDatabaseHelper.KEY_MESSAGE, editText.getText().toString());
-
-                db.insert(dbHelper.TABLE_NAME, null, values);
-
-                editText.setText("");
-                refreshMessages();
-                Log.i(ACTIVITY_NAME, "In onCreate()");
+                Bundle bun = new Bundle();
+                bun.putBoolean("addNewDevice", true);
+                if (isTablet) {
+                    bun.putBoolean("isTablet", true);
+                    frag = new LivingroomFragment(LivingroomList.this);
+                    frag.setArguments( bun );
+                    fragTransaction = getFragmentManager().beginTransaction();
+                    fragTransaction.add(R.id.fragment_holder, frag).commit();
+                }else{
+                    Intent intent = new Intent(LivingroomList.this, LivingroomItemDetails.class);
+                    intent.putExtra("isTablet", false);
+                    intent.putExtras(bun);
+                    startActivityForResult(intent, 6);
+                }
             }
         });
     }
 
     private void refreshMessages(){
-        dbHelper = new LivingroomDatabaseHelper(this);
+        dbHelper = new LivingroomDBHelper(this);
         db = dbHelper.getWritableDatabase();
 
-        results = db.query(false, LivingroomDatabaseHelper.TABLE_NAME,
-                new String[] { LivingroomDatabaseHelper.KEY_ID, LivingroomDatabaseHelper.KEY_MESSAGE },
-                null, null, null, null, null, null);
+        results = db.query(false, LivingroomDBHelper.TABLENAME,
+                new String[] {LivingroomDBHelper.KEY_ID, LivingroomDBHelper.KEY_Name,
+                            LivingroomDBHelper.KEY_Switch, LivingroomDBHelper.KEY_Brightness,
+                            LivingroomDBHelper.KEY_Color, LivingroomDBHelper.KEY_Channel,
+                            LivingroomDBHelper.Key_Volume, LivingroomDBHelper.KEY_Height,
+                            LivingroomDBHelper.KEY_Type, LivingroomDBHelper.KEY_Frequency
+                },
+                null, null, null, null, LivingroomDBHelper.KEY_Frequency+ " DESC", null);
         int rows = results.getCount() ; //number of rows returned
         results.moveToFirst(); //move to first result
 
@@ -135,13 +162,13 @@ public class LivingroomList extends AppCompatActivity {
         for(int i = 0; i < results.getColumnCount();i++)
             Log.i(ACTIVITY_NAME, "Cursor’s column name = " + results.getColumnName(i));
 
-        messages.clear();
+        devices.clear();
         while(!results.isAfterLast() ) {
-            Log.i(ACTIVITY_NAME, "SQL MESSAGE:" + results.getString(results.getColumnIndex(LivingroomDatabaseHelper.KEY_MESSAGE)));
-            messages.add(results.getString(results.getColumnIndex(LivingroomDatabaseHelper.KEY_MESSAGE)));
+            Log.i(ACTIVITY_NAME, "SQL MESSAGE:" + results.getString(results.getColumnIndex(LivingroomDBHelper.KEY_Name)));
+            devices.add(results.getString(results.getColumnIndex(LivingroomDBHelper.KEY_Name)));
             results.moveToNext();
         }
-        messageAdapter.notifyDataSetChanged();
+        deviceAdapter.notifyDataSetChanged();
     }
     @Override
     protected void onDestroy(){
@@ -149,17 +176,91 @@ public class LivingroomList extends AppCompatActivity {
         db.close();
     }
 
-    public void deleteDbMessage(Long messageID){
-        db.delete(dbHelper.TABLE_NAME, LivingroomDatabaseHelper.KEY_ID + "=" + messageID, null);
+    public void insertDbDevice(String deviceName, String deviceTye){
+        ContentValues values = new ContentValues();
+        values.put(LivingroomDBHelper.KEY_Name, deviceName);
+        values.put(LivingroomDBHelper.KEY_Type, deviceTye);
+        db.insert(LivingroomDBHelper.TABLENAME, null, values);
+        refreshMessages();
+    }
+
+    public void updateDbSimpleLamp(long deviceID, boolean deviceSwitch){
+        ContentValues values = new ContentValues();
+        values.put(LivingroomDBHelper.KEY_Switch, deviceSwitch);
+        db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
+    }
+    public void updateDbDimmableLamp(long deviceID, int brightness){
+        ContentValues values = new ContentValues();
+        values.put(LivingroomDBHelper.KEY_Brightness, brightness);
+        db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
+    }
+    public void updateDbSmartLamp(long deviceID, int brightness, String color){
+        ContentValues values = new ContentValues();
+        values.put(LivingroomDBHelper.KEY_Brightness, brightness);
+        values.put(LivingroomDBHelper.KEY_Color, color);
+        db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
+    }
+    public void updateDbTV(long deviceID, boolean deviceSwitch, int channel, int volume){
+        ContentValues values = new ContentValues();
+        values.put(LivingroomDBHelper.KEY_Switch, deviceSwitch);
+        values.put(LivingroomDBHelper.KEY_Channel, channel);
+        values.put(LivingroomDBHelper.Key_Volume, volume);
+        db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
+    }
+
+    public void updateDbBlinds(long deviceID, int height){
+        ContentValues values = new ContentValues();
+        values.put(LivingroomDBHelper.KEY_Height, height);
+        db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
+    }
+
+
+    public void updateDbDeviceFrequency(long deviceID, int frequency){
+        ContentValues values = new ContentValues();
+        values.put(LivingroomDBHelper.KEY_Frequency, frequency);
+        db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
+        refreshMessages();
+    }
+
+    public void deleteDbDevice(Long deviceID){
+        db.delete(LivingroomDBHelper.TABLENAME, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
         refreshMessages();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == 5) {
-            final Bundle bun = data.getExtras();
-            Long messageID = (Long)bun.getLong("id");
-            deleteDbMessage(messageID);
+        final Bundle bun = data.getExtras();
+        Long deviceID = (Long)bun.getLong("id");
+        if (requestCode==5 && resultCode == 0) {
+            deleteDbDevice(deviceID);
+        }
+        if (requestCode==5 && resultCode == 1) {
+            Long deviceType = (Long)bun.getLong("deviceType");
+            if (deviceType.equals("Simple Lamp")){
+                boolean deviceSwith = bun.getBoolean("switch");
+                updateDbSimpleLamp(deviceID, deviceSwith);
+            }else if (deviceType.equals("Dimmable Lamp")){
+                int brightness = bun.getInt("brightness");
+                updateDbDimmableLamp(deviceID, brightness);
+            }else if (deviceType.equals("Smart Lamp")){
+                int brightness = bun.getInt("brightness");
+                String color = bun.getString("color");
+                updateDbSmartLamp(deviceID, brightness, color);
+            }else if (deviceType.equals("Television")){
+                boolean deviceSwith = bun.getBoolean("switch");
+                int channel = bun.getInt("channel");
+                int volume = bun.getInt("volume");
+                updateDbTV(deviceID, deviceSwith, channel, volume);
+            }else if (deviceType.equals("Window Blinds")){
+                int height = bun.getInt("height");
+                updateDbBlinds(deviceID, height);
+            }
+            deleteDbDevice(deviceID);
+        }
+        if (requestCode == 6 && resultCode == 0) {
+            String deviceName = bun.getString("deviceName");
+            String deviceType = bun.getString("deviceType");
+            insertDbDevice(deviceName, deviceType);
         }
     }
 

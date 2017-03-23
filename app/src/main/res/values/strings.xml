@@ -48,7 +48,8 @@
     <string name="lr_blinds_name">Window Blinds</string>
     <string name="lr_blinds_brightness_label">Brightness</string>
     <string name="lr_blinds_seekBar_value">0</string>
-
+    <string name="lr_tv_name">Television</string>
+    <string name="lr_tv_switch">TV Switch</string>
     <string name="lr_save">SAVE</string>
     <string name="lr_delete">DELETE</string>
 
