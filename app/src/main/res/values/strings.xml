@@ -6,4 +6,51 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+
+    <string name="lr_intro_title">Welcome to Living Room</string>
+    <string name="lr_intro_author">Author: Sizhe Chen</string>
+    <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
+    <string name="lr_intro_start_button">START</string>
+
+    <string name="lr_list_add">ADD</string>
+    <string name="lr_list_details_content_title">Create New Device</string>
+    <string name="lr_add_device_name_label">Device Name</string>
+    <string name="lr_add_device_category_label">Device Category</string>
+
+    <string name="lr_list_details_content_submit">SUBMIT</string>
+
+    <string-array name="lr_category_arrays">
+        <item>Simple Lamp</item>
+        <item>Dimmable Lamp</item>
+        <item>Smart Lamp</item>
+        <item>Television</item>
+        <item>Window Blinds</item>
+    </string-array>
+
+    <string-array name="lr_smart_lamp_color">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>White</item>
+    </string-array>
+
+    <string name="lr_simple_lamp_name">Simple Lamp</string>
+    <string name="lr_simple_lamp_switch">Lamp Switch</string>
+    <string name="lr_dimmable_lamp_name">Dimmable Lamp</string>
+    <string name="lr_dimmable_lamp_brightness_label">Brightness</string>
+    <string name="lr_dimmable_lamp_seekBar_value">0</string>
+    <string name="lr_smart_lamp_name">Smart Lamp</string>
+    <string name="lr_smart_lamp_seekBar_value">0</string>
+    <string name="lr_smart_lamp_color">Color</string>
+    <string name="lr_smart_lamp_brightness">Brightness</string>
+    <string name="lr_blinds_name">Window Blinds</string>
+    <string name="lr_blinds_brightness_label">Brightness</string>
+    <string name="lr_blinds_seekBar_value">0</string>
+
+    <string name="lr_save">SAVE</string>
+    <string name="lr_delete">DELETE</string>
+
+
 </resources>
