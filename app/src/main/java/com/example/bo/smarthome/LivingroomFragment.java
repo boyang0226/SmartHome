@@ -35,9 +35,12 @@ public class LivingroomFragment extends Fragment {
 
     View gui;
     Switch SimpleLampSwitch;
+    Switch tvSwitch;
     SeekBar dimmableLampSeekBar;
     SeekBar smartLampSeekBar;
     SeekBar BlindsSeekBar;
+    SeekBar tvVolumeSeekBar;
+    SeekBar tvChannelSeekBar;
     Spinner smartLampSpinner;
     TextView brightnessLabel;
     TextView heightLabel;
@@ -72,7 +75,7 @@ public class LivingroomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (addNewDevice) {
-            gui = inflater.inflate(R.layout.activity_livingroom_item_details, null);
+            gui = inflater.inflate(R.layout.activity_livingroom_add_item_content, null);
             deviceInput = (EditText)gui.findViewById(R.id.lr_add_device_name_edit);
             typeSpinner = (Spinner)gui.findViewById(R.id.lr_spinner);
         }else if (deviceType.equals("Simple Lamp")){
@@ -86,14 +89,29 @@ public class LivingroomFragment extends Fragment {
             dimmableLampSeekBar.setMax(100);
             dimmableLampSeekBar.setProgress(brightness);
 
-            brightnessLabel = (TextView)gui.findViewById(R.id.lr_dimmable_lamp_brightness_label);
-            brightnessLabel.setText(brightness);
+            dimmableLampSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar){
+                }
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                    brightnessLabel.setText(String.valueOf(progress));
+                }
+            });
+            brightnessLabel = (TextView)gui.findViewById(R.id.lr_dimmable_lamp_seekBar_value);
+            brightnessLabel.setText(String.valueOf(brightness));
         }else if (deviceType.equals("Smart Lamp")){
             gui = inflater.inflate(R.layout.activity_livingroom_smart_lamp_content, null);
             smartLampSeekBar = (SeekBar)gui.findViewById(R.id.lr_smart_lamp_seekBar);
             smartLampSeekBar.setMax(0);
             smartLampSeekBar.setMax(100);
             smartLampSeekBar.setProgress(brightness);
+
+            brightnessLabel = (TextView)gui.findViewById(R.id.lr_smart_lamp_seekBar_value);
+            brightnessLabel.setText(String.valueOf(brightness));
 
             smartLampSpinner = (Spinner)gui.findViewById(R.id.lr_color_spinner);
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(livingroomList, R.array.lr_smart_lamp_color, android.R.layout.simple_spinner_item);
@@ -104,7 +122,54 @@ public class LivingroomFragment extends Fragment {
 
         }else if (deviceType.equals("Television")){
             gui = inflater.inflate(R.layout.activity_livingroom_tv_content, null);
-            // TODO
+            tvSwitch = (Switch)gui.findViewById(R.id.lr_tv_switch);
+            tvSwitch.setChecked(deviceSwitch);
+            tvVolumeSeekBar = (SeekBar)gui.findViewById(R.id.lr_tv_volume_seekBar);
+            tvVolumeSeekBar.setMax(1);
+            tvVolumeSeekBar.setMax(100);
+            tvVolumeSeekBar.setProgress(volume);
+            tvChannelSeekBar = (SeekBar)gui.findViewById(R.id.lr_tv_channel_seekBar);
+            tvChannelSeekBar.setMax(0);
+            tvChannelSeekBar.setMax(100);
+            tvChannelSeekBar.setProgress(channel);
+
+            Button upButton = (Button)gui.findViewById(R.id.lr_tv_up_button);
+            Button downButton = (Button)gui.findViewById(R.id.lr_tv_down_button);
+            Button leftButton = (Button)gui.findViewById(R.id.lr_tv_left_button);
+            Button rightButton = (Button)gui.findViewById(R.id.lr_tv_right_button);
+
+            upButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int volume = tvVolumeSeekBar.getProgress();
+                    if (volume < 100)
+                        tvVolumeSeekBar.setProgress(volume + 1);
+                }
+            });
+            downButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int volume = tvVolumeSeekBar.getProgress();
+                    if (volume > 0)
+                        tvVolumeSeekBar.setProgress(volume - 1);
+                }
+            });
+            rightButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int channel = tvChannelSeekBar.getProgress();
+                    if (channel < 100)
+                        tvChannelSeekBar.setProgress(channel + 1);
+                }
+            });
+            leftButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int channel = tvChannelSeekBar.getProgress();
+                    if (channel > 1)
+                        tvChannelSeekBar.setProgress(channel - 1);
+                }
+            });
 
         }else if (deviceType.equals("Window Blinds")){
             gui = inflater.inflate(R.layout.activity_livingroom_blinds_content, null);
@@ -117,22 +182,23 @@ public class LivingroomFragment extends Fragment {
         }
 
         Button deleteButton = (Button)gui.findViewById(R.id.lr_delete);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (deleteButton != null)
+            deleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                if (!isTablet){
-                    Intent intent = new Intent();
-                    intent.putExtra("id" ,id);
-                    getActivity().setResult(0, intent);
-                    getActivity().finish();
+                    if (!isTablet){
+                        Intent intent = new Intent();
+                        intent.putExtra("id" ,id);
+                        getActivity().setResult(0, intent);
+                        getActivity().finish();
+                    }
+                    else{
+                        livingroomList.deleteDbDevice(id);
+                        livingroomList.removeFragment();
+                    }
                 }
-                else{
-                    livingroomList.deleteDbDevice(id);
-                    livingroomList.removeFragment();
-                }
-            }
-        });
+            });
         if (gui.findViewById(R.id.lr_list_details_content_submit) != null){
             Button submitButton = (Button)gui.findViewById(R.id.lr_list_details_content_submit);
             submitButton.setOnClickListener(new View.OnClickListener() {
@@ -156,58 +222,64 @@ public class LivingroomFragment extends Fragment {
             });
         }
         Button saveButton = (Button)gui.findViewById(R.id.lr_save);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                boolean simpleLampSwitchValue = false;
-                int dimmableLampBrightness = 0;
-                int smartLampBrighteness = 0;
-                String  smartLampColor = "White";
-                boolean tvSwitchValue = false;
-                int tvChannel = 1;
-                int tvVolume = 0;
-                int blindsHeight = 0;
-                Intent intent = new Intent();
-                intent.putExtra("id" ,id);
-
-                if (deviceType.equals("Simple Lamp")){
-                    simpleLampSwitchValue = SimpleLampSwitch.isChecked();
-                    intent.putExtra("switch", simpleLampSwitchValue);
-                }else if (deviceType.equals("Dimmable Lamp")){
-                    dimmableLampBrightness = dimmableLampSeekBar.getProgress();
-                    intent.putExtra("brightness", dimmableLampBrightness);
-                }else if (deviceType.equals("Smart Lamp")){
-                    smartLampBrighteness = smartLampSeekBar.getProgress();
-                    smartLampColor = smartLampSpinner.getSelectedItem().toString();
-                    intent.putExtra("brightness", smartLampBrighteness);
-                    intent.putExtra("color", smartLampColor);
-                }else if (deviceType.equals("Television")){
-                    // TODO
-                }else if (deviceType.equals("Window Blinds")){
-                    blindsHeight = BlindsSeekBar.getProgress();
-                    intent.putExtra("height", blindsHeight);
-                }
-
-                if (!isTablet){
-                    getActivity().setResult(1, intent);
-                    getActivity().finish();
-                }
-                else{
+        if (saveButton != null)
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    boolean simpleLampSwitchValue = false;
+                    int dimmableLampBrightness = 0;
+                    int smartLampBrighteness = 0;
+                    String  smartLampColor = "White";
+                    boolean tvSwitchValue = false;
+                    int tvChannel = 1;
+                    int tvVolume = 0;
+                    int blindsHeight = 0;
+                    Intent intent = new Intent();
+                    intent.putExtra("id" ,id);
+                    intent.putExtra("deviceType" ,deviceType);
                     if (deviceType.equals("Simple Lamp")){
-                        livingroomList.updateDbSimpleLamp(id, simpleLampSwitchValue);
+                        simpleLampSwitchValue = SimpleLampSwitch.isChecked();
+                        intent.putExtra("switch", simpleLampSwitchValue);
                     }else if (deviceType.equals("Dimmable Lamp")){
-                        livingroomList.updateDbDimmableLamp(id, dimmableLampBrightness);
+                        dimmableLampBrightness = dimmableLampSeekBar.getProgress();
+                        intent.putExtra("brightness", dimmableLampBrightness);
                     }else if (deviceType.equals("Smart Lamp")){
-                        livingroomList.updateDbSmartLamp(id, smartLampBrighteness, smartLampColor);
+                        smartLampBrighteness = smartLampSeekBar.getProgress();
+                        smartLampColor = smartLampSpinner.getSelectedItem().toString();
+                        intent.putExtra("brightness", smartLampBrighteness);
+                        intent.putExtra("color", smartLampColor);
                     }else if (deviceType.equals("Television")){
-                        // TODO
+                        tvChannel = tvChannelSeekBar.getProgress();
+                        tvVolume = tvVolumeSeekBar.getProgress();
+                        tvSwitchValue = tvSwitch.isChecked();
+                        intent.putExtra("channel", tvChannel);
+                        intent.putExtra("volume", tvVolume);
+                        intent.putExtra("switch", tvSwitchValue);
                     }else if (deviceType.equals("Window Blinds")){
-                        livingroomList.updateDbBlinds(id, blindsHeight);
+                        blindsHeight = BlindsSeekBar.getProgress();
+                        intent.putExtra("height", blindsHeight);
                     }
-                    livingroomList.removeFragment();
+
+                    if (!isTablet){
+                        getActivity().setResult(1, intent);
+                        getActivity().finish();
+                    }
+                    else{
+                        if (deviceType.equals("Simple Lamp")){
+                            livingroomList.updateDbSimpleLamp(id, simpleLampSwitchValue);
+                        }else if (deviceType.equals("Dimmable Lamp")){
+                            livingroomList.updateDbDimmableLamp(id, dimmableLampBrightness);
+                        }else if (deviceType.equals("Smart Lamp")){
+                            livingroomList.updateDbSmartLamp(id, smartLampBrighteness, smartLampColor);
+                        }else if (deviceType.equals("Television")){
+                            livingroomList.updateDbTV(id, tvSwitchValue, tvChannel, tvVolume);
+                        }else if (deviceType.equals("Window Blinds")){
+                            livingroomList.updateDbBlinds(id, blindsHeight);
+                        }
+                        livingroomList.removeFragment();
+                    }
                 }
-            }
-        });
+            });
         return gui;
     }
 

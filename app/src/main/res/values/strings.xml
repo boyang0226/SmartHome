@@ -38,18 +38,33 @@
 
     <string name="lr_simple_lamp_name">Simple Lamp</string>
     <string name="lr_simple_lamp_switch">Lamp Switch</string>
+
     <string name="lr_dimmable_lamp_name">Dimmable Lamp</string>
     <string name="lr_dimmable_lamp_brightness_label">Brightness</string>
     <string name="lr_dimmable_lamp_seekBar_value">0</string>
+
     <string name="lr_smart_lamp_name">Smart Lamp</string>
     <string name="lr_smart_lamp_seekBar_value">0</string>
     <string name="lr_smart_lamp_color">Color</string>
     <string name="lr_smart_lamp_brightness">Brightness</string>
+
     <string name="lr_blinds_name">Window Blinds</string>
     <string name="lr_blinds_brightness_label">Brightness</string>
     <string name="lr_blinds_seekBar_value">0</string>
+
     <string name="lr_tv_name">Television</string>
     <string name="lr_tv_switch">TV Switch</string>
+    <string name="lr_tv_volume">Volume</string>
+    <string name="lr_tv_seekBar_value">0</string>
+    <string name="lr_tv_channel">Channel</string>
+    <string name="lr_tv_channel_seekBar_value">0</string>
+
+    <string name="lr_tv_up_button">U</string>
+    <string name="lr_tv_left_button">L</string>
+    <string name="lr_tv_center_button">Center</string>
+    <string name="lr_tv_right_button">R</string>
+    <string name="lr_tv_down_button">D</string>
+
     <string name="lr_save">SAVE</string>
     <string name="lr_delete">DELETE</string>
 

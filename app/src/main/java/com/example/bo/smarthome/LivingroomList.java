@@ -186,7 +186,7 @@ public class LivingroomList extends AppCompatActivity {
 
     public void updateDbSimpleLamp(long deviceID, boolean deviceSwitch){
         ContentValues values = new ContentValues();
-        values.put(LivingroomDBHelper.KEY_Switch, deviceSwitch);
+        values.put(LivingroomDBHelper.KEY_Switch, deviceSwitch ? 1 : 0);
         db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
     }
     public void updateDbDimmableLamp(long deviceID, int brightness){
@@ -219,7 +219,6 @@ public class LivingroomList extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(LivingroomDBHelper.KEY_Frequency, frequency);
         db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
-        refreshMessages();
     }
 
     public void deleteDbDevice(Long deviceID){
@@ -230,12 +229,12 @@ public class LivingroomList extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final Bundle bun = data.getExtras();
-        Long deviceID = (Long)bun.getLong("id");
+        Long deviceID = bun.getLong("id");
         if (requestCode==5 && resultCode == 0) {
             deleteDbDevice(deviceID);
         }
         if (requestCode==5 && resultCode == 1) {
-            Long deviceType = (Long)bun.getLong("deviceType");
+            String deviceType = bun.getString("deviceType");
             if (deviceType.equals("Simple Lamp")){
                 boolean deviceSwith = bun.getBoolean("switch");
                 updateDbSimpleLamp(deviceID, deviceSwith);
@@ -255,13 +254,13 @@ public class LivingroomList extends AppCompatActivity {
                 int height = bun.getInt("height");
                 updateDbBlinds(deviceID, height);
             }
-            deleteDbDevice(deviceID);
         }
         if (requestCode == 6 && resultCode == 0) {
             String deviceName = bun.getString("deviceName");
             String deviceType = bun.getString("deviceType");
             insertDbDevice(deviceName, deviceType);
         }
+        refreshMessages();
     }
 
     public void removeFragment()
