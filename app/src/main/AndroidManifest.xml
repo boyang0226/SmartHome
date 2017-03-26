@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".HouseSetting" />
-        <activity android:name=".person"></activity>
+        <activity android:name=".HousesettingDetail"></activity>
     </application>
 
 </manifest>

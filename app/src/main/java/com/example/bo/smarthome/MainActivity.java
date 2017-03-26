@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar tb =(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(tb);
 
@@ -34,12 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch(id)
         {
-            case R.id.person:
-
-                Intent person = new Intent(MainActivity.this, person.class);
-                startActivityForResult(person, 5);
-
-                break;
 
             case R.id.living:
 
