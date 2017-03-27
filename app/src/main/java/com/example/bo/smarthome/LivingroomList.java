@@ -4,13 +4,19 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -141,6 +148,10 @@ public class LivingroomList extends AppCompatActivity {
                 }
             }
         });
+
+        //toolbar
+        Toolbar tb =(Toolbar)findViewById(R.id.lr_toolbar);
+        setSupportActionBar(tb);
     }
 
     private void refreshMessages(){
@@ -219,6 +230,7 @@ public class LivingroomList extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(LivingroomDBHelper.KEY_Frequency, frequency);
         db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
+
     }
 
     public void deleteDbDevice(Long deviceID){
@@ -232,6 +244,7 @@ public class LivingroomList extends AppCompatActivity {
         Long deviceID = bun.getLong("id");
         if (requestCode==5 && resultCode == 0) {
             deleteDbDevice(deviceID);
+            Toast.makeText(this, R.string.delete_message, Toast.LENGTH_LONG).show();
         }
         if (requestCode==5 && resultCode == 1) {
             String deviceType = bun.getString("deviceType");
@@ -254,11 +267,14 @@ public class LivingroomList extends AppCompatActivity {
                 int height = bun.getInt("height");
                 updateDbBlinds(deviceID, height);
             }
+            Snackbar.make(findViewById(android.R.id.content), R.string.update_message, Snackbar.LENGTH_LONG)
+                    .show();
         }
         if (requestCode == 6 && resultCode == 0) {
             String deviceName = bun.getString("deviceName");
             String deviceType = bun.getString("deviceType");
             insertDbDevice(deviceName, deviceType);
+            Toast.makeText(this, R.string.save_message, Toast.LENGTH_LONG).show();
         }
         refreshMessages();
     }
@@ -271,6 +287,41 @@ public class LivingroomList extends AppCompatActivity {
         fragTransaction.commit();
 
 
+    }
+
+    //toolbar
+    @Override
+    public boolean onCreateOptionsMenu (Menu m){
+        getMenuInflater().inflate(R.menu.livingroom_menu, m );
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem mi){
+        switch(mi.getItemId() ){
+            case R.id.living:
+
+                break;
+            case R.id.kitchen:
+
+                break;
+            case R.id.house:
+
+                break;
+            case R.id.about:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Welcome to Living Room");
+                builder.setMessage("Version 1.0 by Sizhe Chen\n blablablablablablablabla");
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+                break;
+        }
+        return true;
     }
 }
 

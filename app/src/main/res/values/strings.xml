@@ -67,6 +67,10 @@
 
     <string name="lr_save">SAVE</string>
     <string name="lr_delete">DELETE</string>
-
-
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="update_message">Congrats! Update succeeded!</string>
+    <string name="delete_confirm_message">Are you sure you want to delete this item?</string>
+    <string name="delete_message">Delete succeeded!</string>
+    <string name="save_message">A new item created!</string>
 </resources>
