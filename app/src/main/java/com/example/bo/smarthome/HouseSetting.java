@@ -24,7 +24,7 @@ public class HouseSetting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_setting);
 
-        Toolbar tb2 =(Toolbar)findViewById(R.id.toolbar);
+        Toolbar tb2 =(Toolbar)findViewById(R.id.housetoolbar);
         setSupportActionBar(tb2);
 
 
@@ -52,7 +52,7 @@ public class HouseSetting extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.house_menu, menu);
         return true;
 
     }
@@ -62,32 +62,28 @@ public class HouseSetting extends AppCompatActivity {
         switch(id)
         {
 
-
-
             case R.id.living:
-                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+
 
                 break;
             case R.id.kitchen:
 
-                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+
                 break;
-            case R.id.house:
+            case R.id.househelp:
+
 
                 Intent HouseSetting = new Intent(HouseSetting.this, HouseSetting.class);
                 startActivityForResult(HouseSetting, 5);
 
-
                 break;
             case R.id.car:
 
-                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
                 break;
         }
         return true;
     }
-
-
 
 
 
