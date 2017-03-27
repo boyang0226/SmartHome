@@ -9,12 +9,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class person extends AppCompatActivity {
+public class HousesettingDetail extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person);
+        setContentView(R.layout.activity_housesetting_detail);
 
         Toolbar tb =(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(tb);
@@ -33,33 +33,32 @@ public class person extends AppCompatActivity {
 
         switch(id)
         {
-            case R.id.person:
 
-                Intent person = new Intent(person.this, person.class);
-                startActivityForResult(person, 5);
 
-                break;
 
             case R.id.living:
-
+                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
 
                 break;
             case R.id.kitchen:
 
-
+                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
                 break;
             case R.id.house:
 
-
-                Intent HouseSetting = new Intent(person.this, HouseSetting.class);
+                Intent HouseSetting = new Intent(HousesettingDetail.this, HouseSetting.class);
                 startActivityForResult(HouseSetting, 5);
 
                 break;
             case R.id.car:
 
-//                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
                 break;
         }
         return true;
     }
+
+
+
+
 }

@@ -16,7 +16,7 @@
       android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
+    android:background="@android:color/holo_green_light"
     >
 
 </android.support.v7.widget.Toolbar>
@@ -27,36 +27,10 @@
            android:layout_width="match_parent"
            android:background="@drawable/back"
            android:orientation="vertical"
-          >
+           >
 
-
-        <ImageView
-            android:layout_width="153dp"
-            android:layout_height="133dp"
-            app:srcCompat="@drawable/andriod"
-
-            android:id="@+id/imageView2"
-            android:scaleType="fitXY"
-            android:layout_gravity="center"
-
-
-            />
 
         <TextView
-            android:text="Andriod project: Smart Home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"
-            android:textSize="25dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_gravity="center"
-
-
-
-        />
-
-        <TextView
-            android:text="\n\n\nThis projetc is about the smart home setting\n please click the toolbar to select different functions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/textView2"
@@ -68,9 +42,33 @@
 
 
         <TextView
-            android:text="\n\n\n Zhen Qu \n Sizhe Chen \n Qiuju Zhu\n Bo Yang"
+            android:text="Andriod project: Smart Home"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+
+
+            android:layout_weight="0.31" />
+
+        <ImageView
+            android:layout_width="198dp"
+            android:layout_height="133dp"
+            app:srcCompat="@drawable/andriod"
+
+            android:id="@+id/imageView2"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+
+
+            android:layout_weight="0.70" />
+
+        <TextView
+            android:text="\n\n Zhen Qu \n Sizhe Chen \n Qiuju Zhu\n Bo Yang "
+            android:layout_width="wrap_content"
+            android:layout_height="197dp"
             android:id="@+id/textView3"
             android:textColor="@color/colorPrimary"
             android:textSize="20dp"
