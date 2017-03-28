@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,7 +19,11 @@
         </activity>
         <activity android:name=".HouseSetting" />
         <activity android:name=".HousesettingDetail" />
-        <activity android:name=".HouseWeather"></activity>
+        <activity android:name=".HouseWeather" />
+        <activity
+            android:name=".KitchenMain"
+            android:label="@string/title_activity_kitchen_main"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>
