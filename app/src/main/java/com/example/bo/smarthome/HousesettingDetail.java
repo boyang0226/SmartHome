@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class HousesettingDetail extends AppCompatActivity {
@@ -19,12 +21,26 @@ public class HousesettingDetail extends AppCompatActivity {
         Toolbar tb =(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(tb);
 
+
+        Button outsideWeather = (Button)findViewById(R.id.houseweather);
+
+        outsideWeather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent Weather = new Intent(HousesettingDetail.this, HouseWeather.class);
+                startActivityForResult(Weather, 5);
+
+            }
+        });
+
     }
+
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        inflater.inflate(R.menu.house_menu, menu);
         return true;
 
     }
@@ -44,7 +60,7 @@ public class HousesettingDetail extends AppCompatActivity {
 
                 Toast.makeText(this, "", Toast.LENGTH_LONG).show();
                 break;
-            case R.id.house:
+            case R.id.househelp:
 
                 Intent HouseSetting = new Intent(HousesettingDetail.this, HouseSetting.class);
                 startActivityForResult(HouseSetting, 5);
