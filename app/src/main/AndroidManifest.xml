@@ -17,8 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HouseSetting" />
         <activity android:name=".HousesettingDetail" />
+
+        
+        <activity android:name=".HouseDatabaseHelper" />
+        <activity android:name=".HouseMessageFragment" />
+        <activity android:name=".HouseGarageFragment"></activity>
+
 
         <activity android:name=".HouseWeather"></activity>
         <activity android:name=".LivingroomList" />
@@ -29,6 +34,7 @@
             android:name=".KitchenMain"
             android:label="@string/title_activity_kitchen_main"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+
 
     </application>
 
