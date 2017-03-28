@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.house:
 
 
-                Intent HouseSetting = new Intent(MainActivity.this, HouseSetting.class);
+                Intent HouseSetting = new Intent(MainActivity.this, HousesettingDetail.class);
                 startActivityForResult(HouseSetting, 5);
 
                 break;
             case R.id.car:
 
-//                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+//
                 break;
         }
         return true;
