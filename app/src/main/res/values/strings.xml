@@ -26,6 +26,7 @@
     </string>
 
 
+
     <string name="lr_intro_title">Welcome to Living Room</string>
     <string name="lr_intro_author">Author: Sizhe Chen</string>
     <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
@@ -86,5 +87,20 @@
     <string name="lr_save">SAVE</string>
     <string name="lr_delete">DELETE</string>
 
+    <string name="title_activity_kitchen_main">My Kitchen</string>
+    <string name="title_toolbar_kitchen_car">Automobile</string>
+    <string name="title_toolbar_kitchen_house">House Setting</string>
+    <string name="title_toolbar_kitchen_living">Living Room</string>
+    <string name="dialog_positive_text_ok">OK</string>
+    <string name="dialog_negative_text_cancel">Cancel</string>
+    <string name="button_add_appliance_text">ADD</string>
+
+    <string name="spinner_add_appliance_prompt">Please choose an appliance</string>
+
+    <string-array name="spinner_appliance_arrays">
+        <item>Oven</item>
+        <item>Dish Washer</item>
+        <item>Toaster</item>
+    </string-array>
 
 </resources>

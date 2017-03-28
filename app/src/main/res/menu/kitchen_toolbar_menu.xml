@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/kitchen_living"
+        android:title="@string/title_toolbar_kitchen_living"
+        android:icon="@drawable/livingroom1"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="200" />
+    <item
+        android:id="@+id/kitchen_house"
+        android:title="@string/title_toolbar_kitchen_house"
+        android:icon="@drawable/house1"
+        app:showAsAction="ifRoom"
+        android:orderInCategory="400" />
+    <item
+        android:id="@+id/kitchen_car"
+        android:title="@string/title_toolbar_kitchen_car"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/car1"
+        android:orderInCategory="500" />
+</menu>

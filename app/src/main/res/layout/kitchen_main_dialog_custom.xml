@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:src="@drawable/plus"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:scaleType="center"
+        android:background="@color/colorSHNavigationBar"
+        android:contentDescription="@string/app_name" />
+
+    <Spinner
+        android:id="@+id/spnKitchenAddAppliance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/spinner_appliance_arrays"
+        android:prompt="@string/spinner_add_appliance_prompt" />
+
+</LinearLayout>
