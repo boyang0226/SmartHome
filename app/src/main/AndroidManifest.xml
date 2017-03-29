@@ -23,6 +23,22 @@
         <activity
             android:name=".KitchenMain"
             android:label="@string/title_activity_kitchen_main"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".KitchenLightDetail"
+            android:label="@string/title_activity_kitchen_light_detail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".KitchenFridgeDetail"
+            android:label="@string/title_activity_kitchen_fridge_detail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".KitchenMicrowaveDetail"
+            android:label="@string/title_activity_kitchen_microwave_detail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".KitchenBase"
+            android:label="@string/title_activity_kitchen_base"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 

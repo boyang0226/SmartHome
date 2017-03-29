@@ -1,27 +1,25 @@
 package com.example.bo.smarthome;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class KitchenMain extends AppCompatActivity {
+public class KitchenMain extends KitchenBase {
 
     protected static final String ACTIVITY_NAME = "KitchenMain_";
     protected static final String TOOLBAR_AREA = "Toolbar";
@@ -37,10 +35,14 @@ public class KitchenMain extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kitchen_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarkitchenmain);
+        setToolbarColor(toolbar);
         setSupportActionBar(toolbar);
 
         populateListView(logTag);
+
+        handleListViewItemClick(logTag);
+
         addAppliance(logTag);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -49,6 +51,47 @@ public class KitchenMain extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+    }
+
+    private void handleListViewItemClick(String logTag) {
+
+
+        final ListView applianceListView = (ListView) findViewById(R.id.lvKitchenAppliance);
+        applianceListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final String tag =ACTIVITY_NAME + "ListView Clicked.";
+                //Bundle bun = new Bundle();
+                //bun.putLong("ID", id );
+                //String msg = chatList.getItemAtPosition(position).toString();
+                //bun.putString("Msg", msg );
+
+                String selectedAppliance = ((TextView)view).getText().toString();
+
+                switch(selectedAppliance) {
+                    case "Microwave":
+                        Log.d(tag, "Clicked Microwave.");
+                        callActivity(KitchenMicrowaveDetail.class);
+                        break;
+                    case "Fridge":
+                        Log.d(tag, "Clicked Fridge.");
+                        callActivity(KitchenFridgeDetail.class);
+                        break;
+                    case "Main light":
+                        Log.d(tag, "Clicked Main light.");
+                        callActivity(KitchenLightDetail.class);
+                        break;
+                    // case R.id.action_settings:
+                    //   Log.d("Toolbar", "Version 1.0, by Qiuju Zhu");
+                    //   break;
+                    default:
+                        break;
+                }
+
             }
         });
     }
@@ -69,6 +112,7 @@ public class KitchenMain extends AppCompatActivity {
 
     private void addAppliance(String logTag)
     {
+
         Log.d(logTag, "Add appliance button event handler.");
 
         Button btnAddAppliance = (Button) findViewById(R.id.btnKitchenMainAdd);
@@ -76,9 +120,9 @@ public class KitchenMain extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                String logTag = ADDAPPLIANCEBTN;
 
-                Log.d(logTag, "Add Appliance button clicked.");
+                String logTag1 = ADDAPPLIANCEBTN;
+                Log.d(logTag1, "Add Appliance button clicked.");
 
                 AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(KitchenMain.this);
                 LayoutInflater inflater = KitchenMain.this.getLayoutInflater();
@@ -107,47 +151,7 @@ public class KitchenMain extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu m){
-        getMenuInflater().inflate(R.menu.kitchen_toolbar_menu, m );
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem mi) {
-
-        String logTag = ACTIVITY_NAME + TOOLBAR_AREA;
-
-        int id;
-        id = mi.getItemId();
-
-        switch(id) {
-            case R.id.kitchen_car:
-                Log.d(logTag, "Switch to Automobile from Kitchen.");
-                //callActivity(Automobile.class);
-                break;
-            case R.id.kitchen_house:
-                Log.d(logTag, "Switch to House Setting from Kitchen.");
-                callActivity(HouseSetting.class);
-                break;
-            case R.id.kitchen_living:
-                Log.d(logTag, "Switch to Living Room from Kitchen.");
-                //callActivity(LivingRoom.class);
-                break;
-           // case R.id.action_settings:
-             //   Log.d("Toolbar", "Version 1.0, by Qiuju Zhu");
-             //   break;
-            default:
-                break;
-        }
-        return true;
-    }
-
-    private void callActivity(Class<?> cls)
-    {
-        Intent intent = new Intent(KitchenMain.this, cls);
-        startActivity(intent);
-    }
 
 
 }
