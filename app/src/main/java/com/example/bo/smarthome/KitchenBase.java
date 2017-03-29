@@ -49,7 +49,7 @@ public class KitchenBase extends AppCompatActivity {
         switch(id) {
             case R.id.kitchen_car:
                 Log.d(logTag, "Switch to Automobile from Kitchen.");
-                //callActivity(Automobile.class);
+                callActivity(AutoListView.class);
                 break;
             case R.id.kitchen_house:
                 Log.d(logTag, "Switch to House Setting from Kitchen.");
@@ -57,7 +57,7 @@ public class KitchenBase extends AppCompatActivity {
                 break;
             case R.id.kitchen_living:
                 Log.d(logTag, "Switch to Living Room from Kitchen.");
-                //callActivity(LivingRoom.class);
+                callActivity(LivingroomList.class);
                 break;
             // case R.id.action_settings:
             //   Log.d("Toolbar", "Version 1.0, by Qiuju Zhu");
