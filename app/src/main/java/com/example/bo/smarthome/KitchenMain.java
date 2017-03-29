@@ -64,15 +64,15 @@ public class KitchenMain extends KitchenBase {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                final String tag =ACTIVITY_NAME + "ListView Clicked.";
+                final String tag = ACTIVITY_NAME + "ListView Clicked.";
                 //Bundle bun = new Bundle();
                 //bun.putLong("ID", id );
                 //String msg = chatList.getItemAtPosition(position).toString();
                 //bun.putString("Msg", msg );
 
-                String selectedAppliance = ((TextView)view).getText().toString();
+                String selectedAppliance = ((TextView) view).getText().toString();
 
-                switch(selectedAppliance) {
+                switch (selectedAppliance) {
                     case "Microwave":
                         Log.d(tag, "Clicked Microwave.");
                         callActivity(KitchenMicrowaveDetail.class);
@@ -96,22 +96,21 @@ public class KitchenMain extends KitchenBase {
         });
     }
 
-    private void populateListView(String logTag)   {
+    private void populateListView(String logTag) {
 
         Log.d(logTag, "Populating appliance list view.");
 
-        ListView kitchenListview  = (ListView) findViewById(R.id.lvKitchenAppliance );
+        ListView kitchenListview = (ListView) findViewById(R.id.lvKitchenAppliance);
 
         //dummy data
-        String[] planets = new String[] { "Microwave", "Fridge", "Main light"};
+        String[] planets = new String[]{"Microwave", "Fridge", "Main light"};
         ArrayList<String> applianceList = new ArrayList<>();
-        applianceList.addAll( Arrays.asList(planets) );
+        applianceList.addAll(Arrays.asList(planets));
         listAdapter = new ArrayAdapter<>(this, R.layout.kitchen_main_listview_row, applianceList);
-        kitchenListview.setAdapter( listAdapter );
+        kitchenListview.setAdapter(listAdapter);
     }
 
-    private void addAppliance(String logTag)
-    {
+    private void addAppliance(String logTag) {
 
         Log.d(logTag, "Add appliance button event handler.");
 
@@ -133,7 +132,7 @@ public class KitchenMain extends KitchenBase {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
 
-                               Spinner spnAppliance = (Spinner)dlgView.findViewById(R.id.spnKitchenAddAppliance);
+                                Spinner spnAppliance = (Spinner) dlgView.findViewById(R.id.spnKitchenAddAppliance);
                                 String newAppliance = spnAppliance.getSelectedItem().toString();
 
                                 listAdapter.remove(newAppliance);
@@ -151,4 +150,4 @@ public class KitchenMain extends KitchenBase {
         });
     }
 
-
+}

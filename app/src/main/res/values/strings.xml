@@ -133,7 +133,7 @@
     <string name="title_activity_kitchen_microwave_detail">Microwave</string>
     <string name="title_activity_kitchen_base">KitchenBase</string>
     <string name="kitchen_light_dimmer_button_text">Set Dimmer</string>
-    <string name="kitchen_light_dimmer_section_text">Set Dimmer</string>
-    <string name="kitchen_light_main_switch_section_text">Set Dimmer</string>
+    <string name="kitchen_light_dimmer_section_text">Dimmer</string>
+    <string name="kitchen_light_main_switch_section_text">Main Switch</string>
 
 </resources>

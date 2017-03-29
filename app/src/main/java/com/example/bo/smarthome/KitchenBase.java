@@ -53,7 +53,7 @@ public class KitchenBase extends AppCompatActivity {
                 break;
             case R.id.kitchen_house:
                 Log.d(logTag, "Switch to House Setting from Kitchen.");
-                callActivity(HouseSetting.class);
+                callActivity(HousesettingDetail.class);
                 break;
             case R.id.kitchen_living:
                 Log.d(logTag, "Switch to Living Room from Kitchen.");
