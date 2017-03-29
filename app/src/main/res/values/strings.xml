@@ -30,6 +30,20 @@
         Thank you for using my program!
     </string>
 
+    <string name="auto_listview_add_button">Add</string>
+    <string name="auto_add_new_unit_textview">Add New Unit</string>
+    <string name="auto_add_new_unit_edit_textinput">Enter Unit Name</string>
+    <string name="auto_add_new_unit_prompt">Choose a type</string>
+    <string-array name="auto_add_new_unit_arrays">
+        <item>Auto Temp</item>
+        <item>Auto Normal Light</item>
+        <item>Auto High Light</item>
+        <item>Auto Inside Light</item>
+        <item>Auto Radio Station</item>
+        <item>Auto GPS</item>
+    </string-array>
+    <string name="auto_add_new_unit_submitbutton">Submit</string>
+
 
     <array name="house_spinner_add">
         <item>garage</item>
@@ -113,6 +127,7 @@
         <item>Dish Washer</item>
         <item>Toaster</item>
     </string-array>
+
 
 
 </resources>

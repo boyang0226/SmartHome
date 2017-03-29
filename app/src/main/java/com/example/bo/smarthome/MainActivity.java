@@ -55,7 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.car:
 
-//
+                startActivity(new Intent(MainActivity.this, AutoListView.class));
+
+
                 break;
         }
         return true;

@@ -19,6 +19,10 @@
         </activity>
         <activity android:name=".HousesettingDetail" />
 
+       
+        <activity android:name=".AutoListView" />
+
+
         
         <activity android:name=".HouseDatabaseHelper" />
         <activity android:name=".HouseMessageFragment" />
@@ -33,6 +37,7 @@
             android:name=".KitchenMain"
             android:label="@string/title_activity_kitchen_main"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+
 
 
     </application>

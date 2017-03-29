@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_auto_add_new_unit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<EditText-->
+        <!--android:id="@+id/auto_AddNewUnitEditText"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="4dp"-->
+        <!--android:layout_marginRight="4dp"-->
+        <!--android:hint="@string/auto_add_new_unit_edit_textinput"-->
+        <!--android:layout_weight="1.37"-->
+        <!--android:layout_below="@+id/auto_AddNewUnitTextView"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+    <TextView
+        android:text="@string/auto_add_new_unit_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/auto_AddNewUnitTextView"
+        android:layout_weight="1.37"
+        android:layout_marginTop="96dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/auto_AddNewUnitSpinner"
+        android:entries="@array/auto_add_new_unit_arrays"
+        android:prompt="@string/auto_add_new_unit_prompt"
+        android:layout_weight="1.23"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/auto_AddNewUnitTextView"
+        android:layout_alignParentStart="true" />
+
+    <!--<Button-->
+        <!--android:text="@string/auto_add_new_unit_submitbutton"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/auto_AddNewUnitSubmitButton"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+</RelativeLayout>
