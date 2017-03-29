@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/living"
-        android:title="Living Room"
-        android:icon="@drawable/livingroom1"
-        app:showAsAction="always"
-        android:orderInCategory="200"/>
     <item
         android:id="@+id/kitchen"
         android:title="Kitchen"
@@ -30,6 +24,14 @@
         app:showAsAction="always"
         android:icon="@drawable/car1"
         android:orderInCategory="500"
+        />
+
+    <item
+        android:id="@+id/lr_help"
+        android:title="Living Room Help"
+        app:showAsAction="always"
+        android:icon="@drawable/help"
+        android:orderInCategory="600"
         />
 
 </menu>

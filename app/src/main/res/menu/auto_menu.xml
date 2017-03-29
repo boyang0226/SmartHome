@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id = "@+id/autoListViewToolbarMenu">
 
     <item
-        android:id="@+id/living"
+        android:id="@+id/auto_living"
         android:title="Living Room"
         android:icon="@drawable/livingroom1"
         app:showAsAction="always"
-        android:orderInCategory="200"/>
+        android:orderInCategory="200" />
+
     <item
-        android:id="@+id/kitchen"
+        android:id="@+id/auto_kitchen"
         android:title="Kitchen"
         android:icon="@drawable/kitchen1"
         app:showAsAction="always"
-        android:orderInCategory="300"
-        />
+        android:orderInCategory="300" />
 
     <item
-        android:id="@+id/house"
+        android:id="@+id/auto_house"
         android:title="House Setting"
         android:icon="@drawable/house1"
         app:showAsAction="always"
-        android:orderInCategory="400"
-        />
+        android:orderInCategory="400" />
 
-    <item
-        android:id="@+id/car"
-        android:title="Automobile"
-        app:showAsAction="always"
-        android:icon="@drawable/car1"
+    <item android:id="@+id/auto_helpMenu"
+        android:title="About"
         android:orderInCategory="500"
-        />
-
+        app:showAsAction="never" />
 </menu>

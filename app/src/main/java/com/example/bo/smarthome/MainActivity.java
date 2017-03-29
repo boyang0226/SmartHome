@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -37,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         {
 
             case R.id.living:
-
+                Intent livingIntro = new Intent(MainActivity.this, LivingroomList.class);
+                startActivityForResult(livingIntro, 1);
 
                 break;
             case R.id.kitchen:
@@ -47,13 +49,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.house:
 
 
-                Intent HouseSetting = new Intent(MainActivity.this, HouseSetting.class);
+                Intent HouseSetting = new Intent(MainActivity.this, HousesettingDetail.class);
                 startActivityForResult(HouseSetting, 5);
 
                 break;
             case R.id.car:
 
-//                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MainActivity.this, AutoListView.class));
+
+
                 break;
         }
         return true;
