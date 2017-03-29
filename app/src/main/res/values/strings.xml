@@ -10,12 +10,17 @@
     <string name="house_garage"> garage</string>
     <string name="house_temp">house temperature</string>
     <string name="house_weather">weather</string>
-    <string name="house_help">
-        Author: Bo Yang\n
-        Click one of the menu options to start\n
+
+
+    <string name="house_add">ADD</string>
+    <string name="house_toolbar">Tool Bar</string>
+
+    <string name="house_introduction">
+        \nAuthor: Boyang\n
+        Click one of the OK options to start\n
         Garage:\n
-        Click  to open the garage door. This will also light the garage light.\n
-        Click  to close the garage door. This will also turn off the garage light.\n
+        Click OPEN button to open the garage door. This will also light the garage light.\n
+        Click CLOSE button to close the garage door. This will also turn off the garage light.\n
         Click on the garage lamp to activate the garage light\n
         Temperature of the house:\n
         Click the text box and write a value for the temperature, and then click CHANGE TEMPERATURE.\n
@@ -24,6 +29,7 @@
         Click on the Outdoor Weather Menu to view the weather outside.\n
         Thank you for using my program!
     </string>
+
     <string name="auto_listview_add_button">Add</string>
     <string name="auto_add_new_unit_textview">Add New Unit</string>
     <string name="auto_add_new_unit_edit_textinput">Enter Unit Name</string>
@@ -37,5 +43,91 @@
         <item>Auto GPS</item>
     </string-array>
     <string name="auto_add_new_unit_submitbutton">Submit</string>
+
+
+    <array name="house_spinner_add">
+        <item>garage</item>
+        <item>temp</item>
+        <item>weather</item></array>
+
+
+
+    <string name="lr_intro_title">Welcome to Living Room</string>
+    <string name="lr_intro_author">Author: Sizhe Chen</string>
+    <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
+    <string name="lr_intro_start_button">START</string>
+
+    <string name="lr_list_add">ADD</string>
+    <string name="lr_list_details_content_title">Create New Device</string>
+    <string name="lr_add_device_name_label">Device Name</string>
+    <string name="lr_add_device_category_label">Device Category</string>
+
+    <string name="lr_list_details_content_submit">SUBMIT</string>
+
+    <string-array name="lr_category_arrays">
+        <item>Simple Lamp</item>
+        <item>Dimmable Lamp</item>
+        <item>Smart Lamp</item>
+        <item>Television</item>
+        <item>Window Blinds</item>
+    </string-array>
+
+    <string-array name="lr_smart_lamp_color">
+        <item>Red</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>White</item>
+    </string-array>
+
+    <string name="lr_simple_lamp_name">Simple Lamp</string>
+    <string name="lr_simple_lamp_switch">Lamp Switch</string>
+
+    <string name="lr_dimmable_lamp_name">Dimmable Lamp</string>
+    <string name="lr_dimmable_lamp_brightness_label">Brightness</string>
+    <string name="lr_dimmable_lamp_seekBar_value">0</string>
+
+    <string name="lr_smart_lamp_name">Smart Lamp</string>
+    <string name="lr_smart_lamp_seekBar_value">0</string>
+    <string name="lr_smart_lamp_color">Color</string>
+    <string name="lr_smart_lamp_brightness">Brightness</string>
+
+    <string name="lr_blinds_name">Window Blinds</string>
+    <string name="lr_blinds_brightness_label">Brightness</string>
+    <string name="lr_blinds_seekBar_value">0</string>
+
+    <string name="lr_tv_name">Television</string>
+    <string name="lr_tv_switch">TV Switch</string>
+    <string name="lr_tv_volume">Volume</string>
+    <string name="lr_tv_seekBar_value">0</string>
+    <string name="lr_tv_channel">Channel</string>
+    <string name="lr_tv_channel_seekBar_value">0</string>
+
+    <string name="lr_tv_up_button">U</string>
+    <string name="lr_tv_left_button">L</string>
+    <string name="lr_tv_center_button">Center</string>
+    <string name="lr_tv_right_button">R</string>
+    <string name="lr_tv_down_button">D</string>
+
+    <string name="lr_save">SAVE</string>
+    <string name="lr_delete">DELETE</string>
+
+    <string name="title_activity_kitchen_main">My Kitchen</string>
+    <string name="title_toolbar_kitchen_car">Automobile</string>
+    <string name="title_toolbar_kitchen_house">House Setting</string>
+    <string name="title_toolbar_kitchen_living">Living Room</string>
+    <string name="dialog_positive_text_ok">OK</string>
+    <string name="dialog_negative_text_cancel">Cancel</string>
+    <string name="button_add_appliance_text">ADD</string>
+
+    <string name="spinner_add_appliance_prompt">Please choose an appliance</string>
+
+    <string-array name="spinner_appliance_arrays">
+        <item>Oven</item>
+        <item>Dish Washer</item>
+        <item>Toaster</item>
+    </string-array>
+
+
 
 </resources>

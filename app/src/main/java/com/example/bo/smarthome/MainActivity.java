@@ -1,12 +1,13 @@
 package com.example.bo.smarthome;
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -37,22 +38,26 @@ public class MainActivity extends AppCompatActivity {
         {
 
             case R.id.living:
-
+                Intent livingIntro = new Intent(MainActivity.this, LivingroomList.class);
+                startActivityForResult(livingIntro, 1);
 
                 break;
             case R.id.kitchen:
-
-
+                Intent itntKitchenMain = new Intent(MainActivity.this, KitchenMain.class);
+                startActivityForResult(itntKitchenMain, 5);
                 break;
             case R.id.house:
 
 
-                Intent HouseSetting = new Intent(MainActivity.this, HouseSetting.class);
+                Intent HouseSetting = new Intent(MainActivity.this, HousesettingDetail.class);
                 startActivityForResult(HouseSetting, 5);
 
                 break;
             case R.id.car:
+
                 startActivity(new Intent(MainActivity.this, AutoListView.class));
+
+
                 break;
         }
         return true;
