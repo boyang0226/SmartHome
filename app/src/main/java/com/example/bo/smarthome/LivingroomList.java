@@ -301,7 +301,7 @@ public class LivingroomList extends AppCompatActivity {
             case R.id.house:
 
 
-                Intent HouseSetting = new Intent(this, HouseSetting.class);
+                Intent HouseSetting = new Intent(this, HousesettingDetail.class);
                 startActivityForResult(HouseSetting, 5);
 
                 break;

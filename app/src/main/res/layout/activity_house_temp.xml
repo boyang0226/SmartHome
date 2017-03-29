@@ -23,7 +23,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:text="choose a time  "
-        android:theme="@style/HeadingText" />
+        />
 
 
     <TimePicker
@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/house_temp_number"
         android:text="choose a temrature"
-        android:theme="@style/HeadingText"
         android:gravity="center_horizontal"
         android:layout_marginBottom="20dp"
         />
@@ -47,7 +46,6 @@
             android:id="@+id/house_temp_number_picker"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-
             android:gravity="center_horizontal" />
 
 
@@ -66,7 +64,7 @@
             android:gravity="bottom"
             android:text="ADD"
             android:textAlignment="center"
-            android:theme="@style/Button" />
+            />
 
         <Button
             android:id="@+id/house_temp_delete"
@@ -76,7 +74,7 @@
             android:gravity="bottom"
             android:textAlignment="center"
             android:text="Delete"
-            android:theme="@style/Button" />
+          />
 
 
     </LinearLayout>

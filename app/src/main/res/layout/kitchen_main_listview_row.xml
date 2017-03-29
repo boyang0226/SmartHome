@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:text=""
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:id="@+id/txtKitchenMainListViewRow"
+        android:id="@+id/house_"
     android:gravity="center"
         android:layout_weight="1"
     android:typeface="sans"
     android:textSize="18sp"
     android:lineSpacingExtra="8sp"
-    android:textAlignment="center" />
+    android:textAlignment="center"
+    />
 
