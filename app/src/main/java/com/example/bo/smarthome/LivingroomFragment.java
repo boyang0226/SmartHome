@@ -113,8 +113,21 @@ public class LivingroomFragment extends Fragment {
             brightnessLabel = (TextView)gui.findViewById(R.id.lr_smart_lamp_seekBar_value);
             brightnessLabel.setText(String.valueOf(brightness));
 
+            smartLampSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar){
+                }
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                    brightnessLabel.setText(String.valueOf(progress));
+                }
+            });
+
             smartLampSpinner = (Spinner)gui.findViewById(R.id.lr_color_spinner);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(livingroomList, R.array.lr_smart_lamp_color, android.R.layout.simple_spinner_item);
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.lr_smart_lamp_color, android.R.layout.simple_spinner_item);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             smartLampSpinner.setAdapter(adapter);
             int spinnerPosition = adapter.getPosition(color);
@@ -178,7 +191,7 @@ public class LivingroomFragment extends Fragment {
             BlindsSeekBar.setMax(100);
             BlindsSeekBar.setProgress(height);
             heightLabel = (TextView)gui.findViewById(R.id.lr_blinds_seekBar_value);
-            heightLabel.setText(height);
+            heightLabel.setText(String.valueOf(height));
         }
 
         Button deleteButton = (Button)gui.findViewById(R.id.lr_delete);
