@@ -39,7 +39,7 @@
         android:layout_toStartOf="@+id/house_garage_swith" />
 
     <Switch
-       
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/house_garage_swith2"
