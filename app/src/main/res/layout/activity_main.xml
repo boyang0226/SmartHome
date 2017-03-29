@@ -5,30 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:layout_width="match_parent"
-
-
-    >
-
-
+    android:layout_width="match_parent">
 
 <android.support.v7.widget.Toolbar
-      android:id="@+id/toolbar"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#1caee5"
-    >
+    android:background="#1caee5">
 
 </android.support.v7.widget.Toolbar>
-
-
-
-
-
-
-
-
-
 
         <ImageView
             android:layout_width="150dp"
@@ -37,10 +22,7 @@
             android:layout_below="@id/toolbar"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="90dp"
-            android:id="@+id/image"
-
-            />
-
+            android:id="@+id/image" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,8 +31,7 @@
            android:layout_below="@+id/image"
             android:layout_marginTop="12dp"
             android:textSize="25dp"
-            android:text="Smart Home"
-            />
+            android:text="Smart Home" />
 
 
 </RelativeLayout>

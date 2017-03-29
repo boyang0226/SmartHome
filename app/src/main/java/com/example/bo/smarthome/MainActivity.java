@@ -52,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.car:
-
-//                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(MainActivity.this, AutoListView.class));
                 break;
         }
         return true;
