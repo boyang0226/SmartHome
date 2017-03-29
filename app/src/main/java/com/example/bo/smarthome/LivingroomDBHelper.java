@@ -1,6 +1,8 @@
 package com.example.bo.smarthome;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -11,7 +13,7 @@ import android.util.Log;
 
 public class LivingroomDBHelper  extends SQLiteOpenHelper {
     public static final String TABLENAME = "LivingRoomDevice";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
     public static final String KEY_ID = "_ID";
     public static final String KEY_Name = "DeviceName";
     public static final String KEY_Switch = "Switch";
@@ -35,7 +37,36 @@ public class LivingroomDBHelper  extends SQLiteOpenHelper {
                 KEY_Height + " INT DEFAULT 0," + KEY_Type + " VARCHAR(20)," +
                 KEY_Frequency + " INT DEFAULT 0);");
 
+        Cursor results = db.query(false, LivingroomDBHelper.TABLENAME,
+                new String[] {},
+                null, null, null, null, null, null);
+        int rows = results.getCount() ; //number of rows returned
+        if (rows == 0) {
+            ContentValues values = new ContentValues();
+            values.put(LivingroomDBHelper.KEY_Name, "Simple Lamp 1");
+            values.put(LivingroomDBHelper.KEY_Type, "Simple Lamp");
+            db.insert(LivingroomDBHelper.TABLENAME, null, values);
 
+            values = new ContentValues();
+            values.put(LivingroomDBHelper.KEY_Name, "Dimmable Lamp 1");
+            values.put(LivingroomDBHelper.KEY_Type, "Dimmable Lamp");
+            db.insert(LivingroomDBHelper.TABLENAME, null, values);
+
+            values = new ContentValues();
+            values.put(LivingroomDBHelper.KEY_Name, "Smart Lamp 1");
+            values.put(LivingroomDBHelper.KEY_Type, "Smart Lamp");
+            db.insert(LivingroomDBHelper.TABLENAME, null, values);
+
+            values = new ContentValues();
+            values.put(LivingroomDBHelper.KEY_Name, "TV 1");
+            values.put(LivingroomDBHelper.KEY_Type, "Television");
+            db.insert(LivingroomDBHelper.TABLENAME, null, values);
+
+            values = new ContentValues();
+            values.put(LivingroomDBHelper.KEY_Name, "Blinds 1");
+            values.put(LivingroomDBHelper.KEY_Type, "Window Blinds");
+            db.insert(LivingroomDBHelper.TABLENAME, null, values);
+        }
         Log.i("LivingroomDBHelper", "Calling onCreate");
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)

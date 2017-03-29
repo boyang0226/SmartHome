@@ -27,7 +27,6 @@
 
         <activity android:name=".HouseWeather"></activity>
         <activity android:name=".LivingroomList" />
-        <activity android:name=".LivingroomIntro" />
         <activity android:name=".LivingroomItemDetails"></activity>
         <activity android:name=".HousesettingDetail"></activity>
         <activity
