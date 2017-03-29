@@ -128,6 +128,12 @@
         <item>Toaster</item>
     </string-array>
 
-
+    <string name="title_activity_kitchen_light_detail">Main light</string>
+    <string name="title_activity_kitchen_fridge_detail">Fridge</string>
+    <string name="title_activity_kitchen_microwave_detail">Microwave</string>
+    <string name="title_activity_kitchen_base">KitchenBase</string>
+    <string name="kitchen_light_dimmer_button_text">Set Dimmer</string>
+    <string name="kitchen_light_dimmer_section_text">Set Dimmer</string>
+    <string name="kitchen_light_main_switch_section_text">Set Dimmer</string>
 
 </resources>
