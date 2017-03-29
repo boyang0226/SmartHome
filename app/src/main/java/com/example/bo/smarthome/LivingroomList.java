@@ -296,6 +296,8 @@ public class LivingroomList extends AppCompatActivity {
 
             case R.id.kitchen:
 
+                Intent itntKitchenMain = new Intent(this, KitchenMain.class);
+                startActivityForResult(itntKitchenMain, 5);
 
                 break;
             case R.id.house:
@@ -307,7 +309,7 @@ public class LivingroomList extends AppCompatActivity {
                 break;
             case R.id.car:
 
-//                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+               startActivity(new Intent(this, AutoListView.class));
                 break;
             case R.id.lr_help:
 

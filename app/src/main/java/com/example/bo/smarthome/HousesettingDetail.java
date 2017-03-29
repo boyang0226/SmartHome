@@ -85,8 +85,19 @@ public class HousesettingDetail extends AppCompatActivity {
         HouseView.setAdapter(adapter);
 
 
+        HouseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                if (adapterView.getItemAtPosition(i).equals("House Weather")) {
+
+                    Intent HouseWeatherSetting = new Intent(HousesettingDetail.this, HouseWeather.class);
+                    startActivityForResult(HouseWeatherSetting, 5);
+
+                }
+            }
+        });
 
 
     }
@@ -107,12 +118,14 @@ public class HousesettingDetail extends AppCompatActivity {
         {
 
             case R.id.living:
-
+                Intent livingIntro = new Intent(this, LivingroomList.class);
+                startActivityForResult(livingIntro, 1);
 
                 break;
             case R.id.kitchen:
 
-
+                Intent itntKitchenMain = new Intent(this, KitchenMain.class);
+                startActivityForResult(itntKitchenMain, 5);
                 break;
             case R.id.househelp:
 
@@ -129,7 +142,8 @@ public class HousesettingDetail extends AppCompatActivity {
                 break;
             case R.id.car:
 
-//
+                startActivity(new Intent(this, AutoListView.class));
+
                 break;
         }
         return true;
