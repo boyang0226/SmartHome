@@ -11,39 +11,42 @@
     tools:context="com.example.bo.smarthome.HouseGarageFragment">
 
     <TextView
-        android:text="TextView"
+        android:text=" Garage Door"
+        android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_marginTop="165dp"
-        android:id="@+id/textView4" />
+        android:id="@+id/house_frag_garage"
+        android:layout_marginTop="94dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <Switch
-        android:text="Switch"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/switch1"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_marginStart="68dp" />
+        android:id="@+id/house_garage_swith"
+        android:layout_marginStart="47dp"
+        android:layout_alignTop="@+id/house_frag_garage"
+        android:layout_toEndOf="@+id/house_frag_garage" />
+
+    <TextView
+        android:text="Light"
+        android:textSize="30dp"
+        android:id="@+id/house_garage_light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/house_garage_swith2"
+        android:layout_toStartOf="@+id/house_garage_swith" />
 
     <Switch
-        android:text="Switch"
+       
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_alignStart="@+id/switch1"
-        android:id="@+id/switch2" />
+        android:id="@+id/house_garage_swith2"
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:ems="10"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toStartOf="@+id/switch2"
-        android:id="@+id/editText" />
+        android:layout_marginTop="96dp"
+        android:layout_below="@+id/house_frag_garage"
+        android:layout_alignStart="@+id/house_garage_swith" />
 
 
 </RelativeLayout>

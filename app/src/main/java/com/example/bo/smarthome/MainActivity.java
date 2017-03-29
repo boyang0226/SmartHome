@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         {
 
             case R.id.living:
-                Intent livingIntro = new Intent(MainActivity.this, LivingroomIntro.class);
+                Intent livingIntro = new Intent(MainActivity.this, LivingroomList.class);
                 startActivityForResult(livingIntro, 1);
 
                 break;
