@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.bo.smarthome">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,11 +17,45 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HouseSetting" />
+        <activity android:name=".HousesettingDetail" />
+
+       
+        <activity android:name=".AutoListView" />
+
+
+        
+        <activity android:name=".HouseDatabaseHelper" />
+        <activity android:name=".HouseMessageFragment" />
+        <activity android:name=".HouseGarageFragment"></activity>
+
+
+        <activity android:name=".HouseWeather"></activity>
         <activity android:name=".LivingroomList" />
-        <activity android:name=".LivingroomIntro" />
         <activity android:name=".LivingroomItemDetails"></activity>
         <activity android:name=".HousesettingDetail"></activity>
+        <activity
+            android:name=".KitchenMain"
+            android:label="@string/title_activity_kitchen_main"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".KitchenLightDetail"
+            android:label="@string/title_activity_kitchen_light_detail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".KitchenFridgeDetail"
+            android:label="@string/title_activity_kitchen_fridge_detail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".KitchenMicrowaveDetail"
+            android:label="@string/title_activity_kitchen_microwave_detail"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".KitchenBase"
+            android:label="@string/title_activity_kitchen_base"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+
+
+
     </application>
 
 </manifest>
