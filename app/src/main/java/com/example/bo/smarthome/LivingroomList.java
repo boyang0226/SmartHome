@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,6 +82,9 @@ public class LivingroomList extends AppCompatActivity {
 
         deviceAdapter = new DeviceAdapter(this);
         listView.setAdapter(deviceAdapter);
+
+        Toolbar tb =(Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(tb);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -289,36 +293,40 @@ public class LivingroomList extends AppCompatActivity {
 
     }
 
-    //toolbar
+    //livingroom_menu
     @Override
-    public boolean onCreateOptionsMenu (Menu m){
-        getMenuInflater().inflate(R.menu.livingroom_menu, m );
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.livingroom_menu, menu);
         return true;
+
     }
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
 
-    public boolean onOptionsItemSelected(MenuItem mi){
-        switch(mi.getItemId() ){
-            case R.id.living:
+        switch(id)
+        {
 
-                break;
             case R.id.kitchen:
+
+                Intent itntKitchenMain = new Intent(this, KitchenMain.class);
+                startActivityForResult(itntKitchenMain, 5);
 
                 break;
             case R.id.house:
 
-                break;
-            case R.id.about:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Welcome to Living Room");
-                builder.setMessage("Version 1.0 by Sizhe Chen\n blablablablablablablabla");
-                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User clicked OK button
-                    }
-                });
 
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                Intent HouseSetting = new Intent(this, HousesettingDetail.class);
+                startActivityForResult(HouseSetting, 5);
+
+                break;
+            case R.id.car:
+
+               startActivity(new Intent(this, AutoListView.class));
+                break;
+            case R.id.lr_help:
+
+//                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
                 break;
         }
         return true;

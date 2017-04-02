@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
+
+
+
+    <item
+        android:id="@+id/living"
+        android:title="Living Room"
+        android:icon="@drawable/livingroom1"
+        app:showAsAction="always"
+        android:orderInCategory="200"/>
     <item
         android:id="@+id/kitchen"
         android:title="Kitchen"
@@ -10,28 +20,21 @@
         android:orderInCategory="300"
         />
 
-    <item
-        android:id="@+id/house"
-        android:title="House Setting"
-        android:icon="@drawable/house1"
-        app:showAsAction="always"
-        android:orderInCategory="400"
-        />
 
     <item
         android:id="@+id/car"
         android:title="Automobile"
         app:showAsAction="always"
         android:icon="@drawable/car1"
-        android:orderInCategory="500"
+        android:orderInCategory="400"
         />
 
     <item
-        android:id="@+id/lr_help"
-        android:title="Living Room Help"
+        android:id="@+id/househelp"
+        android:title="house_help"
         app:showAsAction="always"
         android:icon="@drawable/help"
-        android:orderInCategory="600"
+        android:orderInCategory="500"
         />
 
 </menu>
