@@ -48,8 +48,8 @@
     <array name="house_spinner_add">
         <item>garage</item>
         <item>temp</item>
-        <item>weather</item></array>
-
+        <item>weather</item>
+    </array>
 
 
     <string name="lr_intro_title">Welcome to Living Room</string>
@@ -135,5 +135,8 @@
     <string name="kitchen_light_dimmer_button_text">Set Dimmer</string>
     <string name="kitchen_light_dimmer_section_text">Dimmer</string>
     <string name="kitchen_light_main_switch_section_text">Main Switch</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
