@@ -8,6 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,10 +27,22 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class LivingroomList extends AppCompatActivity {
@@ -77,6 +92,7 @@ public class LivingroomList extends AppCompatActivity {
 
         final ListView listView = (ListView) findViewById(R.id.list_view);
         Button addButton = (Button) findViewById(R.id.lr_list_add);
+        addButton.setVisibility(View.INVISIBLE);
 
         final boolean isTablet = findViewById(R.id.fragment_holder) != null;
 
@@ -85,6 +101,9 @@ public class LivingroomList extends AppCompatActivity {
 
         Toolbar tb =(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(tb);
+
+        ProgressBar progressBar= (ProgressBar) findViewById(R.id.lr_progressBar);
+        progressBar.setVisibility(View.VISIBLE);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -113,6 +132,9 @@ public class LivingroomList extends AppCompatActivity {
                 bun.putInt("volume", volume);
                 bun.putInt("height", height);
 
+                if (fragTransaction!=null && !fragTransaction.isEmpty())
+                    removeFragment();
+
                 if (isTablet) {
                     bun.putBoolean("isTablet", true);
                     frag = new LivingroomFragment(LivingroomList.this);
@@ -138,6 +160,10 @@ public class LivingroomList extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle bun = new Bundle();
                 bun.putBoolean("addNewDevice", true);
+
+                if (fragTransaction!=null && !fragTransaction.isEmpty())
+                    removeFragment();
+
                 if (isTablet) {
                     bun.putBoolean("isTablet", true);
                     frag = new LivingroomFragment(LivingroomList.this);
@@ -153,12 +179,11 @@ public class LivingroomList extends AppCompatActivity {
             }
         });
 
-        //toolbar
-        Toolbar tb =(Toolbar)findViewById(R.id.lr_toolbar);
-        setSupportActionBar(tb);
+        InitiaizeDB thread = new InitiaizeDB();
+        thread.execute();
     }
 
-    private void refreshMessages(){
+    public void refreshMessages(){
         dbHelper = new LivingroomDBHelper(this);
         db = dbHelper.getWritableDatabase();
 
@@ -242,13 +267,26 @@ public class LivingroomList extends AppCompatActivity {
         refreshMessages();
     }
 
+    public void showUpdateMessage(){
+        Snackbar.make(findViewById(android.R.id.content), R.string.update_message, Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    public void showSaveMessage(){
+        Toast.makeText(this, R.string.save_message, Toast.LENGTH_LONG).show();
+    }
+
+    public void showDeleteMessage(){
+        Toast.makeText(this, R.string.delete_message, Toast.LENGTH_LONG).show();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final Bundle bun = data.getExtras();
         Long deviceID = bun.getLong("id");
         if (requestCode==5 && resultCode == 0) {
             deleteDbDevice(deviceID);
-            Toast.makeText(this, R.string.delete_message, Toast.LENGTH_LONG).show();
+            showDeleteMessage();
         }
         if (requestCode==5 && resultCode == 1) {
             String deviceType = bun.getString("deviceType");
@@ -271,14 +309,13 @@ public class LivingroomList extends AppCompatActivity {
                 int height = bun.getInt("height");
                 updateDbBlinds(deviceID, height);
             }
-            Snackbar.make(findViewById(android.R.id.content), R.string.update_message, Snackbar.LENGTH_LONG)
-                    .show();
+            showUpdateMessage();
         }
         if (requestCode == 6 && resultCode == 0) {
             String deviceName = bun.getString("deviceName");
             String deviceType = bun.getString("deviceType");
             insertDbDevice(deviceName, deviceType);
-            Toast.makeText(this, R.string.save_message, Toast.LENGTH_LONG).show();
+            showSaveMessage();
         }
         refreshMessages();
     }
@@ -330,6 +367,106 @@ public class LivingroomList extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    //asyncTask Progress bar
+    private class InitiaizeDB extends AsyncTask<String, Integer, String>
+    {
+
+        @Override
+        protected String doInBackground(String ... args)
+        {
+            Cursor results = db.query(false, LivingroomDBHelper.TABLENAME,
+                    new String[] {},
+                    null, null, null, null, null, null);
+            int rows = results.getCount() ; //number of rows returned
+            if (rows == 0) {
+                try {
+                    publishProgress(0);
+                    ContentValues values = new ContentValues();
+                    values.put(LivingroomDBHelper.KEY_Name, "Simple Lamp 1");
+                    values.put(LivingroomDBHelper.KEY_Type, "Simple Lamp");
+                    db.insert(LivingroomDBHelper.TABLENAME, null, values);
+                    Thread.sleep(500);
+                    publishProgress(20);
+
+                    values = new ContentValues();
+                    values.put(LivingroomDBHelper.KEY_Name, "Dimmable Lamp 1");
+                    values.put(LivingroomDBHelper.KEY_Type, "Dimmable Lamp");
+                    db.insert(LivingroomDBHelper.TABLENAME, null, values);
+                    Thread.sleep(500);
+                    publishProgress(40);
+
+                    values = new ContentValues();
+                    values.put(LivingroomDBHelper.KEY_Name, "Smart Lamp 1");
+                    values.put(LivingroomDBHelper.KEY_Type, "Smart Lamp");
+                    db.insert(LivingroomDBHelper.TABLENAME, null, values);
+                    Thread.sleep(500);
+                    publishProgress(60);
+
+                    values = new ContentValues();
+                    values.put(LivingroomDBHelper.KEY_Name, "TV 1");
+                    values.put(LivingroomDBHelper.KEY_Type, "Television");
+                    db.insert(LivingroomDBHelper.TABLENAME, null, values);
+                    Thread.sleep(500);
+                    publishProgress(80);
+
+                    values = new ContentValues();
+                    values.put(LivingroomDBHelper.KEY_Name, "Blinds 1");
+                    values.put(LivingroomDBHelper.KEY_Type, "Window Blinds");
+                    db.insert(LivingroomDBHelper.TABLENAME, null, values);
+                    Thread.sleep(500);
+                    publishProgress(100);
+                }
+                catch( Exception me)
+                {
+                    Log.e("AsyncTask", "Malformed URL:" + me.getMessage());
+                }
+
+
+            }
+            return " ";
+
+        }
+
+        public void onProgressUpdate(Integer... progress)
+        {
+            ProgressBar progressBar= (ProgressBar) findViewById(R.id.lr_progressBar);
+            progressBar.setProgress(progress[0]);
+            Log.i("ASYNCTASK", "" + progress[0]);
+        }
+
+        public void onPostExecute(String work)
+        {
+            ProgressBar progressBar= (ProgressBar) findViewById(R.id.lr_progressBar);
+            progressBar.setVisibility(View.INVISIBLE);
+
+            Button addButton = (Button) findViewById(R.id.lr_list_add);
+            addButton.setVisibility(View.VISIBLE);
+
+            refreshMessages();
+            Log.i("ASYNC TASK DONE", work);
+        }
+
+        private Bitmap getImage(URL url) {
+            HttpURLConnection connection = null;
+            try {
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                int responseCode = connection.getResponseCode();
+                if (responseCode == 200) {
+                    return BitmapFactory.decodeStream(connection.getInputStream());
+                } else
+                    return null;
+            } catch (Exception e) {
+                return null;
+            } finally {
+                if (connection != null) {
+                    connection.disconnect();
+                }
+            }
+        }
+
     }
 }
 

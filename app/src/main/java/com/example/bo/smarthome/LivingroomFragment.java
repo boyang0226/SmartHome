@@ -63,6 +63,7 @@ public class LivingroomFragment extends Fragment {
         super.onCreate(b);
         Bundle bun = getArguments();
         id = bun.getLong("id");
+        isTablet = bun.getBoolean("isTablet");
         deviceName = bun.getString("deviceName");
         deviceType = bun.getString("deviceType");
         deviceSwitch = bun.getBoolean("switch");
@@ -218,6 +219,7 @@ public class LivingroomFragment extends Fragment {
                             else{
                                 livingroomList.deleteDbDevice(id);
                                 livingroomList.removeFragment();
+                                livingroomList.showDeleteMessage();
                             }
                         }
                     });
@@ -253,6 +255,7 @@ public class LivingroomFragment extends Fragment {
                     else{
                         livingroomList.insertDbDevice(deviceName, deviceType);
                         livingroomList.removeFragment();
+                        livingroomList.showSaveMessage();
                     }
 
                 }
@@ -315,6 +318,8 @@ public class LivingroomFragment extends Fragment {
                         }else if (deviceType.equals("Window Blinds")){
                             livingroomList.updateDbBlinds(id, blindsHeight);
                         }
+                        livingroomList.showUpdateMessage();
+                        livingroomList.refreshMessages();
                         livingroomList.removeFragment();
                     }
 

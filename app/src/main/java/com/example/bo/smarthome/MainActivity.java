@@ -35,13 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch(id)
         {
-            case R.id.person:
-
-                Intent person = new Intent(MainActivity.this, person.class);
-                startActivityForResult(person, 5);
-
-                break;
-
             case R.id.living:
                 Intent livingroomlist = new Intent(MainActivity.this, LivingroomList.class);
                 startActivityForResult(livingroomlist, 1);
@@ -51,9 +44,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent itntKitchenMain = new Intent(MainActivity.this, KitchenMain.class);
                 startActivityForResult(itntKitchenMain, 5);
                 break;
+
             case R.id.house:
-
-
                 Intent HouseSetting = new Intent(MainActivity.this, HousesettingDetail.class);
                 startActivityForResult(HouseSetting, 5);
 
@@ -61,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.car:
 
                 startActivity(new Intent(MainActivity.this, AutoListView.class));
-
-
                 break;
         }
         return true;

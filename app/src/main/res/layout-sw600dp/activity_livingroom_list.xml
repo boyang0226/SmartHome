@@ -16,12 +16,36 @@ android:showDividers="middle">
     android:id="@+id/activity_chat_window"
     android:layout_width="300dp"
     android:layout_height="match_parent"
-    android:paddingBottom="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="10dp"
     tools:context="com.example.bo.smarthome.LivingroomList">
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1caee5"
+        >
+
+    </android.support.v7.widget.Toolbar>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:id="@+id/lr_progressBar"
+        android:visibility="invisible"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/lr_list_add"
@@ -31,16 +55,7 @@ android:showDividers="middle">
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
         android:text="@string/lr_list_add"
-        android:textSize="16sp" />
-
-
-
-    <ListView
-        android:id="@+id/list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:textSize="24sp" />
 
 </RelativeLayout>
 
