@@ -88,10 +88,16 @@ public class KitchenLightDetail extends KitchenBase {
         setToolbarColor(toolbar);
         setSupportActionBar(toolbar);
 
+        Bundle extras = getIntent().getExtras();
+
+        Bundle bun = new Bundle();
+        bun.putInt("applianceId", extras.getInt("applianceId"));
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         KitchenLightFragment frg = new KitchenLightFragment();
+        frg.setArguments(bun);
         ft.replace(R.id.frmKitchenDetailPortrait, frg);
         ft.commit();
-        }
+    }
 }

@@ -1,9 +1,11 @@
 package com.example.bo.smarthome;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -65,6 +67,8 @@ public class KitchenMain extends KitchenBase {
     Cursor results;
     KitchenListAdapter listAdapter;
     boolean isLandscape = false;
+
+    KitchenLightFragment klf = null;
 
     ArrayList<KitchenApplianceType> applianceTypeList = new ArrayList<>();
 
@@ -168,18 +172,19 @@ public class KitchenMain extends KitchenBase {
 
     public class KitchenListAdapter extends ArrayAdapter<KitchenAppliance> {
 
+        private int selectedItem = -1;
         public KitchenListAdapter(Context ctx){
             super(ctx,0);
         }
 
-//        public long getItemId(int position)
-//        {
-//            //results.moveToPosition(position);
-//            return results.getLong( results.getColumnIndex(KitchenDatabaseHelper.KEY_ID) );
-//            return applianceList.get(position)
-//
-//
-//        }
+        public long getItemId(int position)
+        {
+            //results.moveToPosition(position);
+            //return results.getLong( results.getColumnIndex(KitchenDatabaseHelper.KEY_ID) );
+            return applianceList.get(position).getId();
+
+
+        }
 
         @Override
         public int getCount() {
@@ -200,9 +205,19 @@ public class KitchenMain extends KitchenBase {
             View result = inflater.inflate(R.layout.kitchen_main_listview_row,null);
             TextView message = (TextView)result.findViewById(R.id.txtKitchenMainListViewRow);
             KitchenAppliance ka = getItem(position);
-            String listItemText = ka.getApplianceName() + " - " + ka.getApplianceType();
+            String listItemText;
+            if (position==selectedItem)
+                 listItemText = ka.getApplianceName() + " - " + ka.getApplianceType() + "(*)";
+            else
+                 listItemText = ka.getApplianceName() + " - " + ka.getApplianceType();
+
             message.setText(listItemText);
             return result;
+        }
+
+        public void setSelectedItem(int selecteItem)
+        {
+            this.selectedItem = selecteItem;
         }
     }
 
@@ -236,7 +251,7 @@ public class KitchenMain extends KitchenBase {
 
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(300);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -299,9 +314,9 @@ public class KitchenMain extends KitchenBase {
         setSupportActionBar(toolbar);
 
 
-        applianceTypeList.add( new KitchenApplianceType(1,"OVEN","Oven"));
-        applianceTypeList.add( new KitchenApplianceType(1,"DISHWASHER","Dish Washer"));
-        applianceTypeList.add( new KitchenApplianceType(1,"TOASTER","Toaster"));
+        applianceTypeList.add( new KitchenApplianceType(1,"MICROWAVE","Microware Oven"));
+        applianceTypeList.add( new KitchenApplianceType(2,"FRIDGE","Refrigerator"));
+        applianceTypeList.add( new KitchenApplianceType(3,"LIGHT","Light"));
 
         isLandscape = IsLandscapeLayout();
 
@@ -345,41 +360,42 @@ public class KitchenMain extends KitchenBase {
                 KitchenAppliance selectedAppliance = (KitchenAppliance) listAdapter.getItem(position);
 
                 String selectedApplianceName = selectedAppliance.getApplianceName();
+                String selectedApplianceType = selectedAppliance.getApplianceType();
+                int applianceId = selectedAppliance.getId();
 
-                switch (selectedApplianceName) {
-                    case "Microwave":
+                switch (selectedApplianceType) {
+                    case "MICROWAVE":
                         Log.d(tag, "Clicked Microwave.");
                         callActivity(KitchenMicrowaveDetail.class);
                         break;
-                    case "Fridge":
+                    case "FRIDGE":
                         Log.d(tag, "Clicked Fridge.");
                         callActivity(KitchenFridgeDetail.class);
                         break;
-                    case "Main Ceiling light":
-                        Log.d(tag, "Clicked Main light.");
+                    case "LIGHT":
+                        Log.d(tag, "Clicked on LIGHT device.");
+                        Bundle bun = new Bundle();
+                        bun.putInt("applianceId", applianceId );
                         if (isLandscape)
                         {
                             FragmentManager fm = getSupportFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
-                            KitchenLightFragment m = new KitchenLightFragment();
-                            //M = m;
-                            //m.setArguments(bun);
-                            //if (M != null)
-                            //    ft.replace(R.id.frame1, m);
-                            //else
-                            //{
-                                ft.add(R.id.frmKitchenDetail, m);
-                            //    M = m;
-                            //}
+                            KitchenLightFragment f = new KitchenLightFragment();
+                            f.setArguments(bun);
+                            if (klf != null) {
+                                ft.replace(R.id.frmKitchenDetail, f);
+                                klf = f;
+                            }
+                            else {
+                                ft.add(R.id.frmKitchenDetail, f);
+                                klf = f;
+                            }
                             ft.commit();
                         }
                         else {
-                            callActivity(KitchenLightDetail.class);
+                            callActivityWithData(KitchenLightDetail.class, bun);
                         }
                         break;
-                    // case R.id.action_settings:
-                    //   Log.d("Toolbar", "Version 1.0, by Qiuju Zhu");
-                    //   break;
                     default:
                         break;
                 }
@@ -393,7 +409,6 @@ public class KitchenMain extends KitchenBase {
         Log.d(logTag, "Populating appliance list view.");
 
         ListView kitchenListview = (ListView) findViewById(R.id.lvKitchenAppliance);
-
 
         listAdapter = new KitchenListAdapter(this);
         if (kitchenListview != null)
@@ -413,8 +428,6 @@ public class KitchenMain extends KitchenBase {
 
                 String logTag1 = ADDAPPLIANCEBTN;
                 Log.d(logTag1, "Add Appliance button clicked.");
-
-
 
                 AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(KitchenMain.this);
                 LayoutInflater inflater = KitchenMain.this.getLayoutInflater();
@@ -445,20 +458,44 @@ public class KitchenMain extends KitchenBase {
                                     KitchenAppliance ka = new KitchenAppliance(0,newAppliancetype.getApplianceType(),
                                             applianceName.getText().toString(), "");
 
-                                    ContentValues values = new ContentValues();
-                                    values.put(KitchenDatabaseHelper.KEY_APPLIANCE_TYPE, ka.getApplianceType() );
-                                    values.put(KitchenDatabaseHelper.KEY_APPLIANCE_NAME, ka.getApplianceName() );
-                                    values.put(KitchenDatabaseHelper.KEY_APPLIANCE_SETTING, ka.getApplianceSetting() );
-                                    Long newId = db.insert(KitchenDatabaseHelper.KITCHEN_APPLIANCE_TABLE_NAME, "", values);
+                                    ContentValues applianceValues = new ContentValues();
+                                    applianceValues.put(KitchenDatabaseHelper.KEY_APPLIANCE_TYPE, ka.getApplianceType() );
+                                    applianceValues.put(KitchenDatabaseHelper.KEY_APPLIANCE_NAME, ka.getApplianceName() );
+                                    applianceValues.put(KitchenDatabaseHelper.KEY_APPLIANCE_SETTING, ka.getApplianceSetting() );
+                                    Long newId = db.insert(KitchenDatabaseHelper.KITCHEN_APPLIANCE_TABLE_NAME, "", applianceValues);
                                     ka.setId(Integer.parseInt(newId.toString()));
-                                    if (newId > 0)
-                                    {
+                                    if (newId > 0) {
+                                        if (ka.getApplianceType() == "LIGHT") {
+                                            ContentValues lightValues = new ContentValues();
+                                            lightValues.put(KitchenDatabaseHelper.KEY_ID, newId);
+                                            lightValues.put(KitchenDatabaseHelper.KEY_MAINSWITCH, 0);
+                                            lightValues.put(KitchenDatabaseHelper.KEY_DIMMER_LEVEL, 60);
+                                            db.insert(KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME, "", lightValues);
+                                        }
+
+
                                         applianceList.add(ka);
                                         listAdapter.notifyDataSetChanged();
+                                        if (isLandscape) {
+                                            selectListViewItem(applianceList.size() - 1);
+                                            listAdapter.setSelectedItem(applianceList.size() - 1);
+                                        }
                                     }
 
 
+                                } else {
+                                        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(KitchenMain.this);
+                                        // 2. Chain together various setter methods to set the dialog characteristics
+                                            builder.setMessage(R.string.kitchen_main_add_appliance_dialog_warning_msg) //Add a dialog message to strings.xml
+                                            .setTitle(R.string.kitchen_main_add_appliance_dialog_title)
+                                            .setPositiveButton(R.string.dialog_positive_text_ok, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                }
+                                            })
+                                            .show();
+
                                 }
+
 
                             }
                         }).setNegativeButton(R.string.dialog_negative_text_cancel, new DialogInterface.OnClickListener() {
@@ -469,6 +506,15 @@ public class KitchenMain extends KitchenBase {
                 dlgAddAppliance.show();
             }
         });
+    }
+
+    private void selectListViewItem(int position)
+    {
+        ListView kitchenListview = (ListView) findViewById(R.id.lvKitchenAppliance);
+        kitchenListview.performItemClick(
+                kitchenListview.getAdapter().getView(position, null, null),
+                position,
+                kitchenListview.getAdapter().getItemId(position));
     }
 
 }

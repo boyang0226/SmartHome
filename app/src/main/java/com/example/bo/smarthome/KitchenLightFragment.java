@@ -26,6 +26,7 @@ public class KitchenLightFragment extends Fragment {
     private static final String ACTIVITY_NAME = "KitchenLight_";
     private KitchenLightFragment.LightSetting lightSetting;
 
+    private int applianceId = 0;
 
     View frgRootView;
     private class LightSetting {
@@ -80,7 +81,8 @@ public class KitchenLightFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
+        Bundle bun = getArguments();
+        applianceId = bun.getInt("applianceId");
     }
 
     @Override
@@ -108,20 +110,17 @@ public class KitchenLightFragment extends Fragment {
         lightSetting = new KitchenLightFragment.LightSetting();
         db = dbHelper.getWritableDatabase();
         Cursor results = db.query(false, KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME,
-                new String[]{KitchenDatabaseHelper.KEY_ID, KitchenDatabaseHelper.KEY_MAINSWITCH, KitchenDatabaseHelper.KEY_DIMMER_LEVEL},null, null, null, null, null, null);
+                new String[]{KitchenDatabaseHelper.KEY_ID, KitchenDatabaseHelper.KEY_MAINSWITCH, KitchenDatabaseHelper.KEY_DIMMER_LEVEL}, KitchenDatabaseHelper.KEY_ID +"=" + String.valueOf(applianceId), null, null, null, null, null);
 
         int rows = results.getCount();
-        if (rows > 1)
-        {
+        if (rows > 0) {
             results.moveToFirst();
             Log.i(ACTIVITY_NAME + methodName, "SQL MESSAGE:" + "Read record no. "+ results.getInt( results.getColumnIndex( KitchenDatabaseHelper.KEY_ID) ) );
 
-            int tempId = results.getInt(results.getColumnIndex(KitchenDatabaseHelper.KEY_ID));
+            int tempId = applianceId;
             boolean tempMainSwith = results.getInt(results.getColumnIndex(KitchenDatabaseHelper.KEY_MAINSWITCH))==0?false:true;
             int tempDimmerLevel = results.getInt(results.getColumnIndex(KitchenDatabaseHelper.KEY_DIMMER_LEVEL));
-
-            lightSetting = new KitchenLightFragment.LightSetting(tempId, tempMainSwith, tempDimmerLevel);
-        }
+            lightSetting = new KitchenLightFragment.LightSetting(tempId, tempMainSwith, tempDimmerLevel);        }
     }
 
     private void handleSwitchOnOff() {
@@ -202,7 +201,6 @@ public class KitchenLightFragment extends Fragment {
         btnSetDimmer.setEnabled(enabled);
         dimmerBar.setEnabled(enabled);
     }
-
     private void InitializeInuptControls () {
         Switch mainSWitch=(Switch)frgRootView.findViewById(R.id.swtMainSwitch);
         final EditText dimmerLevel = (EditText)frgRootView.findViewById(R.id.edtDimmerLevel);
@@ -273,7 +271,6 @@ public class KitchenLightFragment extends Fragment {
             }
         });
     }
-
     private void showSnackbarMessage() {
 
         String snackBarMsg = "Dimmer level saved.";

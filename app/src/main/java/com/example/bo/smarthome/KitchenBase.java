@@ -34,6 +34,13 @@ public class KitchenBase extends AppCompatActivity {
         startActivity(intent);
     }
 
+    protected void callActivityWithData(Class<?> cls, Bundle bun)    {
+
+        Intent intnt = new Intent(getBaseContext(), cls);
+        intnt.putExtras(bun);
+        startActivity(intnt);
+    }
+
     protected void showHelp() {
     }
 
