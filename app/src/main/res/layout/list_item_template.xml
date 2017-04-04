@@ -5,19 +5,23 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/item_text"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:id="@+id/item_text"
-        android:layout_weight="1.00"
-        android:gravity="left"
-        android:textSize="26sp" />
+        android:layout_weight="5"
+        android:gravity="center"
+        android:lineSpacingExtra="8sp"
+        android:paddingLeft="10dp"
+        android:text="TextView"
+        android:textAlignment="textStart"
+        android:textSize="18sp"
+        android:typeface="sans" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/arrow_next"
-        android:layout_weight="0.07"
+        android:layout_weight="2"
         tools:src="?android:attr/findOnPageNextDrawable" />
 
 </LinearLayout>
