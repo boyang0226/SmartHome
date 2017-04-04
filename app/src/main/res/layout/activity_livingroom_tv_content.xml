@@ -11,7 +11,7 @@
         android:layout_alignParentTop="true"
         android:minHeight="50dp"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:text="@string/lr_tv_name" />
 
@@ -23,7 +23,7 @@
         android:layout_below="@+id/lr_tv_name"
         android:height="50dp"
         android:text="@string/lr_tv_switch"
-        android:textSize="18sp" />
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:id="@+id/lr_tv_volume"
@@ -35,7 +35,7 @@
         android:gravity="center"
         android:minHeight="50dp"
         android:text="@string/lr_tv_volume"
-        android:textSize="18sp" />
+        android:paddingLeft="10dp"/>
 
     <SeekBar
         android:id="@+id/lr_tv_volume_seekBar"
@@ -57,7 +57,7 @@
         android:gravity="center"
         android:minHeight="50dp"
         android:text="@string/lr_tv_seekBar_value"
-        android:textSize="24sp" />
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:id="@+id/lr_tv_channel"
@@ -69,7 +69,7 @@
         android:gravity="center"
         android:minHeight="50dp"
         android:text="@string/lr_tv_channel"
-        android:textSize="18sp" />
+        android:paddingLeft="10dp"/>
 
     <SeekBar
         android:id="@+id/lr_tv_channel_seekBar"
@@ -90,8 +90,7 @@
         android:layout_marginRight="10dp"
         android:gravity="center"
         android:minHeight="50dp"
-        android:text="@string/lr_tv_channel_seekBar_value"
-        android:textSize="24sp" />
+        android:text="@string/lr_tv_channel_seekBar_value"/>
 
     <GridLayout
         android:layout_width="match_parent"
@@ -99,7 +98,8 @@
         android:layout_below="@+id/lr_tv_channel"
         android:columnCount="3"
         android:orientation="horizontal"
-        android:rowCount="3">
+        android:rowCount="3"
+        android:padding="40dp">
 
         <Button
             android:id="@+id/lr_tv_up_button"
@@ -127,7 +127,7 @@
             android:layout_column="1"
             android:layout_columnWeight="1"
             android:layout_row="1"
-            android:text="@string/lr_tv_center_button" />
+            android:text="@string/lr_tv_mute_button" />
 
         <Button
             android:id="@+id/lr_tv_right_button"

@@ -55,7 +55,6 @@
     <string name="lr_intro_title">Welcome to Living Room</string>
     <string name="lr_intro_author">Author: Sizhe Chen</string>
     <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
-    <string name="lr_intro_start_button">START</string>
 
     <string name="lr_list_add">ADD</string>
     <string name="lr_list_details_content_title">Create New Device</string>
@@ -105,9 +104,10 @@
 
     <string name="lr_tv_up_button">U</string>
     <string name="lr_tv_left_button">L</string>
-    <string name="lr_tv_center_button">Center</string>
+    <string name="lr_tv_mute_button">Mute</string>
     <string name="lr_tv_right_button">R</string>
     <string name="lr_tv_down_button">D</string>
+    <string name="lr_toolbar_title">Living Room</string>
 
     <string name="lr_save">SAVE</string>
     <string name="lr_delete">DELETE</string>

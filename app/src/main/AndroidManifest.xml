@@ -30,7 +30,8 @@
 
 
         <activity android:name=".HouseWeather"></activity>
-        <activity android:name=".LivingroomList" />
+        <activity android:name=".LivingroomList"
+                  android:label="@string/lr_toolbar_title"/>
         <activity android:name=".LivingroomItemDetails"></activity>
         <activity android:name=".HousesettingDetail"></activity>
         <activity

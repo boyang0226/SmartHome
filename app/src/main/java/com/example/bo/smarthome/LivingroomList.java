@@ -362,8 +362,17 @@ public class LivingroomList extends AppCompatActivity {
                startActivity(new Intent(this, AutoListView.class));
                 break;
             case R.id.lr_help:
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Welcome to Living Room");
+                builder.setMessage("Version 1.0 by Sizhe Chen\n blablablablablablablabla");
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                    }
+                });
 
-//                Toast.makeText(this, "", Toast.LENGTH_LONG).show();
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 break;
         }
         return true;
