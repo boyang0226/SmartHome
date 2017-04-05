@@ -51,7 +51,6 @@
         <item>weather</item></array>
 
 
-
     <string name="lr_intro_title">Welcome to Living Room</string>
     <string name="lr_intro_author">Author: Sizhe Chen</string>
     <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
@@ -141,5 +140,8 @@
     <string name="kitchen_light_dimmer_button_text">Set Dimmer</string>
     <string name="kitchen_light_dimmer_section_text">Dimmer</string>
     <string name="kitchen_light_main_switch_section_text">Main Switch</string>
-
+    <string name="kitchen_main_add_appliance_dialog_warning_msg">Please enter an appliance name.</string>
+    <string name="kitchen_main_add_appliance_dialog_title">Add Appliance</string>
+    <string name="kitchen_light_delete_appliance_dialog_message">Do you want to delete </string>
+    <string name="kitchen_light_delete_appliance_dialog_title">Confirm Delete Light</string>
 </resources>
