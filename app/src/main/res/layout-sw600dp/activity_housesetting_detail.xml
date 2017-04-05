@@ -11,12 +11,11 @@
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
-        android:background="@android:color/holo_green_light"
+        android:background="#1caee5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
-
     </android.support.v7.widget.Toolbar>
 
     <ListView
@@ -26,11 +25,13 @@
         android:layout_below="@+id/toolbar"/>
 
     <FrameLayout
+        android:id="@+id/house_fragholder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toRightOf="@id/house_listview"
         android:layout_below="@+id/toolbar"
-        android:background="@color/colorPrimary">
+        android:layout_toEndOf="@id/house_listview"
+        android:background="@android:color/holo_blue_bright">
+
 
     </FrameLayout>
 

@@ -57,7 +57,6 @@ public class AutoTemperatureFragment extends Fragment {
                         Intent resultIntent = new Intent();
                         resultIntent.putExtra("Temperature", newTemp);
                         resultIntent.putExtra("id", tempID);
-                        resultIntent.putExtra("Response", "Auto Temperature is set");
                         getActivity().setResult(0, resultIntent);
                         getActivity().finish();
                     } else            // callled from tablet

@@ -1,6 +1,7 @@
 package com.example.bo.smarthome;
 
 
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,48 +10,58 @@ import android.util.Log;
 
 /**
  * Created by Bo on 2017-03-27.
+ *
  */
 
 public class HouseDatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int VERSION_NUM = 3;
-    public static final String databaseName = "HouseDatabase";
+    public static final int VERSION_NUM = 1;
+    public static final String DATABASE_NAME = "HouseDatabase";
     public static final String KEY_ID = "_id";
-
-    public static final String KEY_DoorStatus="DoorStatus";
-    public static final String KEY_LightStatus=  "LightStatus";
+    public static final String KEY_DoorSwitch="DoorSwitch";
+    public static final String KEY_LightSwitch="LightSwitch";
     public static final String KEY_Time="Time";
     public static final String Key_Temp ="Temp";
 
 
+    protected HouseDatabaseHelper(Context ctx) {
 
-    public HouseDatabaseHelper(Context ctx) {
-         super(ctx, databaseName, null, VERSION_NUM);
+        super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
 
     public void onCreate(SQLiteDatabase db) //only called if not yet created
     {
-        db.execSQL("CREATE TABLE " + databaseName + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + KEY_DoorStatus + " text,  "
-                + KEY_LightStatus + " text, "
-                + KEY_Time + "  text,  "
-                + Key_Temp + "  text); "
+        db.execSQL("CREATE TABLE " + DATABASE_NAME + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_DoorSwitch + " BOOLEAN DEFAULT 0, "
+                + KEY_LightSwitch+ " BOOLEAN DEFAULT 0, "
+                + KEY_Time + " TEXT, "
+                + Key_Temp + " TEXT); ");
 
 
-        );
 
-        Log.i("ChatDatabaseHelper", "Calling onCreate");
+
+
+
+
     }
+
+
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
-        db.execSQL("DROP TABLE IF EXISTS " + databaseName);
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_NAME);
         onCreate(db);
 
-        Log.i("ChatDatabaseHelper", "Calling onUpgrade, oldVersion=" + oldVersion + "newVersion=" + newVersion);
+        Log.i("HouseDatabasehelper", "Calling onUpgrade, oldVersion=" + oldVersion + "newVersion=" + newVersion);
     }
 
 
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_NAME);
+        onCreate(db);
+        Log.i("HouseDatabasehelper", "Calling onDowngrade, oldVersion=" + oldVersion + "newVersion=" + newVersion);
+    }
 
 
 }

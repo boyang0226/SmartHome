@@ -30,7 +30,7 @@ import java.util.Arrays;
 
 public class AutoListView extends AppCompatActivity {
     Context ctx;
-    ArrayList<String> autoArray = new ArrayList<String>();
+    ArrayList<String> autoArray = new ArrayList<>();
     ArrayAdapter<String> listAdapter;
     protected static final String ACTIVITY_NAME = "AutoListView";
     protected AutoDatabaseHelper dbHelper;
@@ -91,7 +91,7 @@ public class AutoListView extends AppCompatActivity {
 
                 bun.putLong("id",id);
                 bun.putString("GPSEntry",gpsEntry);
-                bun.putString("TEmperature",temp);
+                bun.putString("Temperature",temp);
                 bun.putString("NormalSwitch",normalSwitch);
                 bun.putString("HeadSwitch",headSwitch);
                 bun.putString("InsideBrightness",insideBrightness);
@@ -150,6 +150,9 @@ public class AutoListView extends AppCompatActivity {
         values.put(AutoDatabaseHelper.KEY_TEMPERATURE, temp);
         db.update(AutoDatabaseHelper.DATABASE_NAME, values, AutoDatabaseHelper.KEY_ID + "=" + tempid, null);
         refreshDB();
+        String toastText = "Auto Temperature is set";
+        Toast toast = Toast.makeText(AutoListView.this, toastText, Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     @Override
@@ -157,11 +160,10 @@ public class AutoListView extends AppCompatActivity {
         final Bundle bun = data.getExtras();
         Long tempid = bun.getLong("id");
         String temp = bun.getString("Temperature");
-        String toastText = bun.getString("Response");
+
         if (requestCode==5 && resultCode == 0) {
             updateTemp(tempid, temp);
-            Toast toast = Toast.makeText(AutoListView.this, toastText, Toast.LENGTH_SHORT);
-            toast.show();
+
         }
     }
 
@@ -179,7 +181,7 @@ public class AutoListView extends AppCompatActivity {
     }
 
     public void removeFragment() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.auto_FragmentHolder, frag).commit();
+        getSupportFragmentManager().beginTransaction().remove(frag).commit();
     }
 
     protected void onDestroy() {
