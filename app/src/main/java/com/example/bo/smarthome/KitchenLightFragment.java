@@ -1,7 +1,11 @@
 package com.example.bo.smarthome;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -27,6 +31,7 @@ public class KitchenLightFragment extends Fragment {
     private KitchenLightFragment.LightSetting lightSetting;
 
     private int applianceId = 0;
+    private String applianceName = "";
 
     View frgRootView;
     private class LightSetting {
@@ -69,12 +74,16 @@ public class KitchenLightFragment extends Fragment {
         }
     }
 
-
+    KitchenMain km = null;
 
     SQLiteDatabase db = null;
 
     public KitchenLightFragment() {
         // Required empty public constructor
+    }
+
+    public KitchenLightFragment(KitchenMain km) {
+        this.km = km;
     }
 
     @Override
@@ -83,6 +92,7 @@ public class KitchenLightFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Bundle bun = getArguments();
         applianceId = bun.getInt("applianceId");
+        applianceName = bun.getString("applianceName");
     }
 
     @Override
@@ -99,9 +109,61 @@ public class KitchenLightFragment extends Fragment {
         handleSwitchOnOff();
         handleSetDimmerBtn();
         handleDimmerSeekBarChange();
+        handleDeleteAppliance();
         return frgRootView;
 
         //View v = inflater.inflate(R.layout.fragment_mssage, null);
+    }
+
+    private void handleDeleteAppliance() {
+        Button btnDeleteAppliance = (Button) frgRootView.findViewById(R.id.btnDeleteKitchenAppliance);
+        btnDeleteAppliance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String msg = getString(R.string.kitchen_light_delete_appliance_dialog_message)  + " " + applianceName + "?";
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                // 2. Chain together various setter methods to set the dialog characteristics
+                builder.setMessage(msg)
+                        .setTitle(R.string.kitchen_light_delete_appliance_dialog_title)
+                        .setPositiveButton(R.string.dialog_positive_text_ok, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                deleteDatabaseRecords();
+                                if (km == null) {
+                                    getActivity().finish();
+                                } else {
+                                    km.removeFragment();
+                                }
+
+                            }
+                        })
+                        .setNegativeButton(R.string.dialog_negative_text_cancel, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                               // buttonView.setChecked(false);
+                                dialog.cancel();
+                            }
+                        })
+                        .show();
+            }
+        });
+
+
+    }
+
+    private void deleteDatabaseRecords() {
+
+//        try {
+//            db.beginTransaction();
+            db.delete(KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME, "id="+applianceId , null);
+            db.delete(KitchenDatabaseHelper.KITCHEN_APPLIANCE_TABLE_NAME, "id="+applianceId , null);
+//            db.endTransaction();
+//            db.setTransactionSuccessful();
+//            db.set
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+
     }
 
     private void loadValuesFromDb() {
@@ -264,16 +326,17 @@ public class KitchenLightFragment extends Fragment {
                 EditText dimmerLevel = (EditText)frgRootView.findViewById(R.id.edtDimmerLevel);
                 SeekBar dimmerBar = (SeekBar)frgRootView.findViewById(R.id.skbDimmer);
 
-                dimmerBar.setProgress(Integer.parseInt(dimmerLevel.getText().toString()));
+                String dimmerLevelValue = dimmerLevel.getText().toString();
+                dimmerBar.setProgress(Integer.parseInt(dimmerLevelValue));
 
                 saveLightSetting();
-                showSnackbarMessage();
+                showSnackbarMessage(dimmerLevelValue);
             }
         });
     }
-    private void showSnackbarMessage() {
+    private void showSnackbarMessage(String dimmerLevelValue) {
 
-        String snackBarMsg = "Dimmer level saved.";
+        String snackBarMsg = applianceName + " dimmer level " + dimmerLevelValue +"% saved.";
         FrameLayout coordinatorLayout = (FrameLayout) frgRootView.findViewById(R.id.layoutFragmentKitchenLight);
 
         Snackbar.make(coordinatorLayout, snackBarMsg, Snackbar.LENGTH_LONG)

@@ -92,6 +92,7 @@ public class KitchenLightDetail extends KitchenBase {
 
         Bundle bun = new Bundle();
         bun.putInt("applianceId", extras.getInt("applianceId"));
+        bun.putString("applianceName", extras.getString("applianceName"));
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

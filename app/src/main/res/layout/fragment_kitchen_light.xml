@@ -31,13 +31,13 @@
             style="@style/Widget.AppCompat.SeekBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtDimmer"
-            android:layout_below="@+id/txtDimmer"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="40dp"
-            android:layout_marginTop="29dp"
+            android:layout_marginTop="18dp"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp" />
+            android:paddingRight="20dp"
+            android:layout_below="@+id/txtDimmer"
+            android:layout_alignStart="@+id/txtDimmer" />
 
 
         <TextView
@@ -63,11 +63,20 @@
             style="@style/Widget.AppCompat.EditText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txtDimmer"
-            android:layout_below="@+id/skbDimmer"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="33dp"
             android:ems="6"
-            android:inputType="number" />
+            android:inputType="number"
+            android:layout_below="@+id/skbDimmer"
+            android:layout_alignStart="@+id/txtDimmer" />
+
+        <Button
+            android:id="@+id/btnDeleteKitchenAppliance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/edtDimmerLevel"
+            android:layout_alignEnd="@+id/skbDimmer" />
     </RelativeLayout>
 
 </FrameLayout>

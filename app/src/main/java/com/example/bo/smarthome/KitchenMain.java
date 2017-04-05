@@ -335,6 +335,14 @@ public class KitchenMain extends KitchenBase {
         addAppliance(logTag);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        applianceList.clear();
+        new KitchenApplianceQuery().execute("");
+
+    }
+
     private boolean IsLandscapeLayout()
     {
         FrameLayout f = (FrameLayout) findViewById(R.id.frmKitchenDetail);
@@ -376,11 +384,13 @@ public class KitchenMain extends KitchenBase {
                         Log.d(tag, "Clicked on LIGHT device.");
                         Bundle bun = new Bundle();
                         bun.putInt("applianceId", applianceId );
+                        bun.putString("applianceName", selectedApplianceName);
+
                         if (isLandscape)
                         {
                             FragmentManager fm = getSupportFragmentManager();
                             FragmentTransaction ft = fm.beginTransaction();
-                            KitchenLightFragment f = new KitchenLightFragment();
+                            KitchenLightFragment f = new KitchenLightFragment(KitchenMain.this);
                             f.setArguments(bun);
                             if (klf != null) {
                                 ft.replace(R.id.frmKitchenDetail, f);
@@ -515,6 +525,16 @@ public class KitchenMain extends KitchenBase {
                 kitchenListview.getAdapter().getView(position, null, null),
                 position,
                 kitchenListview.getAdapter().getItemId(position));
+    }
+
+    public void removeFragment()
+    {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.remove(klf);
+        ft.commit();
+        applianceList.clear();
+        new KitchenApplianceQuery().execute("");
     }
 
 }

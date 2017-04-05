@@ -38,7 +38,7 @@ public class KitchenBase extends AppCompatActivity {
 
         Intent intnt = new Intent(getBaseContext(), cls);
         intnt.putExtras(bun);
-        startActivity(intnt);
+        startActivityForResult(intnt,5);
     }
 
     protected void showHelp() {
