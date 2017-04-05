@@ -1,5 +1,8 @@
 package com.example.bo.smarthome;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +15,7 @@ import android.view.MenuItem;
 public class KitchenBase extends AppCompatActivity {
 
     private String logTag = "KitchenBase";
+    Context ctx;
 
     protected void setLogTag(String logTag)
     {
@@ -29,6 +33,17 @@ public class KitchenBase extends AppCompatActivity {
         Intent intent = new Intent(getBaseContext(), cls);
         startActivity(intent);
     }
+
+    protected void callActivityWithData(Class<?> cls, Bundle bun)    {
+
+        Intent intnt = new Intent(getBaseContext(), cls);
+        intnt.putExtras(bun);
+        startActivityForResult(intnt,5);
+    }
+
+    protected void showHelp() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +74,12 @@ public class KitchenBase extends AppCompatActivity {
                 Log.d(logTag, "Switch to Living Room from Kitchen.");
                 callActivity(LivingroomList.class);
                 break;
-            // case R.id.action_settings:
-            //   Log.d("Toolbar", "Version 1.0, by Qiuju Zhu");
-            //   break;
+             case R.id.kitchen_help:
+               Log.d(logTag, "Help");
+               showHelp();
+
+              break;
+
             default:
                 break;
         }

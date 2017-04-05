@@ -29,7 +29,7 @@
     <item
         android:id="@+id/lr_help"
         android:title="Living Room Help"
-        app:showAsAction="always"
+        app:showAsAction="never"
         android:icon="@drawable/help"
         android:orderInCategory="600"
         />
