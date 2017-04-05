@@ -37,10 +37,19 @@
 
     <ListView
         android:id="@+id/auto_ListView"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/auto_AppBarLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true" />
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/auto_AppBarLayout"
-        android:layout_above="@+id/auto_fab" />
+        android:layout_toRightOf="@+id/auto_ListView"
+        android:id="@+id/auto_FragmentHolder"
+        android:background="@color/colorAccent"
+        android:layout_below="@+id/auto_AppBarLayout">
+    </FrameLayout>
 
 </RelativeLayout>

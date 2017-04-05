@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/auto_AddedListView"
-        android:layout_weight="3"
+        android:textSize="30dp"
         android:layout_gravity="center"
         android:gravity="center" />
 

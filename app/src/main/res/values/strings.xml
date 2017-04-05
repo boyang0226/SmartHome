@@ -30,26 +30,30 @@
         Thank you for using my program!
     </string>
 
-    <string name="auto_listview_add_button">Add</string>
-    <string name="auto_add_new_unit_textview">Add New Unit</string>
-    <string name="auto_add_new_unit_edit_textinput">Enter Unit Name</string>
-    <string name="auto_add_new_unit_prompt">Choose a type</string>
-    <string-array name="auto_add_new_unit_arrays">
-        <item>Auto Temp</item>
-        <item>Auto Normal Light</item>
-        <item>Auto High Light</item>
-        <item>Auto Inside Light</item>
-        <item>Auto Radio Station</item>
-        <item>Auto GPS</item>
-    </string-array>
-    <string name="auto_add_new_unit_submitbutton">Submit</string>
-
+    <string name = "auto_temperature_textview">Auto Temperature</string>
+    <string name = "auto_temperature_edittext_hint">Enter Temperature</string>
+    <string name = "auto_temperature_setbutton">Set</string>
+    <string name = "auto_normallight_textview">Normal Light</string>
+    <string name = "auto_highlight_textview">High Light</string>
+    <string name = "auto_dimmablelight_texview">Dimmable Light</string>
+    <string name = "auto_gps_textview">Destination</string>
+    <string name = "auto_gps_edittext_hint">Enter Address</string>
+    <string name = "auto_gps_setbutton">Set</string>
+    <string name = "auto_radiostation1_textview">RadioStation One</string>
+    <string name = "auto_radiostation2_textview">RadioStation Two</string>
+    <string name = "auto_radiostation3_textview">RadioStation Three</string>
+    <string name = "auto_radiostation4_textview">RadioStation Four</string>
+    <string name = "auto_radiostation5_textview">RadioStation Five</string>
+    <string name = "auto_radiostation6_textview">RadioStation Six</string>
+    <string name = "auto_radiostation_edittext_hint">Enter Station</string>
+    <string name = "auto_radiostation_setbutton">Set</string>
+    <string name = "auto_radiostation_clearbutton">Clear</string>
 
     <array name="house_spinner_add">
         <item>garage</item>
         <item>temp</item>
-        <item>weather</item></array>
-
+        <item>weather</item>
+    </array>
 
     <string name="lr_intro_title">Welcome to Living Room</string>
     <string name="lr_intro_author">Author: Sizhe Chen</string>
