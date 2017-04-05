@@ -18,21 +18,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".HousesettingDetail" />
-
-       
         <activity android:name=".AutoListView" />
-
-
-        
+        <activity android:name=".AutoItemDetails" />
+        <activity android:name=".AutoTemperatureFragment" />
+        <activity android:name=".AutoDatabaseHelper" />
         <activity android:name=".HouseDatabaseHelper" />
         <activity android:name=".HouseMessageFragment" />
-        <activity android:name=".HouseGarageFragment"></activity>
-
-
-        <activity android:name=".HouseWeather"></activity>
+        <activity android:name=".HouseGarageFragment" />
+        <activity android:name=".HouseWeather" />
         <activity android:name=".LivingroomList" />
-        <activity android:name=".LivingroomItemDetails"></activity>
-        <activity android:name=".HousesettingDetail"></activity>
+        <activity android:name=".LivingroomItemDetails" />
+        <activity android:name=".HousesettingDetail" />
         <activity
             android:name=".KitchenMain"
             android:label="@string/title_activity_kitchen_main"
@@ -52,10 +48,7 @@
         <activity
             android:name=".KitchenBase"
             android:label="@string/title_activity_kitchen_base"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-
-
-
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>
