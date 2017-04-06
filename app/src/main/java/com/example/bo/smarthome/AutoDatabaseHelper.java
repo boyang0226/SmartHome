@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class AutoDatabaseHelper extends SQLiteOpenHelper {
-    private static final int VERSION_NUM = 3;
+    private static final int VERSION_NUM = 1;
     public static final String DATABASE_NAME = "AutoUnits";
     public static final String KEY_ID = "_id";
     public static final String KEY_NAME = "UnitName";
@@ -67,7 +67,13 @@ public class AutoDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_NAME);
         onCreate(db);
 
-        Log.i("AtoDatabaseHelper", "Calling onUpgrade, oldVersion=" + oldVersion + " newVersion=" + newVersion);
+        Log.i("AutoDatabaseHelper", "Calling onUpgrade, oldVersion=" + oldVersion + " newVersion=" + newVersion);
     }
 
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
+    {
+        db.execSQL("DROP TABLE IF EXISTS " + DATABASE_NAME);
+        onCreate(db);
+        Log.i("AutoDatabaseHelper", "Calling onDowngrade, oldVersion=" + oldVersion + "newVersion=" + newVersion);
+    }
 }
