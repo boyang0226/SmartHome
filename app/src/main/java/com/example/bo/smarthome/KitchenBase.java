@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -42,6 +44,16 @@ public class KitchenBase extends AppCompatActivity {
     }
 
     protected void showHelp() {
+    }
+
+    protected void loadKitchenFragment(KitchenFragmentBase frg, int resId, Bundle bun)
+    {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        frg.setArguments(bun);
+        ft.replace(resId, frg);
+        ft.commit();
+
     }
 
     @Override

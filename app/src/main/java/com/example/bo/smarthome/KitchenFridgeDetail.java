@@ -29,6 +29,14 @@ public class KitchenFridgeDetail extends KitchenBase {
         setToolbarColor(toolbar);
         setSupportActionBar(toolbar);
 
+        Bundle extras = getIntent().getExtras();
+        Bundle bun = new Bundle();
+        bun.putInt("applianceId", extras.getInt("applianceId"));
+        bun.putString("applianceName", extras.getString("applianceName"));
+
+        KitchenFridgeFragment frg = new KitchenFridgeFragment();
+        loadKitchenFragment(frg, R.id.frmKitchenFridgeDetailPortrait, bun);
+
     }
 
 }
