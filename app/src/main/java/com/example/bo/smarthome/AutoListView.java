@@ -29,7 +29,7 @@ import java.util.Arrays;
 
 public class AutoListView extends AppCompatActivity {
     Context ctx;
-    ArrayList<String> autoArray = new ArrayList<>();
+    ArrayList<String> autoArray = new ArrayList<String>();
     ArrayAdapter<String> listAdapter;
     protected static final String ACTIVITY_NAME = "AutoListView";
     protected AutoDatabaseHelper dbHelper;
@@ -174,7 +174,6 @@ public class AutoListView extends AppCompatActivity {
         String toastText = "Auto Temperature is set";
         Toast toast = Toast.makeText(AutoListView.this, toastText, Toast.LENGTH_SHORT);
         toast.show();
-
     }
 
     public void insertGPSEntry(long gpsentryid, String gpsentry){
@@ -185,30 +184,22 @@ public class AutoListView extends AppCompatActivity {
         String toastText = "Auto GPS is set";
         Toast toast = Toast.makeText(AutoListView.this, toastText, Toast.LENGTH_SHORT);
         toast.show();
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final Bundle bun = data.getExtras();
 
-
-        Long tempid = bun.getLong("id");
-        String temp = bun.getString("Temperature");
-
-
         if (requestCode==5 && resultCode == 0) {
             Long tempid = bun.getLong("id");
             String temp = bun.getString("Temperature");
             updateTemp(tempid, temp);
-
         }
 
         if (requestCode==5 && resultCode == 2) {
             Long gpsid = bun.getLong("id");
             String gpsentry = bun.getString("GPSEntry");
             insertGPSEntry(gpsid, gpsentry);
-
         }
     }
 
