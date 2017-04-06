@@ -33,8 +33,8 @@ public class AutoDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) //only called if not yet created
     {
         db.execSQL("CREATE TABLE " + DATABASE_NAME + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_GPS_ENTRY + " TEXT, " + KEY_NAME + " TEXT, "
-         + KEY_TEMPERATURE + " TEXT, " + KEY_NORMAL_SWITCH + " TEXT, " + KEY_HEAD_SWITCH + " TEXT, " + KEY_INSIDE_BRIGHTNESS + " TEXT, "
-         + KEY_RADIO_VOLUME + " TEXT, " + KEY_RADIO_MUTE + " TEXT, " + KEY_RADIO_STATION_ONE + " TEXT, "
+         + KEY_TEMPERATURE + " TEXT, " + KEY_NORMAL_SWITCH + " BOOLEAN DEFAULT 0, " + KEY_HEAD_SWITCH + " BOOLEAN DEFAULT 0, " + KEY_INSIDE_BRIGHTNESS + " INT DEFAULT 0, "
+         + KEY_RADIO_VOLUME + " INT DEFAULT 0, " + KEY_RADIO_MUTE + " BOOLEAN DEFAULT 0, " + KEY_RADIO_STATION_ONE + " TEXT, "
          + KEY_RADIO_STATION_TWO + " TEXT, " + KEY_RADIO_STATION_THREE + " TEXT, " + KEY_RADIO_STATION_FOUR + " TEXT, "
          + KEY_RADIO_STATION_FIVE + " TEXT, " + KEY_RADIO_STATION_SIX + " TEXT);");
 

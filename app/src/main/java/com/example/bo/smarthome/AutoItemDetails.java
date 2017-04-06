@@ -20,7 +20,10 @@ public class AutoItemDetails extends AppCompatActivity {
                 break;
 
             case "lights":
-
+                AutoLightsFragment fraglights = new AutoLightsFragment(null);
+                Bundle bunlights = getIntent().getExtras();
+                fraglights.setArguments(bunlights);
+                getSupportFragmentManager().beginTransaction().add(R.id.auto_FragmentHolder, fraglights).commit();
                 break;
 
             case "gps":

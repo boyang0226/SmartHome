@@ -49,10 +49,13 @@
     <string name = "auto_radiostation4_textview">RadioStation Four</string>
     <string name = "auto_radiostation5_textview">RadioStation Five</string>
     <string name = "auto_radiostation6_textview">RadioStation Six</string>
-    <string name = "auto_radiostation_edittext_hint">Enter Station</string>
+    <string name = "auto_radiostation_edittext_hint">Enter Station Number</string>
     <string name = "auto_radiostation_setbutton">Set</string>
     <string name = "auto_radiostation_clearbutton">Clear</string>
     <string name = "auto_gps_entry_title">GPS Entry List</string>
+    <string name = "auto_radiostation_mute">Mute</string>
+    <string name = "auto_radiostation_volumn">Volumn</string>
+    <string name ="auto_light_setbutton">Set</string>
 
     <array name="house_spinner_add">
         <item>garage</item>
