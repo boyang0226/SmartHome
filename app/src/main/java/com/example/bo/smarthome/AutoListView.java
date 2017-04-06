@@ -53,7 +53,7 @@ public class AutoListView extends AppCompatActivity {
 
         ListView autoListView =(ListView)findViewById(R.id.auto_ListView);
 
-        String [] item = {"Auto Temperature", "Auto Lights", "Auto GPS", "Auto Radio Stations"};
+        String [] item = {"Auto Temperature", "Auto Lights", "Auto GPS", "Auto Radio Station"};
         autoArray = new ArrayList<>(Arrays.asList(item));
         listAdapter =new ArrayAdapter <> (this,R.layout.activity_auto_list_view_item,R.id.auto_AddedListView,autoArray);
         autoListView.setAdapter(listAdapter);
@@ -76,32 +76,32 @@ public class AutoListView extends AppCompatActivity {
                 long id = results.getLong(results.getColumnIndex(AutoDatabaseHelper.KEY_ID));
                 String gpsEntry = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_GPS_ENTRY));
                 String temp = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_TEMPERATURE));
-                String normalSwitch = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_NORMAL_SWITCH));
-                String headSwitch = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_HEAD_SWITCH));
-                String insideBrightness = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_INSIDE_BRIGHTNESS));
-                String volumn = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_VOLUME));
-                String mute = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_MUTE));
-                String radiaostation1 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_ONE));
-                String radiaostation2 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_TWO));
-                String radiaostation3 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_THREE));
-                String radiaostation4 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_FOUR));
-                String radiaostation5 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_FIVE));
-                String radiaostation6 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_SIX));
+                int  normalSwitch = results.getInt(results.getColumnIndex(AutoDatabaseHelper.KEY_NORMAL_SWITCH));
+                int headSwitch = results.getInt(results.getColumnIndex(AutoDatabaseHelper.KEY_HEAD_SWITCH));
+                int insideBrightness = results.getInt(results.getColumnIndex(AutoDatabaseHelper.KEY_INSIDE_BRIGHTNESS));
+                int volumn = results.getInt(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_VOLUME));
+                int mute = results.getInt(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_MUTE));
+                String radiostation1 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_ONE));
+                String radiostation2 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_TWO));
+                String radiostation3 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_THREE));
+                String radiostation4 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_FOUR));
+                String radiostation5 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_FIVE));
+                String radiostation6 = results.getString(results.getColumnIndex(AutoDatabaseHelper.KEY_RADIO_STATION_SIX));
 
                 bun.putLong("id",id);
                 bun.putString("GPSEntry",gpsEntry);
                 bun.putString("Temperature",temp);
-                bun.putString("NormalSwitch",normalSwitch);
-                bun.putString("HeadSwitch",headSwitch);
-                bun.putString("InsideBrightness",insideBrightness);
-                bun.putString("Volumn",volumn);
-                bun.putString("Mute",mute);
-                bun.putString("Station1",radiaostation1);
-                bun.putString("Station2",radiaostation2);
-                bun.putString("Station3",radiaostation3);
-                bun.putString("Station4",radiaostation4);
-                bun.putString("Station5",radiaostation5);
-                bun.putString("Station6",radiaostation6);
+                bun.putBoolean("NormalSwitch",normalSwitch!=0);
+                bun.putBoolean("HeadSwitch",headSwitch!=0);
+                bun.putInt("InsideBrightness",insideBrightness);
+                bun.putInt("Volumn",volumn);
+                bun.putBoolean("Mute",mute!=0);
+                bun.putString("Station1",radiostation1);
+                bun.putString("Station2",radiostation2);
+                bun.putString("Station3",radiostation3);
+                bun.putString("Station4",radiostation4);
+                bun.putString("Station5",radiostation5);
+                bun.putString("Station6",radiostation6);
 
                 if (adapterView.getItemAtPosition(i).equals("Auto Temperature")) {
                     if (isTablet) {
@@ -110,8 +110,7 @@ public class AutoListView extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.auto_FragmentHolder, frag).commit();
                     }else {
                         Intent intnt = new Intent(AutoListView.this, AutoItemDetails.class);
-                        intnt.putExtra("id", id);
-                        intnt.putExtra("Temperature", temp);//pass the Database ID and message to next activity
+                        intnt.putExtras(bun);//pass the Database ID and message to next activity
                         intnt.putExtra("Function", "temperature");
                         startActivityForResult(intnt, 5); //go to view fragment details
                     }
@@ -133,6 +132,35 @@ public class AutoListView extends AppCompatActivity {
                     mNotifyMgr.notify(mNotificationId, mBuilder.build());
                 }
 
+                else if (adapterView.getItemAtPosition(i).equals("Auto Lights")) {
+                    if (isTablet) {
+                        frag = new AutoTemperatureFragment(AutoListView.this);
+                        frag.setArguments(bun);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.auto_FragmentHolder, frag).commit();
+                    }else {
+                        Intent intnt = new Intent(AutoListView.this, AutoItemDetails.class);
+                        intnt.putExtras(bun);//pass the Database ID and message to next activity
+                        intnt.putExtra("Function", "lights");
+                        startActivityForResult(intnt, 5); //go to view fragment details
+                    }
+
+                    NotificationCompat.Builder mBuilder =
+                            new NotificationCompat.Builder(ctx)
+                                    .setSmallIcon(R.drawable.car1)
+                                    .setContentTitle("Notification")
+                                    .setContentText("Auto Lights Setting");
+
+                    //where to go if clicked
+                    Intent resultIntent = new Intent(ctx, AutoItemDetails.class);
+                    PendingIntent resultPendingIntent = PendingIntent.getActivity( ctx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    mBuilder.setContentIntent(resultPendingIntent);
+
+                    //now show the notification:
+                    int mNotificationId = 0635;
+                    NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    mNotifyMgr.notify(mNotificationId, mBuilder.build());
+                }
+
                 else if (adapterView.getItemAtPosition(i).equals("Auto GPS")) {
                     if (isTablet) {
                         frag = new AutoTemperatureFragment(AutoListView.this);
@@ -140,8 +168,7 @@ public class AutoListView extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.auto_FragmentHolder, frag).commit();
                     }else {
                         Intent intnt = new Intent(AutoListView.this, AutoItemDetails.class);
-                        intnt.putExtra("id", id);
-                        intnt.putExtra("GPSEntry", gpsEntry);//pass the Database ID and message to next activity
+                        intnt.putExtras(bun);//pass the Database ID and message to next activity
                         intnt.putExtra("Function", "gps");
                         startActivityForResult(intnt, 5); //go to view fragment details
                     }
@@ -158,7 +185,36 @@ public class AutoListView extends AppCompatActivity {
                     mBuilder.setContentIntent(resultPendingIntent);
 
                     //now show the notification:
-                    int mNotificationId = 0634;
+                    int mNotificationId = 0636;
+                    NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    mNotifyMgr.notify(mNotificationId, mBuilder.build());
+                }
+
+                else if (adapterView.getItemAtPosition(i).equals("Auto Radio Station")) {
+                    if (isTablet) {
+                        frag = new AutoTemperatureFragment(AutoListView.this);
+                        frag.setArguments(bun);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.auto_FragmentHolder, frag).commit();
+                    }else {
+                        Intent intnt = new Intent(AutoListView.this, AutoItemDetails.class);
+                        intnt.putExtras(bun);//pass the Database ID and message to next activity
+                        intnt.putExtra("Function", "radio");
+                        startActivityForResult(intnt, 5); //go to view fragment details
+                    }
+
+                    NotificationCompat.Builder mBuilder =
+                            new NotificationCompat.Builder(ctx)
+                                    .setSmallIcon(R.drawable.car1)
+                                    .setContentTitle("Notification")
+                                    .setContentText("Auto Radio Setting");
+
+                    //where to go if clicked
+                    Intent resultIntent = new Intent(ctx, AutoItemDetails.class);
+                    PendingIntent resultPendingIntent = PendingIntent.getActivity( ctx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    mBuilder.setContentIntent(resultPendingIntent);
+
+                    //now show the notification:
+                    int mNotificationId = 0637;
                     NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                     mNotifyMgr.notify(mNotificationId, mBuilder.build());
                 }
@@ -172,6 +228,18 @@ public class AutoListView extends AppCompatActivity {
         db.update(AutoDatabaseHelper.DATABASE_NAME, values, AutoDatabaseHelper.KEY_ID + "=" + tempid, null);
         refreshDB();
         String toastText = "Auto Temperature is set";
+        Toast toast = Toast.makeText(AutoListView.this, toastText, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public void updateLights(long lightsid, Boolean nswitch, Boolean hswitch, int ibrightness){
+        ContentValues values = new ContentValues();
+        values.put(AutoDatabaseHelper.KEY_NORMAL_SWITCH, nswitch ? 1 : 0);
+        values.put(AutoDatabaseHelper.KEY_HEAD_SWITCH, hswitch ? 1 : 0);
+        values.put(AutoDatabaseHelper.KEY_INSIDE_BRIGHTNESS, ibrightness);
+        db.update(AutoDatabaseHelper.DATABASE_NAME, values, AutoDatabaseHelper.KEY_ID + "=" + lightsid, null);
+        refreshDB();
+        String toastText = "Auto Lights is set";
         Toast toast = Toast.makeText(AutoListView.this, toastText, Toast.LENGTH_SHORT);
         toast.show();
     }
@@ -194,6 +262,14 @@ public class AutoListView extends AppCompatActivity {
             Long tempid = bun.getLong("id");
             String temp = bun.getString("Temperature");
             updateTemp(tempid, temp);
+        }
+
+        if (requestCode==5 && resultCode == 1) {
+            Long lightsID = bun.getLong("id");
+            boolean nswitch = bun.getBoolean("NormalSwitch");
+            boolean hswitch = bun.getBoolean("HeadSwitch");
+            int ibrightness = bun.getInt("InsideBrightness");
+            updateLights(lightsID, nswitch, hswitch, ibrightness);
         }
 
         if (requestCode==5 && resultCode == 2) {
