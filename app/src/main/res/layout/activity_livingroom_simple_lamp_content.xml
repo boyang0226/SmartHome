@@ -12,7 +12,7 @@
         android:layout_alignParentTop="true"
         android:minHeight="70dp"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:text="@string/lr_simple_lamp_name" />
 
@@ -24,7 +24,7 @@
         android:layout_below="@+id/lr_simple_lamp_name"
         android:height="50dp"
         android:text="@string/lr_simple_lamp_switch"
-        android:textSize="18sp" />
+        android:paddingLeft="10dp"/>
 
     <Button
         android:id="@+id/lr_save"

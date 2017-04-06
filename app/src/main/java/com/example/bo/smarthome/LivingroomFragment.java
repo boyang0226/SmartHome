@@ -1,8 +1,11 @@
 package com.example.bo.smarthome;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +63,7 @@ public class LivingroomFragment extends Fragment {
         super.onCreate(b);
         Bundle bun = getArguments();
         id = bun.getLong("id");
+        isTablet = bun.getBoolean("isTablet");
         deviceName = bun.getString("deviceName");
         deviceType = bun.getString("deviceType");
         deviceSwitch = bun.getBoolean("switch");
@@ -194,24 +198,46 @@ public class LivingroomFragment extends Fragment {
             heightLabel.setText(String.valueOf(height));
         }
 
+        //Delete event handler
         Button deleteButton = (Button)gui.findViewById(R.id.lr_delete);
         if (deleteButton != null)
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle(R.string.delete_confirm_message);
 
-                    if (!isTablet){
-                        Intent intent = new Intent();
-                        intent.putExtra("id" ,id);
-                        getActivity().setResult(0, intent);
-                        getActivity().finish();
-                    }
-                    else{
-                        livingroomList.deleteDbDevice(id);
-                        livingroomList.removeFragment();
-                    }
+                    builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id1) {
+                            // User clicked OK button
+                            if (!isTablet){
+                                Intent intent = new Intent();
+                                intent.putExtra("id" ,id);
+                                getActivity().setResult(0, intent);
+                                getActivity().finish();
+                            }
+                            else{
+                                livingroomList.deleteDbDevice(id);
+                                livingroomList.removeFragment();
+                                livingroomList.showDeleteMessage();
+                            }
+                        }
+                    });
+                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+
+
                 }
             });
+
+        //Submit event handler
         if (gui.findViewById(R.id.lr_list_details_content_submit) != null){
             Button submitButton = (Button)gui.findViewById(R.id.lr_list_details_content_submit);
             submitButton.setOnClickListener(new View.OnClickListener() {
@@ -229,11 +255,14 @@ public class LivingroomFragment extends Fragment {
                     else{
                         livingroomList.insertDbDevice(deviceName, deviceType);
                         livingroomList.removeFragment();
+                        livingroomList.showSaveMessage();
                     }
 
                 }
             });
         }
+
+        //save event handler
         Button saveButton = (Button)gui.findViewById(R.id.lr_save);
         if (saveButton != null)
             saveButton.setOnClickListener(new View.OnClickListener() {
@@ -289,8 +318,11 @@ public class LivingroomFragment extends Fragment {
                         }else if (deviceType.equals("Window Blinds")){
                             livingroomList.updateDbBlinds(id, blindsHeight);
                         }
+                        livingroomList.showUpdateMessage();
+                        livingroomList.refreshMessages();
                         livingroomList.removeFragment();
                     }
+
                 }
             });
         return gui;

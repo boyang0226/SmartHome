@@ -13,7 +13,7 @@
         android:layout_alignParentTop="true"
         android:minHeight="70dp"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:text="@string/lr_smart_lamp_name" />
 
@@ -27,7 +27,7 @@
         android:gravity="center"
         android:minHeight="50dp"
         android:text="@string/lr_smart_lamp_brightness"
-        android:textSize="18sp" />
+        android:paddingLeft="10dp"/>
 
 
 
@@ -50,8 +50,7 @@
         android:layout_marginRight="10dp"
         android:gravity="center"
         android:minHeight="50dp"
-        android:text="@string/lr_smart_lamp_seekBar_value"
-        android:textSize="24sp" />
+        android:text="@string/lr_smart_lamp_seekBar_value"/>
 
     <TextView
         android:id="@+id/lr_smart_lamp_color"
@@ -63,7 +62,7 @@
         android:gravity="center"
         android:minHeight="50dp"
         android:text="@string/lr_smart_lamp_color"
-        android:textSize="18sp" />
+        android:paddingLeft="10dp"/>
 
     <Spinner
         android:id="@+id/lr_color_spinner"
@@ -71,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/lr_smart_lamp_seekBar"
-        android:layout_toEndOf="@+id/lr_smart_lamp_color"
+        android:layout_toEndOf="@+id/lr_smart_lamp_brightness"
         android:entries="@array/lr_smart_lamp_color"
         android:minHeight="50dp"/>
 
