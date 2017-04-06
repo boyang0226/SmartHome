@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/auto_gps_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="54dp"
+        android:text="@string/auto_gps_textview"
+        android:textSize="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/auto_gps_editText" />
+
+    <EditText
+        android:id="@+id/auto_gps_editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:ems="10"
+        android:hint="@string/auto_gps_edittext_hint"
+        android:text=""
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/auto_gps_textView"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/auto_gps_setbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auto_gps_setbutton"
+        android:layout_alignTop="@+id/auto_gps_editText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="32dp" />
+
+    <ProgressBar
+        android:id="@+id/auto_gps_progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:visibility="invisible"
+        android:layout_below="@+id/auto_gps_setbutton"
+        android:layout_toEndOf="@+id/auto_gps_textView" />
+
+    <TextView
+        android:id="@+id/auto_gps_entry_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auto_gps_entry_title"
+        android:textSize="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/auto_gps_editText" />
+
+    <ListView
+        android:id="@+id/auto_gps_entry_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/auto_gps_entry_title"
+        android:layout_marginTop="32dp"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

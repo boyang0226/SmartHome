@@ -52,6 +52,7 @@
     <string name = "auto_radiostation_edittext_hint">Enter Station</string>
     <string name = "auto_radiostation_setbutton">Set</string>
     <string name = "auto_radiostation_clearbutton">Clear</string>
+    <string name = "auto_gps_entry_title">GPS Entry List</string>
 
     <array name="house_spinner_add">
         <item>garage</item>

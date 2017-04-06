@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.NotificationCompat;
@@ -67,7 +66,7 @@ public class AutoListView extends AppCompatActivity {
                                AutoDatabaseHelper.KEY_HEAD_SWITCH, AutoDatabaseHelper.KEY_INSIDE_BRIGHTNESS, AutoDatabaseHelper.KEY_RADIO_VOLUME, AutoDatabaseHelper.KEY_RADIO_MUTE,
                                AutoDatabaseHelper.KEY_RADIO_STATION_ONE, AutoDatabaseHelper.KEY_RADIO_STATION_TWO, AutoDatabaseHelper.KEY_RADIO_STATION_THREE, AutoDatabaseHelper.KEY_RADIO_STATION_FOUR,
                                AutoDatabaseHelper.KEY_RADIO_STATION_FIVE, AutoDatabaseHelper.KEY_RADIO_STATION_SIX}, null, null, null, null, null, null);
-        results.moveToFirst();
+        results.moveToLast();
 
         autoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -106,8 +105,6 @@ public class AutoListView extends AppCompatActivity {
 
                 if (adapterView.getItemAtPosition(i).equals("Auto Temperature")) {
                     if (isTablet) {
-                        String unit = "Auto Temperature";
-                        bun.putString("AutoUnit",unit);
                         frag = new AutoTemperatureFragment(AutoListView.this);
                         frag.setArguments(bun);
                         getSupportFragmentManager().beginTransaction().replace(R.id.auto_FragmentHolder, frag).commit();
@@ -115,6 +112,7 @@ public class AutoListView extends AppCompatActivity {
                         Intent intnt = new Intent(AutoListView.this, AutoItemDetails.class);
                         intnt.putExtra("id", id);
                         intnt.putExtra("Temperature", temp);//pass the Database ID and message to next activity
+                        intnt.putExtra("Function", "temperature");
                         startActivityForResult(intnt, 5); //go to view fragment details
                     }
 
@@ -136,10 +134,33 @@ public class AutoListView extends AppCompatActivity {
                 }
 
                 else if (adapterView.getItemAtPosition(i).equals("Auto GPS")) {
-                    Uri gmmIntentUri = Uri.parse("geo:0,0?q=city+hall, Ottawa, ON");
-                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-                    mapIntent.setPackage("com.google.android.apps.maps");
-                    startActivity(mapIntent);
+                    if (isTablet) {
+                        frag = new AutoTemperatureFragment(AutoListView.this);
+                        frag.setArguments(bun);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.auto_FragmentHolder, frag).commit();
+                    }else {
+                        Intent intnt = new Intent(AutoListView.this, AutoItemDetails.class);
+                        intnt.putExtra("id", id);
+                        intnt.putExtra("GPSEntry", gpsEntry);//pass the Database ID and message to next activity
+                        intnt.putExtra("Function", "gps");
+                        startActivityForResult(intnt, 5); //go to view fragment details
+                    }
+
+                    NotificationCompat.Builder mBuilder =
+                            new NotificationCompat.Builder(ctx)
+                                    .setSmallIcon(R.drawable.car1)
+                                    .setContentTitle("Notification")
+                                    .setContentText("Auto GPS Setting");
+
+                    //where to go if clicked
+                    Intent resultIntent = new Intent(ctx, AutoItemDetails.class);
+                    PendingIntent resultPendingIntent = PendingIntent.getActivity( ctx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    mBuilder.setContentIntent(resultPendingIntent);
+
+                    //now show the notification:
+                    int mNotificationId = 0634;
+                    NotificationManager mNotifyMgr = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    mNotifyMgr.notify(mNotificationId, mBuilder.build());
                 }
             }
         });
@@ -153,16 +174,40 @@ public class AutoListView extends AppCompatActivity {
         String toastText = "Auto Temperature is set";
         Toast toast = Toast.makeText(AutoListView.this, toastText, Toast.LENGTH_SHORT);
         toast.show();
+
+    }
+
+    public void insertGPSEntry(long gpsentryid, String gpsentry){
+        ContentValues values = new ContentValues();
+        values.put(AutoDatabaseHelper.KEY_GPS_ENTRY, gpsentry);
+        db.insert(AutoDatabaseHelper.DATABASE_NAME, null, values);
+        refreshDB();
+        String toastText = "Auto GPS is set";
+        Toast toast = Toast.makeText(AutoListView.this, toastText, Toast.LENGTH_SHORT);
+        toast.show();
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final Bundle bun = data.getExtras();
+
+
         Long tempid = bun.getLong("id");
         String temp = bun.getString("Temperature");
 
+
         if (requestCode==5 && resultCode == 0) {
+            Long tempid = bun.getLong("id");
+            String temp = bun.getString("Temperature");
             updateTemp(tempid, temp);
+
+        }
+
+        if (requestCode==5 && resultCode == 2) {
+            Long gpsid = bun.getLong("id");
+            String gpsentry = bun.getString("GPSEntry");
+            insertGPSEntry(gpsid, gpsentry);
 
         }
     }
@@ -177,7 +222,7 @@ public class AutoListView extends AppCompatActivity {
                         AutoDatabaseHelper.KEY_RADIO_STATION_ONE, AutoDatabaseHelper.KEY_RADIO_STATION_TWO, AutoDatabaseHelper.KEY_RADIO_STATION_THREE, AutoDatabaseHelper.KEY_RADIO_STATION_FOUR,
                         AutoDatabaseHelper.KEY_RADIO_STATION_FIVE, AutoDatabaseHelper.KEY_RADIO_STATION_SIX}, null, null, null, null, null, null);
         int rows = results.getCount(); //number of rows returned
-        results.moveToFirst(); //move to first result
+        results.moveToLast(); //move to first result
     }
 
     public void removeFragment() {

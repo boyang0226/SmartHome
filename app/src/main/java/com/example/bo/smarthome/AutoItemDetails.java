@@ -8,11 +8,34 @@ public class AutoItemDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auto_item_details);
+        //Bundle bun = getIntent().getExtras();
+        String function = getIntent().getExtras().getString("Function");
 
-        //Step 3, create fragment onCreation, pass data from Intent Extras to FragmentTransction
-        AutoTemperatureFragment frag = new AutoTemperatureFragment(null);
-        Bundle bun = getIntent().getExtras();
-        frag.setArguments( bun );
-        getSupportFragmentManager().beginTransaction().add(R.id.auto_FragmentHolder, frag).commit();
+        switch (function){
+            case "temperature":
+                AutoTemperatureFragment fragtemp = new AutoTemperatureFragment(null);
+                Bundle buntemp = getIntent().getExtras();
+                fragtemp.setArguments(buntemp);
+                getSupportFragmentManager().beginTransaction().add(R.id.auto_FragmentHolder, fragtemp).commit();
+                break;
+
+            case "lights":
+
+                break;
+
+            case "gps":
+                AutoGPSFragment fraggps = new AutoGPSFragment(null);
+                Bundle bungps = getIntent().getExtras();
+                fraggps.setArguments(bungps);
+                getSupportFragmentManager().beginTransaction().add(R.id.auto_FragmentHolder, fraggps).commit();
+                break;
+
+            case"radio":
+
+                break;
+        }
+
     }
 }
+
+
