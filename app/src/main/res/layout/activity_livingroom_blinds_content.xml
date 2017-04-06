@@ -10,7 +10,7 @@
         android:layout_alignParentTop="true"
         android:minHeight="70dp"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:text="@string/lr_blinds_name" />
 
@@ -23,8 +23,8 @@
         android:minHeight="50dp"
         android:layout_marginRight="10dp"
         android:gravity="center"
-        android:textSize="18sp"
-        android:text="@string/lr_blinds_brightness_label" />
+        android:text="@string/lr_blinds_brightness_label"
+        android:paddingLeft="10dp"/>
 
     <SeekBar
         android:id="@+id/lr_blinds_seekBar"
@@ -47,8 +47,7 @@
         android:layout_marginRight="10dp"
         android:gravity="center"
         android:minHeight="50dp"
-        android:text="@string/lr_blinds_seekBar_value"
-        android:textSize="24sp" />
+        android:text="@string/lr_blinds_seekBar_value"/>
 
     <Button
         android:id="@+id/lr_save"

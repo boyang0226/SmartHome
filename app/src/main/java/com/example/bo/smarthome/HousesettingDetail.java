@@ -1,33 +1,45 @@
 package com.example.bo.smarthome;
 
 
+import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.app.FragmentTransaction;
-import android.widget.Spinner;
-
+import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 
 public class HousesettingDetail extends AppCompatActivity {
 
     private ArrayList <String> arrayList;
     private ArrayAdapter<String> adapter ;
+    private boolean isTablet;
+    HouseGarageFragment houseGarageFragment;
+
+    SQLiteDatabase db;
+     String ACTIVITY_NAME = "HousesettingDetail";
+
+
+    Cursor results;
+    protected HouseDatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,45 +48,37 @@ public class HousesettingDetail extends AppCompatActivity {
         setContentView(R.layout.activity_housesetting_detail);
 
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        Toolbar tb =(Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(tb);
-
-
-        Button add =(Button)findViewById(R.id.house_add) ;
-
-        add.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
+        isTablet = (findViewById(R.id.house_fragholder) != null);
 
 
-                AlertDialog.Builder dlgBuilder = new AlertDialog.Builder(HousesettingDetail.this);
+         dbHelper=new HouseDatabaseHelper(this);
+         db = dbHelper.getWritableDatabase();
 
-                LayoutInflater inflater = HousesettingDetail.this.getLayoutInflater();
 
-                final View dlgView = inflater.inflate(R.layout.activity_house_add_dialog, null);
-                dlgBuilder.setView(dlgView)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
 
-                                Spinner spnAppliance = (Spinner)dlgView.findViewById(R.id.house_add_spinner);
-                                String newAppliance = spnAppliance.getSelectedItem().toString();
 
-                                adapter.remove(newAppliance);
-                                adapter.add(newAppliance);
-                            }
-                        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+          results = db.query(false, HouseDatabaseHelper.DATABASE_NAME,
+                new String[]{HouseDatabaseHelper.KEY_ID,
+                        HouseDatabaseHelper.KEY_LightSwitch,
+                        HouseDatabaseHelper.KEY_DoorSwitch,
+                        HouseDatabaseHelper.KEY_Time,
+                        HouseDatabaseHelper.Key_Temp},
+                null, null, null, null, null, null);
 
-                    }
-                });
 
-                AlertDialog dlgAddAppliance = dlgBuilder.create();
-                dlgAddAppliance.show();
-            }
-        });
+
+
+
+
+        results.moveToFirst();
+
+
+
+
+
 
 
         ListView HouseView =(ListView)findViewById(R.id.house_listview);
@@ -89,23 +93,129 @@ public class HousesettingDetail extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("HouseView ", "onItemClick: " + i + " " + l);
+                long id = results.getLong(results.getColumnIndex(HouseDatabaseHelper.KEY_ID));
+                int LightSwitch =results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_LightSwitch));
+                int DoorSwitch =results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_DoorSwitch));
+                String Time =results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
+                String Temp =results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
+
+
+
+                Bundle bun = new Bundle();
+                bun.putLong("_id", id);//l is the database ID of selected item
+                bun.putBoolean("DoorSwitch",DoorSwitch!=0);
+                bun.putBoolean("LightSwitch",LightSwitch!=0);
+                bun.putString("Time",Time);
+                bun.putString("Temp",Temp);
+
+
+
 
                 if (adapterView.getItemAtPosition(i).equals("House Weather")) {
+
 
                     Intent HouseWeatherSetting = new Intent(HousesettingDetail.this, HouseWeather.class);
                     startActivityForResult(HouseWeatherSetting, 5);
 
+                }else if (adapterView.getItemAtPosition(i).equals("House Temperature")) {
+
+
+                    Intent HouseTempSetting = new Intent(HousesettingDetail.this, HouseTemp.class);
+           //        HouseTempSetting.putExtra("Time",time);
+            //       HouseTempSetting.putExtra("Temp",temp);
+            //          HouseTempSetting.putExtras(bun);
+                    startActivityForResult(HouseTempSetting, 5);
+
+                }else  if (adapterView.getItemAtPosition(i).equals("House Garage")) {
+
+                    if (isTablet) {
+
+                        houseGarageFragment = new HouseGarageFragment(HousesettingDetail.this);
+
+                        houseGarageFragment.setArguments(bun);
+
+
+                        getSupportFragmentManager().beginTransaction().replace(R.id.house_fragholder, houseGarageFragment).commit();
+
+                    }
+                    //step 3 if a phone, transition to empty Activity that has FrameLayout
+                    else //isPhone
+                    {
+                        Intent intnt = new Intent(HousesettingDetail.this, Housegarage.class);
+                        intnt.putExtra("_id", id);
+                        intnt.putExtra("DoorSwitch",DoorSwitch);
+                        intnt.putExtra("LightSwitch",LightSwitch);
+
+
+
+                        startActivityForResult(intnt,5);
+                    }
                 }
             }
         });
+    }
 
 
+    public void updateGarage(long id, boolean door, boolean light) {
+
+        ContentValues values = new ContentValues();
+        values.put(HouseDatabaseHelper.KEY_DoorSwitch, door ? 1:0);
+        values.put(HouseDatabaseHelper.KEY_LightSwitch,light ? 1:0);
+        db.update(HouseDatabaseHelper.DATABASE_NAME, values, HouseDatabaseHelper.KEY_ID + "=" + id, null);
+        refreshDB();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        final Bundle bun = data.getExtras();
+        Long id = bun.getLong("_id");
+        boolean DoorSwitch = bun.getBoolean("DoorSwitch");
+        boolean LightSwitch = bun.getBoolean("LightSwitch");
+        String toastText = bun.getString("Response");
+
+        if (requestCode==5 && resultCode == 0) {
+            updateGarage(id, DoorSwitch,LightSwitch);
+
+            Toast toast = Toast.makeText(HousesettingDetail.this, toastText, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+    private void refreshDB() {
+        dbHelper = new HouseDatabaseHelper(this);
+        db = dbHelper.getWritableDatabase();
+
+        results = db.query(false, HouseDatabaseHelper.DATABASE_NAME,
+                new String[] {  HouseDatabaseHelper.KEY_ID,
+                        HouseDatabaseHelper.KEY_LightSwitch,
+                        HouseDatabaseHelper.KEY_DoorSwitch,
+                        HouseDatabaseHelper.KEY_Time,
+                        HouseDatabaseHelper.Key_Temp  },
+                null, null, null, null, null, null);
+
+        int rows = results.getCount(); //number of rows returned
+        results.moveToFirst(); //move to first result
     }
 
 
 
+
+    public void removeFragment() {
+        getSupportFragmentManager().beginTransaction().remove(houseGarageFragment).commit();
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        dbHelper.close();
+        db.close();
+        Log.i(ACTIVITY_NAME, "In onDestroy()");
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.house_menu, menu);
         return true;

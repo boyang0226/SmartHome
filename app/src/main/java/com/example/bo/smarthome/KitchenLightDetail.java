@@ -1,7 +1,14 @@
 package com.example.bo.smarthome;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -11,86 +18,87 @@ import android.widget.Switch;
 
 public class KitchenLightDetail extends KitchenBase {
 
+    private static final String ACTIVITY_NAME = "KitchenLight_";
+    private LightSetting lightSetting;
+    SQLiteDatabase db = null;
+
+    private class LightSetting {
+        private int id = 0;
+        private boolean mainSwitch = false;
+        private int dimmerLevel = 100;
+
+
+
+        public LightSetting()
+        {
+
+        }
+        public LightSetting(int id, boolean mainSwitch, int dimmerLevel)
+        {   this.id = id;
+            this.mainSwitch = mainSwitch;
+            this.dimmerLevel = dimmerLevel;
+        }
+        public int getId()
+        {
+            return id;
+        }
+
+        public boolean getMainSwitch()
+        {
+            return mainSwitch;
+        }
+        public void setMainSwitch(boolean isChecked)
+        {
+            this.mainSwitch = isChecked;
+        }
+
+        public int getDimmerLevel()
+        {
+            return dimmerLevel;
+        }
+
+        public void setDimmerLevel(int dimmerLevel)
+        {
+            this.dimmerLevel = dimmerLevel;
+        }
+    }
+
+    protected KitchenDatabaseHelper dbHelper;
+    Cursor results;
+
+    @Override
+    protected void showHelp()
+    {
+        android.app.AlertDialog.Builder kitchenbase_builder = new android.app.AlertDialog.Builder(KitchenLightDetail.this);
+        kitchenbase_builder.setTitle("Welcome to Smart Home Kitchen Setting")
+                .setMessage("Click the switch to turn on/off the kitchen main light. Slide or enter to set the dimmer as you wish. Version 1.0 by Qiuju Zhu.")
+                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.i("No", "No");
+                    }
+                });
+        kitchenbase_builder.create().show();
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kitchen_light_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarkitchenlight);
         setToolbarColor(toolbar);
-        SeekBar dimmerBar = (SeekBar) findViewById(R.id.skbDimmer);
-        dimmerBar.setMax(100);
         setSupportActionBar(toolbar);
 
-        handleSwitchOnOff();
-        handleSetDimmerBtn();
-        handleDimmerSeekBarChange();
+        Bundle extras = getIntent().getExtras();
 
-        DisableInuptControls(false);
+        Bundle bun = new Bundle();
+        bun.putInt("applianceId", extras.getInt("applianceId"));
+        bun.putString("applianceName", extras.getString("applianceName"));
 
-
-        }
-
-    private void handleSwitchOnOff() {
-        Switch mainSWitch=(Switch)findViewById(R.id.swtMainSwitch);
-        mainSWitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked) {
-                    DisableInuptControls(true);
-                }
-                else {
-                    DisableInuptControls(false);
-                }
-            }
-        });
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        KitchenLightFragment frg = new KitchenLightFragment();
+        frg.setArguments(bun);
+        ft.replace(R.id.frmKitchenDetailPortrait, frg);
+        ft.commit();
     }
-    private void DisableInuptControls (boolean enabled) {
-
-        final EditText dimmerLevel = (EditText)findViewById(R.id.edtDimmerLevel);
-        final SeekBar dimmerBar = (SeekBar) findViewById(R.id.skbDimmer);
-        final Button btnSetDimmer = (Button) findViewById(R.id.btnSetDimmer);
-
-        dimmerLevel.setEnabled(enabled);
-        btnSetDimmer.setEnabled(enabled);
-        dimmerBar.setEnabled(enabled);
-    }
-    private void handleDimmerSeekBarChange() {
-
-        SeekBar dimmerBar = (SeekBar) findViewById(R.id.skbDimmer);
-
-        dimmerBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-
-                EditText dimmerLevel = (EditText)findViewById(R.id.edtDimmerLevel);
-                dimmerLevel.setText(String.valueOf(progress));
-            }
-
-        });
-}
-    private void handleSetDimmerBtn() {
-        Button btnSetDimmer = (Button) findViewById(R.id.btnSetDimmer);
-        btnSetDimmer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EditText dimmerLevel = (EditText)findViewById(R.id.edtDimmerLevel);
-                SeekBar dimmerBar = (SeekBar)findViewById(R.id.skbDimmer);
-
-                dimmerBar.setProgress(Integer.parseInt(dimmerLevel.getText().toString()));
-            }
-        });
-    }
-
 }

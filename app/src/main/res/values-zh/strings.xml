@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lr_intro_title">欢迎来到客厅</string>
+    <string name="lr_intro_author">作者：陈思哲</string>
+    <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
+
+    <string name="lr_list_add">添加</string>
+    <string name="lr_list_details_content_title">创建新设备</string>
+    <string name="lr_add_device_name_label">名字</string>
+    <string name="lr_add_device_category_label">种类</string>
+
+    <string name="lr_list_details_content_submit">提交</string>
+
+    <string-array name="lr_category_arrays">
+        <item>普通灯</item>
+        <item>调节灯</item>
+        <item>智能灯</item>
+        <item>电视</item>
+        <item>窗帘</item>
+    </string-array>
+
+    <string-array name="lr_smart_lamp_color">
+        <item>红</item>
+        <item>绿</item>
+        <item>蓝</item>
+        <item>黄</item>
+        <item>白</item>
+    </string-array>
+
+    <string name="lr_simple_lamp_name">普通灯</string>
+    <string name="lr_simple_lamp_switch">开关</string>
+
+    <string name="lr_dimmable_lamp_name">调节灯</string>
+    <string name="lr_dimmable_lamp_brightness_label">亮度</string>
+    <string name="lr_dimmable_lamp_seekBar_value">0</string>
+
+    <string name="lr_smart_lamp_name">智能灯</string>
+    <string name="lr_smart_lamp_seekBar_value">0</string>
+    <string name="lr_smart_lamp_color">颜色</string>
+    <string name="lr_smart_lamp_brightness">亮度</string>
+
+    <string name="lr_blinds_name">窗帘</string>
+    <string name="lr_blinds_brightness_label">高度</string>
+    <string name="lr_blinds_seekBar_value">0</string>
+
+    <string name="lr_tv_name">电视</string>
+    <string name="lr_tv_switch">开关</string>
+    <string name="lr_tv_volume">音量</string>
+    <string name="lr_tv_seekBar_value">0</string>
+    <string name="lr_tv_channel">频道</string>
+    <string name="lr_tv_channel_seekBar_value">0</string>
+
+    <string name="lr_tv_up_button">上</string>
+    <string name="lr_tv_left_button">左</string>
+    <string name="lr_tv_mute_button">静音</string>
+    <string name="lr_tv_right_button">右</string>
+    <string name="lr_tv_down_button">下</string>
+    <string name="lr_toolbar_title">客厅</string>
+
+    <string name="lr_save">保存</string>
+    <string name="lr_delete">删除</string>
+    <string name="ok">确认</string>
+    <string name="cancel">取消</string>
+    <string name="update_message">已更新</string>
+    <string name="delete_confirm_message">确定要删除它吗？</string>
+    <string name="delete_message">成功删除!</string>
+    <string name="save_message">新项已创建！</string>
+</resources>

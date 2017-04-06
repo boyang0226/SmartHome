@@ -60,6 +60,7 @@ public class AutoTemperatureFragment extends Fragment {
             public void onClick(View view) {
                 Log.i("AutoTemperatureFragment", "User clicked set auto temp button");
 
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
                 builder.setTitle("Do you want to set a new temperature?")
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -87,6 +88,22 @@ public class AutoTemperatureFragment extends Fragment {
                             }
                         });
                 builder.create().show();
+
+                if (message !=null) {
+                    String newTemp = message.getText().toString();
+                    if (autoLV == null) {               // called from phone
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("Temperature", newTemp);
+                        resultIntent.putExtra("id", tempID);
+                        getActivity().setResult(0, resultIntent);
+                        getActivity().finish();
+                    } else            // callled from tablet
+                    {
+                        autoLV.updateTemp(tempID, newTemp);
+                        autoLV.removeFragment();
+                    }
+                }
+
             }
         });
         return gui;

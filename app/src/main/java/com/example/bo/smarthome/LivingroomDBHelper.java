@@ -37,36 +37,7 @@ public class LivingroomDBHelper  extends SQLiteOpenHelper {
                 KEY_Height + " INT DEFAULT 0," + KEY_Type + " VARCHAR(20)," +
                 KEY_Frequency + " INT DEFAULT 0);");
 
-        Cursor results = db.query(false, LivingroomDBHelper.TABLENAME,
-                new String[] {},
-                null, null, null, null, null, null);
-        int rows = results.getCount() ; //number of rows returned
-        if (rows == 0) {
-            ContentValues values = new ContentValues();
-            values.put(LivingroomDBHelper.KEY_Name, "Simple Lamp 1");
-            values.put(LivingroomDBHelper.KEY_Type, "Simple Lamp");
-            db.insert(LivingroomDBHelper.TABLENAME, null, values);
 
-            values = new ContentValues();
-            values.put(LivingroomDBHelper.KEY_Name, "Dimmable Lamp 1");
-            values.put(LivingroomDBHelper.KEY_Type, "Dimmable Lamp");
-            db.insert(LivingroomDBHelper.TABLENAME, null, values);
-
-            values = new ContentValues();
-            values.put(LivingroomDBHelper.KEY_Name, "Smart Lamp 1");
-            values.put(LivingroomDBHelper.KEY_Type, "Smart Lamp");
-            db.insert(LivingroomDBHelper.TABLENAME, null, values);
-
-            values = new ContentValues();
-            values.put(LivingroomDBHelper.KEY_Name, "TV 1");
-            values.put(LivingroomDBHelper.KEY_Type, "Television");
-            db.insert(LivingroomDBHelper.TABLENAME, null, values);
-
-            values = new ContentValues();
-            values.put(LivingroomDBHelper.KEY_Name, "Blinds 1");
-            values.put(LivingroomDBHelper.KEY_Type, "Window Blinds");
-            db.insert(LivingroomDBHelper.TABLENAME, null, values);
-        }
         Log.i("LivingroomDBHelper", "Calling onCreate");
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
