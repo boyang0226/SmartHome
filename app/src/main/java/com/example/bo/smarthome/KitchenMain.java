@@ -380,7 +380,7 @@ public class KitchenMain extends KitchenBase {
                 switch (selectedApplianceType) {
                     case "MICROWAVE":
                         Log.d(tag, "Clicked Microwave.");
-                        kitchenFragment = new KitchenFridgeFragment(KitchenMain.this);
+                        kitchenFragment = new KitchenMicrowaveFragment(KitchenMain.this);
                         CallFragmentOrActivity(kitchenFragment,KitchenMicrowaveDetail.class,bun);
                         break;
                     case "FRIDGE":
@@ -420,7 +420,7 @@ public class KitchenMain extends KitchenBase {
             ft.commit();
         }
         else {
-            callActivityWithData(KitchenFridgeDetail.class, bun);
+            callActivityWithData(cls, bun);
         }
     }
 
