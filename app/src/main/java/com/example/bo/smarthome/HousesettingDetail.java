@@ -11,8 +11,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -28,11 +30,13 @@ import java.util.Arrays;
 
 
 public class HousesettingDetail extends AppCompatActivity {
-
+    Context ctx;
     private ArrayList <String> arrayList;
     private ArrayAdapter<String> adapter ;
     private boolean isTablet;
     HouseGarageFragment houseGarageFragment;
+    HouseWeather houseWeather;
+    HouseTemp houseTemp;
 
     SQLiteDatabase db;
      String ACTIVITY_NAME = "HousesettingDetail";
@@ -40,6 +44,13 @@ public class HousesettingDetail extends AppCompatActivity {
 
     Cursor results;
     protected HouseDatabaseHelper dbHelper;
+
+//    long id ;
+//    int LightSwitch ;
+//    int DoorSwitch ;
+//    String Time ;
+//    String Temp ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +61,20 @@ public class HousesettingDetail extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ctx=this;
+
+
+        ListView HouseView =(ListView)findViewById(R.id.house_listview);
+        String [] item = {"House Garage", "House Temperature", "House Weather"};
+        arrayList= new ArrayList<>(Arrays.asList(item));
+        adapter =new ArrayAdapter<>(this,R.layout.activity_house_setting,R.id.house_view,arrayList);
+        HouseView.setAdapter(adapter);
 
         isTablet = (findViewById(R.id.house_fragholder) != null);
 
 
          dbHelper=new HouseDatabaseHelper(this);
          db = dbHelper.getWritableDatabase();
-
-
 
 
           results = db.query(false, HouseDatabaseHelper.DATABASE_NAME,
@@ -68,88 +85,74 @@ public class HousesettingDetail extends AppCompatActivity {
                         HouseDatabaseHelper.Key_Temp},
                 null, null, null, null, null, null);
 
+              results.moveToLast();
 
 
-
-
-
-        results.moveToFirst();
-
-
-
-
-
-
-
-        ListView HouseView =(ListView)findViewById(R.id.house_listview);
-
-        String [] item = {"House Garage", "House Temperature", "House Weather"};
-        arrayList= new ArrayList<>(Arrays.asList(item));
-        adapter =new ArrayAdapter<>(this,R.layout.activity_house_setting,R.id.house_view,arrayList);
-        HouseView.setAdapter(adapter);
-
-
-        HouseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      HouseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
                 Log.d("HouseView ", "onItemClick: " + i + " " + l);
-                long id = results.getLong(results.getColumnIndex(HouseDatabaseHelper.KEY_ID));
-                int LightSwitch =results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_LightSwitch));
-                int DoorSwitch =results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_DoorSwitch));
-                String Time =results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
-                String Temp =results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
-
-
 
                 Bundle bun = new Bundle();
-                bun.putLong("_id", id);//l is the database ID of selected item
-                bun.putBoolean("DoorSwitch",DoorSwitch!=0);
-                bun.putBoolean("LightSwitch",LightSwitch!=0);
-                bun.putString("Time",Time);
-                bun.putString("Temp",Temp);
+            //    while(!results.isAfterLast() ) {
+                            long id = results.getLong(results.getColumnIndex(HouseDatabaseHelper.KEY_ID));
+                    int LightSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_LightSwitch));
+                     int DoorSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_DoorSwitch));
+                        String Time = results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
+                        String Temp = results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
 
 
-
+                    bun.putLong("_id", id);//l is the database ID of selected item
+                    bun.putBoolean("DoorSwitch", DoorSwitch != 0);
+                    bun.putBoolean("LightSwitch", LightSwitch != 0);
+                    bun.putString("Time", Time);
+                    bun.putString("Temp", Temp);
+                    bun.putString("type", arrayList.get(i));
 
                 if (adapterView.getItemAtPosition(i).equals("House Weather")) {
+                   if (isTablet) {
 
+                        houseWeather = new HouseWeather(HousesettingDetail.this);
+                        houseWeather.setArguments(bun);
+                       getSupportFragmentManager().beginTransaction().replace(R.id.house_fragholder, houseWeather).commit();
+                   }else {
 
-                    Intent HouseWeatherSetting = new Intent(HousesettingDetail.this, HouseWeather.class);
-                    startActivityForResult(HouseWeatherSetting, 5);
-
+                       Intent HouseWeatherSetting = new Intent(HousesettingDetail.this, HouseWeather.class);
+                       HouseWeatherSetting.putExtras(bun);
+                       startActivityForResult(HouseWeatherSetting, 5);
+                   }
                 }else if (adapterView.getItemAtPosition(i).equals("House Temperature")) {
-
-
-                    Intent HouseTempSetting = new Intent(HousesettingDetail.this, HouseTemp.class);
-           //        HouseTempSetting.putExtra("Time",time);
-            //       HouseTempSetting.putExtra("Temp",temp);
-            //          HouseTempSetting.putExtras(bun);
-                    startActivityForResult(HouseTempSetting, 5);
-
-                }else  if (adapterView.getItemAtPosition(i).equals("House Garage")) {
 
                     if (isTablet) {
 
+                        houseTemp = new HouseTemp(HousesettingDetail.this);
+                        houseTemp.setArguments(bun);
+                       getSupportFragmentManager().beginTransaction().replace(R.id.house_fragholder, houseTemp).commit();
+
+                    }else {
+                        Intent HouseTempSetting = new Intent(HousesettingDetail.this, HouseTemp.class);
+                        HouseTempSetting.putExtras(bun);
+                        startActivityForResult(HouseTempSetting, 5);
+                    }
+                }else  if (adapterView.getItemAtPosition(i).equals("House Garage")) {
+
+                    if (isTablet) {
                         houseGarageFragment = new HouseGarageFragment(HousesettingDetail.this);
-
                         houseGarageFragment.setArguments(bun);
-
-
                         getSupportFragmentManager().beginTransaction().replace(R.id.house_fragholder, houseGarageFragment).commit();
 
                     }
                     //step 3 if a phone, transition to empty Activity that has FrameLayout
                     else //isPhone
                     {
-                        Intent intnt = new Intent(HousesettingDetail.this, Housegarage.class);
-                        intnt.putExtra("_id", id);
-                        intnt.putExtra("DoorSwitch",DoorSwitch);
-                        intnt.putExtra("LightSwitch",LightSwitch);
-
-
-
-                        startActivityForResult(intnt,5);
+                        Intent HouseGarageSetting = new Intent(HousesettingDetail.this, Housegarage.class);
+//                        intnt.putExtra("_id", id);
+//                        intnt.putExtra("DoorSwitch",DoorSwitch);
+//                        intnt.putExtra("LightSwitch",LightSwitch);
+                        HouseGarageSetting.putExtras(bun);
+                        startActivityForResult(HouseGarageSetting,5);
                     }
                 }
             }
@@ -166,21 +169,40 @@ public class HousesettingDetail extends AppCompatActivity {
         refreshDB();
     }
 
+    public void updateTemp(long id, String time, String temp) {
+
+        ContentValues values = new ContentValues();
+        values.put(HouseDatabaseHelper.KEY_Time,time);
+        values.put(HouseDatabaseHelper.Key_Temp,temp);
+        db.update(HouseDatabaseHelper.DATABASE_NAME, values, HouseDatabaseHelper.KEY_ID + "=" + id, null);
+        refreshDB();
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final Bundle bun = data.getExtras();
-        Long id = bun.getLong("_id");
-        boolean DoorSwitch = bun.getBoolean("DoorSwitch");
-        boolean LightSwitch = bun.getBoolean("LightSwitch");
-        String toastText = bun.getString("Response");
+    //    Long id = bun.getLong("_id");
+//        boolean DoorSwitch = bun.getBoolean("DoorSwitch");
+//        boolean LightSwitch = bun.getBoolean("LightSwitch");
+
 
         if (requestCode==5 && resultCode == 0) {
+            Long id = bun.getLong("_id");
+            boolean DoorSwitch = bun.getBoolean("DoorSwitch");
+            boolean LightSwitch = bun.getBoolean("LightSwitch");
             updateGarage(id, DoorSwitch,LightSwitch);
 
-            Toast toast = Toast.makeText(HousesettingDetail.this, toastText, Toast.LENGTH_SHORT);
-            toast.show();
+
         }
-    }
+
+        if (requestCode==5 && resultCode == 0) {
+            Long id = bun.getLong("_id");
+            String time = bun.getString("Time");
+            String temp = bun.getString("Temp");
+            updateTemp(id, time, temp);
+        }
+        }
 
     private void refreshDB() {
         dbHelper = new HouseDatabaseHelper(this);

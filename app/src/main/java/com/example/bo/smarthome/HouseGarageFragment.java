@@ -21,9 +21,12 @@ public class HouseGarageFragment extends Fragment {
     Long id;
     Boolean DoorSwitch;
     Boolean LightSwitch;
+
  HousesettingDetail housesettingDetail = null;
-    boolean garagedoor=false;
-    boolean garagelight=false;
+
+
+    boolean garagedoor;
+    boolean garagelight;
     Switch door;
     Switch light;
 
@@ -101,10 +104,7 @@ public class HouseGarageFragment extends Fragment {
             @Override
             public void onClick(View view) {
        if (housesettingDetail==null){
-
-
-
-                       Intent intent = new Intent();
+                        Intent intent = new Intent();
                         intent.putExtra("DoorSwitch", garagedoor);
                         intent.putExtra("LightSwitch", garagelight);
                         intent.putExtra("_id", id);
@@ -113,21 +113,18 @@ public class HouseGarageFragment extends Fragment {
                         getActivity().finish();
                     } else            // callled from tablet
                     {
-
-
-
-
-
-
                         housesettingDetail.updateGarage(id,garagedoor,garagelight);
                         housesettingDetail.removeFragment();
+
+                        Toast.makeText(view.getContext(), " Data saved", Toast.LENGTH_LONG).show();
                     }
 
 
 
             }
         });
-        Toast.makeText(gui.getContext(), " Data saved", Toast.LENGTH_LONG).show();
+
+
 
         return gui;
     }

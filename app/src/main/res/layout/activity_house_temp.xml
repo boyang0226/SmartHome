@@ -4,19 +4,66 @@
     android:id="@+id/activity_house_temp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
     android:orientation="vertical"
     android:gravity="center"
    >
 
-    <ListView
-        android:id="@+id/house_temp_listview"
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal">
 
-    <TextView
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Time"
+                android:id="@+id/house_table_time" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Temp"
+                android:id="@+id/house_table_temp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text=""
+                android:id="@+id/house_table_time_setting" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text=""
+                android:id="@+id/house_table_temp_setting" />
+        </TableRow>
+
+
+    </TableLayout>
+
+
+<TextView
         android:id="@+id/house_temp_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,6 +72,14 @@
         android:text="choose a time  "
         />
 
+
+    <TextView
+        android:id="@+id/house_time_getting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center_horizontal"
+        />
 
     <TimePicker
         android:id="@+id/house_temp_timepicker"
@@ -43,8 +98,15 @@
         />
 
 
+    <TextView
+        android:id="@+id/house_temp_getting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center_horizontal"
+        />
 
-        <NumberPicker
+    <NumberPicker
             android:id="@+id/house_temp_number_picker"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
