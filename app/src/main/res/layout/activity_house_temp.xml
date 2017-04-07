@@ -6,64 +6,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-   >
+    android:weightSum="1">
 
-    <TableLayout
+
+    <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal">
+        android:layout_height="164dp"
+        android:layout_weight="0.07"
+        android:id="@+id/house_temp_listview"
+        />
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="Time"
-                android:id="@+id/house_table_time" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="Temp"
-                android:id="@+id/house_table_temp" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text=""
-                android:id="@+id/house_table_time_setting" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text=""
-                android:id="@+id/house_table_temp_setting" />
-        </TableRow>
-
-
-    </TableLayout>
-
-
-<TextView
+    <TextView
         android:id="@+id/house_temp_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

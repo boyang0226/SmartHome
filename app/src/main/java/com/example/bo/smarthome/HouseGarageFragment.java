@@ -61,41 +61,48 @@ public class HouseGarageFragment extends Fragment {
 
         door.setChecked(DoorSwitch);
         light.setChecked(LightSwitch);
+
         Button save = (Button)gui.findViewById(R.id.house_garage_save);
 
+// if (door.isChecked()==true){
+//    light.setChecked(true);
+//}
 
-        door.setOnClickListener(new View.OnClickListener() {
+      door.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                        if (door.isChecked()) {
+                                        if (door.isChecked()==true) {
                                             Toast.makeText(view.getContext(), "Opening Garage", Toast.LENGTH_LONG).show();
-                                            garagedoor = true;
+                                        //    garagedoor = true;
                                             garagelight=true;
                                         } else {
                                             Toast.makeText(view.getContext(), "Closing Garage", Toast.LENGTH_LONG).show();
-                                            garagedoor = false;
+                                         //   garagedoor = false;
                                             garagelight=false;
                                         }
-                                        light.setChecked(garagedoor);
+                                        light.setChecked(garagelight);
 
                                     }
                                 });
 
 
-        light.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (light.isChecked()) {
-                    Toast.makeText(view.getContext(), "Opening Garage", Toast.LENGTH_LONG).show();
-                    garagelight = true;
-                } else {
-                    Toast.makeText(view.getContext(), "Closing Garage", Toast.LENGTH_LONG).show();
-                    garagelight = false;
-                }
-
-
-            }
-        });
+//        DoorSwitch=   door.isChecked();
+//        LightSwitch=  light.isChecked();
+////
+//        light.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (light.isChecked()) {
+//                    Toast.makeText(view.getContext(), "Opening Garage", Toast.LENGTH_LONG).show();
+//                    garagelight = true;
+//                } else {
+//                    Toast.makeText(view.getContext(), "Closing Garage", Toast.LENGTH_LONG).show();
+//                    garagelight = false;
+//                }
+//
+//
+//            }
+//        });
 
         save.setOnClickListener(new View.OnClickListener() {
 
@@ -103,17 +110,20 @@ public class HouseGarageFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
+
+                DoorSwitch=   door.isChecked();
+                LightSwitch=  light.isChecked();
        if (housesettingDetail==null){
                         Intent intent = new Intent();
-                        intent.putExtra("DoorSwitch", garagedoor);
-                        intent.putExtra("LightSwitch", garagelight);
+                        intent.putExtra("DoorSwitch", DoorSwitch);
+                        intent.putExtra("LightSwitch", LightSwitch);
                         intent.putExtra("_id", id);
 
                         getActivity().setResult(0, intent);
                         getActivity().finish();
                     } else            // callled from tablet
                     {
-                        housesettingDetail.updateGarage(id,garagedoor,garagelight);
+                        housesettingDetail.updateGarage(id,DoorSwitch,LightSwitch);
                         housesettingDetail.removeFragment();
 
                         Toast.makeText(view.getContext(), " Data saved", Toast.LENGTH_LONG).show();

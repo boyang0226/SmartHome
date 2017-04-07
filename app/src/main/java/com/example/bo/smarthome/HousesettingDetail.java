@@ -45,12 +45,12 @@ public class HousesettingDetail extends AppCompatActivity {
     Cursor results;
     protected HouseDatabaseHelper dbHelper;
 
-//    long id ;
-//    int LightSwitch ;
-//    int DoorSwitch ;
-//    String Time ;
+    long id ;
+    int LightSwitch ;
+    int DoorSwitch ;
+    String Schedule ;
+    // String Time;
 //    String Temp ;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,11 +81,12 @@ public class HousesettingDetail extends AppCompatActivity {
                 new String[]{HouseDatabaseHelper.KEY_ID,
                         HouseDatabaseHelper.KEY_LightSwitch,
                         HouseDatabaseHelper.KEY_DoorSwitch,
-                        HouseDatabaseHelper.KEY_Time,
-                        HouseDatabaseHelper.Key_Temp},
+                      //  HouseDatabaseHelper.KEY_Time,
+                      //  HouseDatabaseHelper.Key_Temp
+                        HouseDatabaseHelper.KEY_Schedule},
                 null, null, null, null, null, null);
 
-              results.moveToLast();
+              results.moveToFirst();
 
 
       HouseView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -95,20 +96,22 @@ public class HousesettingDetail extends AppCompatActivity {
 
                 Log.d("HouseView ", "onItemClick: " + i + " " + l);
 
-                Bundle bun = new Bundle();
-            //    while(!results.isAfterLast() ) {
-                            long id = results.getLong(results.getColumnIndex(HouseDatabaseHelper.KEY_ID));
-                    int LightSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_LightSwitch));
-                     int DoorSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_DoorSwitch));
-                        String Time = results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
-                        String Temp = results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
 
+                Bundle bun = new Bundle();
+//             while(!results.isAfterLast() ) {
+                    id = results.getLong(results.getColumnIndex(HouseDatabaseHelper.KEY_ID));
+                    LightSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_LightSwitch));
+                    DoorSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_DoorSwitch));
+               //     Time = results.getString(results.getColumnIndex(HouseDatabaseHelper.Key_Temp));
+               //     Temp = results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
+                   Schedule=results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Schedule));
+//              }
 
                     bun.putLong("_id", id);//l is the database ID of selected item
                     bun.putBoolean("DoorSwitch", DoorSwitch != 0);
                     bun.putBoolean("LightSwitch", LightSwitch != 0);
-                    bun.putString("Time", Time);
-                    bun.putString("Temp", Temp);
+                //    bun.putString("Time", Time);
+                    bun.putString("Schedule", Schedule);
                     bun.putString("type", arrayList.get(i));
 
                 if (adapterView.getItemAtPosition(i).equals("House Weather")) {
@@ -169,12 +172,14 @@ public class HousesettingDetail extends AppCompatActivity {
         refreshDB();
     }
 
-    public void updateTemp(long id, String time, String temp) {
+    public void updateTemp(long id,  String schedule) {
 
         ContentValues values = new ContentValues();
-        values.put(HouseDatabaseHelper.KEY_Time,time);
-        values.put(HouseDatabaseHelper.Key_Temp,temp);
-        db.update(HouseDatabaseHelper.DATABASE_NAME, values, HouseDatabaseHelper.KEY_ID + "=" + id, null);
+       // values.put(HouseDatabaseHelper.Key_Temp,time);
+        values.put(HouseDatabaseHelper.KEY_ID,id);
+      //  values.put(HouseDatabaseHelper.Key_Temp,temp);
+        values.put(HouseDatabaseHelper.KEY_Schedule,schedule);
+        db.insert(HouseDatabaseHelper.DATABASE_NAME,null, values);
         refreshDB();
     }
 
@@ -182,9 +187,7 @@ public class HousesettingDetail extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         final Bundle bun = data.getExtras();
-    //    Long id = bun.getLong("_id");
-//        boolean DoorSwitch = bun.getBoolean("DoorSwitch");
-//        boolean LightSwitch = bun.getBoolean("LightSwitch");
+
 
 
         if (requestCode==5 && resultCode == 0) {
@@ -198,9 +201,10 @@ public class HousesettingDetail extends AppCompatActivity {
 
         if (requestCode==5 && resultCode == 0) {
             Long id = bun.getLong("_id");
-            String time = bun.getString("Time");
-            String temp = bun.getString("Temp");
-            updateTemp(id, time, temp);
+      //     String time = bun.getString("Time");
+       //     String temp = bun.getString("Schedule");
+            String sche =bun.getString("Schedule");
+            updateTemp(id,  sche);
         }
         }
 
@@ -212,8 +216,9 @@ public class HousesettingDetail extends AppCompatActivity {
                 new String[] {  HouseDatabaseHelper.KEY_ID,
                         HouseDatabaseHelper.KEY_LightSwitch,
                         HouseDatabaseHelper.KEY_DoorSwitch,
-                        HouseDatabaseHelper.KEY_Time,
-                        HouseDatabaseHelper.Key_Temp  },
+                  //      HouseDatabaseHelper.KEY_Time,
+                    //    HouseDatabaseHelper.Key_Temp
+                        HouseDatabaseHelper.KEY_Schedule },
                 null, null, null, null, null, null);
 
         int rows = results.getCount(); //number of rows returned
@@ -222,7 +227,9 @@ public class HousesettingDetail extends AppCompatActivity {
 
 
 
-
+    public void removetempFragment() {
+        getSupportFragmentManager().beginTransaction().remove(houseTemp).commit();
+    }
     public void removeFragment() {
         getSupportFragmentManager().beginTransaction().remove(houseGarageFragment).commit();
     }
