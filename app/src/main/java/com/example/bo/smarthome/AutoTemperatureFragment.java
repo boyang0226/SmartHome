@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class AutoTemperatureFragment extends Fragment {
+public class AutoTemperatureFragment extends Fragment {    //auto temp fragment
     String temp;
     Long tempID;
     View gui;
@@ -29,9 +29,8 @@ public class AutoTemperatureFragment extends Fragment {
         autoLV = a;
     }
 
-    //no matter how you got here, the data is in the getArguments
     @Override
-    public void onCreate(Bundle b)
+    public void onCreate(Bundle b)    //get the passed bundle data
     {
         super.onCreate(b);
         Bundle bun = getArguments();
@@ -40,34 +39,32 @@ public class AutoTemperatureFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity) {  //create context object in fragment
         super.onAttach(activity);
         ctx=activity;
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-         gui = inflater.inflate(R.layout.activity_auto_temperature, null);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  //create view and set the passed bundle data
+        gui = inflater.inflate(R.layout.activity_auto_temperature, null);
         final EditText message = (EditText)gui.findViewById(R.id.auto_TemperatureEditText);
         message.setText(temp);
 
         Button btn = (Button)gui.findViewById(R.id.auto_TemperatureSetButton);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {    ////when click set, create bundle data return to AutoListView class and update database
             @Override
             public void onClick(View view) {
                 Log.i("AutoTemperatureFragment", "User clicked set auto temp button");
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-                builder.setTitle("Do you want to set a new temperature?")
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);   //custom dialog box
+                builder.setTitle(getString(R.string.auto_temp_dialog))
+                        .setNegativeButton(getString(R.string.auto_no), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Log.i("No", "No");
                             }
                         })
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getString(R.string.auto_yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Log.i("Yes", "Yes");
                                 if (message !=null) {
@@ -81,7 +78,7 @@ public class AutoTemperatureFragment extends Fragment {
                                     } else            // callled from tablet
                                     {
                                         autoLV.updateTemp(tempID, temp);
-                                        autoLV.removeFragment();
+                                        autoLV.removeTempFragment();
                                     }
                                 }
                             }
