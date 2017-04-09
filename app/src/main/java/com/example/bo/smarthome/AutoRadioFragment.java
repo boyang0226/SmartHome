@@ -13,12 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
 
-public class AutoRadioFragment extends Fragment {
+public class AutoRadioFragment extends Fragment {   //auto radio fragment
     boolean mute;
     int volumn;
     Long radioID;
@@ -40,9 +41,8 @@ public class AutoRadioFragment extends Fragment {
         autoLV = a;
     }
 
-    //no matter how you got here, the data is in the getArguments
     @Override
-    public void onCreate(Bundle b)
+    public void onCreate(Bundle b)   //get the passed bundle data
     {
         super.onCreate(b);
         Bundle bun = getArguments();
@@ -58,14 +58,14 @@ public class AutoRadioFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity) {    //create context object in fragment
         super.onAttach(activity);
         ctx=activity;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {  //create view and set the passed bundle data
+
         gui = inflater.inflate(R.layout.activity_auto_radio_stations, null);
         final Switch muteSwitch = (Switch)gui.findViewById(R.id.auto_radio_mute_switch);
         muteSwitch.setChecked(mute);
@@ -75,10 +75,10 @@ public class AutoRadioFragment extends Fragment {
                 CharSequence text;
                 int duration;
                 if (compoundButton.isChecked()) {
-                    text = "Switch is On";
+                    text = (getString(R.string.auto_switch_on));
                     duration = Toast.LENGTH_SHORT;
                 } else {
-                    text = "Switch is Off";
+                    text = (getString(R.string.auto_switch_off));
                     duration = Toast.LENGTH_SHORT;
                 }
 
@@ -92,42 +92,93 @@ public class AutoRadioFragment extends Fragment {
         volumnSeekbar.setMax(100);
         volumnSeekbar.setProgress(volumn);
 
-        Button btnSet = (Button)gui.findViewById(R.id.auto_light_setbutton);
+        final EditText radiostation1 = (EditText)gui.findViewById(R.id.auto_radiostation1_editText);
+        radiostation1.setText(radio1);
+        final EditText radiostation2 = (EditText)gui.findViewById(R.id.auto_radiostation2_editText);
+        radiostation2.setText(radio2);
+        final EditText radiostation3 = (EditText)gui.findViewById(R.id.auto_radiostation3_editText);
+        radiostation3.setText(radio3);
+        final EditText radiostation4 = (EditText)gui.findViewById(R.id.auto_radiostation4_editText);
+        radiostation4.setText(radio4);
+        final EditText radiostation5 = (EditText)gui.findViewById(R.id.auto_radiostation5_editText);
+        radiostation5.setText(radio5);
+        final EditText radiostation6 = (EditText)gui.findViewById(R.id.auto_radiostation6_editText);
+        radiostation6.setText(radio6);
 
-        btnSet.setOnClickListener(new View.OnClickListener() {
+        Button btnSet = (Button)gui.findViewById(R.id.auto_radiostation1_setbutton);
+
+        btnSet.setOnClickListener(new View.OnClickListener() {    //when click set, create bundle data return to AutoListView class and update database
             @Override
             public void onClick(View view) {
                 Log.i("AutoLightsFragment", "User clicked set auto light button");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-                builder.setTitle("Do you want to set lights?")
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setTitle(getString(R.string.auto_radio_set_dialog))
+                        .setNegativeButton(getString(R.string.auto_no), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Log.i("No", "No");
                             }
                         })
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getString(R.string.auto_yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Log.i("Yes", "Yes");
-//                                //boolean nSwitch1 = false;
-//                                //boolean hSwitch1 = false;
-//                                nSwitch = normal.isChecked();
-//                                hSwitch = head.isChecked();
-//                                iBrightness = brightness.getProgress();
-//                                if (autoLV == null) {               // called from phone
-//                                    Intent resultIntent = new Intent();
-//                                    resultIntent.putExtra("NormalSwitch", nSwitch);
-//                                    resultIntent.putExtra("HeadSwitch", hSwitch);
-//                                    resultIntent.putExtra("InsideBrightness", iBrightness);
-//                                    resultIntent.putExtra("id", lightsID);
-//                                    getActivity().setResult(1, resultIntent);
-//                                    getActivity().finish();
-//                                } else            // callled from tablet
-//                                {
-//                                    autoLV.updateLights(lightsID, nSwitch, hSwitch, iBrightness);
-//                                    autoLV.removeFragment();
-//                                }
+                                mute = muteSwitch.isChecked();
+                                volumn = volumnSeekbar.getProgress();
+                                radio1= radiostation1.getText().toString();
+                                radio2= radiostation2.getText().toString();
+                                radio3= radiostation3.getText().toString();
+                                radio4= radiostation4.getText().toString();
+                                radio5= radiostation5.getText().toString();
+                                radio6= radiostation6.getText().toString();
+                                if (autoLV == null) {               // called from phone
+                                    Intent resultIntent = new Intent();
+                                    resultIntent.putExtra("Mute", mute);
+                                    resultIntent.putExtra("Volumn", volumn);
+                                    resultIntent.putExtra("Station1", radio1);
+                                    resultIntent.putExtra("Station2", radio2);
+                                    resultIntent.putExtra("Station3", radio3);
+                                    resultIntent.putExtra("Station4", radio4);
+                                    resultIntent.putExtra("Station5", radio5);
+                                    resultIntent.putExtra("Station6", radio6);
+                                    resultIntent.putExtra("id", radioID);
+                                    getActivity().setResult(3, resultIntent);
+                                    getActivity().finish();
+                                } else            // callled from tablet
+                                {
+                                    autoLV.updateRadio(radioID, mute, volumn, radio1, radio2, radio3, radio4, radio5, radio6);
+                                    autoLV.removeRadioFragment();
+                                }
+                            }
+                        });
+                builder.create().show();
+            }
+        });
 
+        Button btnClear = (Button)gui.findViewById(R.id.auto_radiostation1_clearbutton);
+
+        btnClear.setOnClickListener(new View.OnClickListener() {    //when click clear, set the components to initial state
+            @Override
+            public void onClick(View view) {
+                Log.i("AutoLightsFragment", "User clicked set auto light button");
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                builder.setTitle(getString(R.string.auto_radio_clear_dialog))
+                        .setNegativeButton(getString(R.string.auto_no), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Log.i("No", "No");
+                            }
+                        })
+                        .setPositiveButton(getString(R.string.auto_yes), new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Log.i("Yes", "Yes");
+                                muteSwitch.setChecked(false);
+                                volumnSeekbar.setProgress(0);
+                                radiostation1.setText("");
+                                radiostation2.setText("");
+                                radiostation3.setText("");
+                                radiostation4.setText("");
+                                radiostation5.setText("");
+                                radiostation6.setText("");
                             }
                         });
                 builder.create().show();

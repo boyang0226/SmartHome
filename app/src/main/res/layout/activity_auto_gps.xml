@@ -17,7 +17,6 @@
         android:id="@+id/auto_gps_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
         android:ems="10"
         android:hint="@string/auto_gps_edittext_hint"
         android:text=""
@@ -30,19 +29,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/auto_gps_setbutton"
+        android:layout_marginEnd="19dp"
         android:layout_alignTop="@+id/auto_gps_editText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="32dp" />
+        android:layout_alignParentEnd="true" />
 
     <ProgressBar
         android:id="@+id/auto_gps_progressBar"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="25dp"
         android:visibility="invisible"
         android:layout_below="@+id/auto_gps_setbutton"
-        android:layout_toEndOf="@+id/auto_gps_textView" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/auto_gps_entry_title"
@@ -50,15 +49,26 @@
         android:layout_height="wrap_content"
         android:text="@string/auto_gps_entry_title"
         android:textSize="20dp"
-        android:layout_centerVertical="true"
-        android:layout_alignEnd="@+id/auto_gps_editText" />
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/auto_gps_progressBar"
+        android:layout_centerHorizontal="true" />
 
     <ListView
         android:id="@+id/auto_gps_entry_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="9dp"
         android:layout_below="@+id/auto_gps_entry_title"
-        android:layout_marginTop="32dp"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:fadeScrollbars="false"/>
+
+    <Button
+        android:id="@+id/auto_gps_navgationbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auto_gps_nav"
+        android:layout_above="@+id/auto_gps_editText"
+        android:layout_alignStart="@+id/auto_gps_setbutton" />
+
 
 </RelativeLayout>

@@ -17,7 +17,9 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
-public class AutoLightsFragment extends Fragment {
+// http://stackoverflow.com/questions/29677812/why-is-onattach-called-before-oncreate
+
+public class AutoLightsFragment extends Fragment {   //auto lights fragment
     boolean nSwitch;
     boolean hSwitch;
     int iBrightness;
@@ -34,9 +36,8 @@ public class AutoLightsFragment extends Fragment {
         autoLV = a;
     }
 
-    //no matter how you got here, the data is in the getArguments
     @Override
-    public void onCreate(Bundle b)
+    public void onCreate(Bundle b)   //get the passed bundle data
     {
         super.onCreate(b);
         Bundle bun = getArguments();
@@ -47,14 +48,14 @@ public class AutoLightsFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Activity activity) {    //create context object in fragment
         super.onAttach(activity);
         ctx=activity;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { //create view and set the passed bundle data
+
         gui = inflater.inflate(R.layout.activity_auto_light, null);
         final Switch normal = (Switch)gui.findViewById(R.id.auto_normallight_switch);
         normal.setChecked(nSwitch);
@@ -64,10 +65,10 @@ public class AutoLightsFragment extends Fragment {
                 CharSequence text;
                 int duration;
                 if (compoundButton.isChecked()) {
-                    text = "Switch is On";
+                    text = getString(R.string.auto_switch_on);
                     duration = Toast.LENGTH_SHORT;
                 } else {
-                    text = "Switch is Off";
+                    text = getString(R.string.auto_switch_off);
                     duration = Toast.LENGTH_SHORT;
                 }
 
@@ -84,10 +85,10 @@ public class AutoLightsFragment extends Fragment {
                 CharSequence text;
                 int duration;
                 if (compoundButton.isChecked()) {
-                    text = "Switch is On";
+                    text = getString(R.string.auto_switch_on);
                     duration = Toast.LENGTH_SHORT;
                 } else {
-                    text = "Switch is Off";
+                    text = getString(R.string.auto_switch_off);
                     duration = Toast.LENGTH_SHORT;
                 }
 
@@ -103,19 +104,19 @@ public class AutoLightsFragment extends Fragment {
 
         Button btn = (Button)gui.findViewById(R.id.auto_light_setbutton);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {  //when click set, create bundle data return to AutoListView class and update database
             @Override
             public void onClick(View view) {
                 Log.i("AutoLightsFragment", "User clicked set auto light button");
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-                builder.setTitle("Do you want to set lights?")
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                builder.setTitle(getString(R.string.auto_light_dialog))
+                        .setNegativeButton(getString(R.string.auto_no), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Log.i("No", "No");
                             }
                         })
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(getString(R.string.auto_yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 Log.i("Yes", "Yes");
                                     nSwitch = normal.isChecked();
@@ -132,7 +133,7 @@ public class AutoLightsFragment extends Fragment {
                                     } else            // callled from tablet
                                     {
                                         autoLV.updateLights(lightsID, nSwitch, hSwitch, iBrightness);
-                                        autoLV.removeFragment();
+                                        autoLV.removeLightsFragment();
                                     }
 
                             }
