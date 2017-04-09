@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="@string/auto_radiostation1_textview"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="13dp"
         android:layout_alignParentTop="true"
         android:layout_alignEnd="@+id/auto_radiostation5_textView" />
 
@@ -35,9 +35,9 @@
         android:id="@+id/auto_radiostation1_clearbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/auto_radiostation1_editText"
-        android:layout_toEndOf="@+id/auto_radiostation1_setbutton"
-        android:text="@string/auto_radiostation_clearbutton" />
+        android:text="@string/auto_radiostation_clearbutton"
+        android:layout_alignBottom="@+id/auto_radiostation2_editText"
+        android:layout_toEndOf="@+id/auto_radiostation2_editText" />
 
     <TextView
         android:id="@+id/auto_radiostation2_textView"
@@ -138,7 +138,7 @@
         android:id="@+id/auto_radio_mute_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="15dp"
         android:text=""
         android:layout_below="@+id/auto_radiostation6_editText"
         android:layout_alignStart="@+id/auto_radio_volumn_seekBar" />
@@ -149,7 +149,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/auto_radiostation_mute"
-        android:layout_alignTop="@+id/auto_radio_mute_switch"
+        android:layout_alignBaseline="@+id/auto_radio_mute_switch"
+        android:layout_alignBottom="@+id/auto_radio_mute_switch"
         android:layout_alignStart="@+id/auto_radio_volumn_textView" />
 
     <SeekBar
@@ -169,4 +170,5 @@
         android:text="@string/auto_radiostation_volumn"
         android:layout_alignTop="@+id/auto_radio_volumn_seekBar"
         android:layout_alignEnd="@+id/auto_radiostation4_textView" />
+
 </RelativeLayout>

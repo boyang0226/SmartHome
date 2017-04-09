@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">智能家庭</string>
+    <!--Living Room-->
     <string name="lr_intro_title">欢迎来到客厅</string>
     <string name="lr_intro_author">作者：陈思哲</string>
     <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
@@ -65,4 +67,61 @@
     <string name="delete_confirm_message">确定要删除它吗？</string>
     <string name="delete_message">成功删除!</string>
     <string name="save_message">新项已创建！</string>
+
+    <!--Auto-->
+    <string name = "auto_temperature_textview">汽车温度</string>
+    <string name = "auto_temperature_edittext_hint">输入温度</string>
+    <string name = "auto_temperature_setbutton">设置</string>
+    <string name = "auto_normallight_textview">日常灯</string>
+    <string name = "auto_highlight_textview">头灯</string>
+    <string name = "auto_dimmablelight_texview">车内灯</string>
+    <string name = "auto_gps_textview">目的地</string>
+    <string name = "auto_gps_edittext_hint">输入地址</string>
+    <string name = "auto_gps_setbutton">设置</string>
+    <string name = "auto_radiostation1_textview">广播电台一</string>
+    <string name = "auto_radiostation2_textview">广播电台二</string>
+    <string name = "auto_radiostation3_textview">广播电台三</string>
+    <string name = "auto_radiostation4_textview">广播电台四</string>
+    <string name = "auto_radiostation5_textview">广播电台五</string>
+    <string name = "auto_radiostation6_textview">广播电台六</string>
+    <string name = "auto_radiostation_edittext_hint">输入电台频率</string>
+    <string name = "auto_radiostation_setbutton">设置</string>
+    <string name = "auto_radiostation_clearbutton">清除</string>
+    <string name = "auto_gps_entry_title">导航历史信息</string>
+    <string name = "auto_radiostation_mute">静音</string>
+    <string name = "auto_radiostation_volumn">音量</string>
+    <string name ="auto_light_setbutton">设置</string>
+    <string name ="auto_welcome">欢迎进入汽车设置</string>
+    <string name ="auto_temp">汽车温度</string>
+    <string name ="auto_lights">汽车灯光</string>
+    <string name ="auto_gps">汽车导航</string>
+    <string name ="auto_radio">汽车广播电台</string>
+    <string name ="auto_notice">通知</string>
+    <string name ="auto_temp_setting">汽车温度设置</string>
+    <string name ="auto_light_setting">汽车灯光设置</string>
+    <string name ="auto_gps_setting">汽车导航设置</string>
+    <string name ="auto_radio_setting">汽车广播电台设置</string>
+    <string name ="auto_temp_toast">汽车温度已设置</string>
+    <string name ="auto_light_toast">汽车灯光已设置</string>
+    <string name ="auto_gps_toast">汽车导航已设置</string>
+    <string name ="auto_radio_toast">汽车广播电台已设置</string>
+    <string name ="auto_help_title">欢迎进入汽车设置</string>
+    <string name ="auto_help_message">这是智能家庭应用的汽车设置部分。你可以设置汽车温度，汽车灯光，汽车导航和汽车广播电台。版本1.0，设计 曲震。</string>
+    <string name ="auto_ok">确认</string>
+    <string name ="auto_temp_dialog">设置汽车温度？</string>
+    <string name ="auto_yes">是</string>
+    <string name ="auto_no">否</string>
+    <string name ="auto_switch_on">开关已打开</string>
+    <string name ="auto_switch_off">开关已关闭</string>
+    <string name ="auto_light_dialog">设置汽车灯光？</string>
+    <string name ="auto_gps_dialog">设置新的导航地址？</string>
+    <string name ="auto_radio_set_dialog">设置广播电台？</string>
+    <string name ="auto_radio_clear_dialog">清除广播电台信息？</string>
+    <string name ="auto_help_menuname">关于</string>
+    <string name ="auto_help_livingroom">起居室</string>
+    <string name ="auto_help_kitchen">厨房</string>
+    <string name ="auto_help_house">房屋</string>
+    <string name ="auto_gps_nav">导航</string>
+
+
 </resources>

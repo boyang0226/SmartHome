@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartHome</string>
+    <string name="app_name">Smart Home</string>
     <string name="title_activity_main2">Main2Activity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -34,6 +34,7 @@
         Thank you for using my program!
     </string>
 
+    <!--Auto-->
     <string name = "auto_temperature_textview">Auto Temperature</string>
     <string name = "auto_temperature_edittext_hint">Enter Temperature</string>
     <string name = "auto_temperature_setbutton">Set</string>
@@ -56,6 +57,37 @@
     <string name = "auto_radiostation_mute">Mute</string>
     <string name = "auto_radiostation_volumn">Volumn</string>
     <string name ="auto_light_setbutton">Set</string>
+    <string name ="auto_welcome">Welcome to Auto Settings</string>
+    <string name ="auto_temp">Auto Temperature</string>
+    <string name ="auto_lights">Auto Lights</string>
+    <string name ="auto_gps">Auto GPS</string>
+    <string name ="auto_radio">Auto Radio Station</string>
+    <string name ="auto_notice">Notification</string>
+    <string name ="auto_temp_setting">Auto Temperature Setting</string>
+    <string name ="auto_light_setting">Auto Lights Setting</string>
+    <string name ="auto_gps_setting">Auto GPS Setting</string>
+    <string name ="auto_radio_setting">Auto Radio Setting</string>
+    <string name ="auto_temp_toast">Auto Temperature is set</string>
+    <string name ="auto_light_toast">Auto Lights is set</string>
+    <string name ="auto_gps_toast">Auto GPS is set</string>
+    <string name ="auto_radio_toast">Auto Radio Station is set</string>
+    <string name ="auto_help_title">Welcome to Smart Home Auto Setting</string>
+    <string name ="auto_help_message">This is the Auto Setting part of the Smart Home App. You can set Temperature, Lights, Radio Stations and GPS of a car. Version 1.0 by Zhen Qu.</string>
+    <string name ="auto_ok">Ok</string>
+    <string name ="auto_temp_dialog">Do you want to set a new temperature?</string>
+    <string name ="auto_yes">Yes</string>
+    <string name ="auto_no">No</string>
+    <string name ="auto_switch_on">Switch is On</string>
+    <string name ="auto_switch_off">Switch is Off</string>
+    <string name ="auto_light_dialog">Do you want to set lights?</string>
+    <string name ="auto_gps_dialog">Do you want to set a new destination?</string>
+    <string name ="auto_radio_set_dialog">Do you want to set Radio Station?</string>
+    <string name ="auto_radio_clear_dialog">Do you want to clear settings of Radio Station?</string>
+    <string name ="auto_help_menuname">About</string>
+    <string name ="auto_help_livingroom">Living Room</string>
+    <string name ="auto_help_kitchen">Kitchen</string>
+    <string name ="auto_help_house">House</string>
+    <string name ="auto_gps_nav">Navigation</string>
 
     <array name="house_spinner_add">
         <item>garage</item>
