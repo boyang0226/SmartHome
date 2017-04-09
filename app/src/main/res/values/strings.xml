@@ -12,11 +12,10 @@
     <string name="house_weather">weather</string>
      <string name="GarageDoor">Garage Door</string>
     <string name="garageLight">Garage Light</string>
-
     <string name="house_add">ADD</string>
     <string name="house_toolbar">Tool Bar</string>
     <string name="house_Save">Save</string>
-    <string name="Living_Room">Living Room</string>
+   <string name="Living_Room">Living Room</string>
     <string name="Kitchen">Kitchen</string>
     <string name="Automobile">Automobile</string>
     <string name="House_Help">House Help</string>
