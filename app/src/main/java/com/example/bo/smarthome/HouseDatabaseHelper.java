@@ -15,15 +15,16 @@ import android.util.Log;
 
 public class HouseDatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int VERSION_NUM = 2;
+    public static final int VERSION_NUM = 6;
     public static final String DATABASE_NAME = "HouseDatabase";
     public static final String KEY_ID = "_id";
     public static final String KEY_DoorSwitch="DoorSwitch";
     public static final String KEY_LightSwitch="LightSwitch";
-//    public static final String KEY_Time="Time";
- //   public static final String Key_Temp ="Temp";
+    public static final String KEY_Time="Time";
+    public static final String Key_Temp ="Temp";
 
-     public static final  String KEY_Schedule="Schedule";
+  //  public static final  String KEY_Schedule="Schedule";
+
 
     public HouseDatabaseHelper(Context ctx) {
 
@@ -35,18 +36,10 @@ public class HouseDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + DATABASE_NAME + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + KEY_DoorSwitch + " BOOLEAN DEFAULT 0, "
                 + KEY_LightSwitch+ " BOOLEAN DEFAULT 0, "
-          //      + KEY_Time + " TEXT, "
-            //    + Key_Temp + " TEXT); "
-
-              + KEY_Schedule + " TEXT); "  );
-
-
-
-
-
-
-
-    }
+                + KEY_Time + " TEXT, "
+                + Key_Temp + " TEXT); ");
+    //            + KEY_Schedule + " TEXT); "  );
+ }
 
 
 

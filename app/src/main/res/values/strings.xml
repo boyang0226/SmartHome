@@ -7,10 +7,10 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="house_garage"> garage</string>
-    <string name="house_temp">house temperature</string>
-    <string name="house_weather">weather</string>
-     <string name="GarageDoor">Garage Door</string>
+    <string name="house_garage">House Garage</string>
+    <string name="house_temp">House Temperature</string>
+    <string name="house_weather">House Weather</string>
+     <string name="house_garagedoor">Garage Door</string>
     <string name="garageLight">Garage Light</string>
     <string name="house_add">ADD</string>
     <string name="house_toolbar">Tool Bar</string>
@@ -19,19 +19,40 @@
     <string name="Kitchen">Kitchen</string>
     <string name="Automobile">Automobile</string>
     <string name="House_Help">House Help</string>
-    <string name="house_introduction">
-        \nAuthor: Boyang\n
-        Click one of the OK options to start\n
-        Garage:\n
-        Click OPEN button to open the garage door. This will also light the garage light.\n
-        Click CLOSE button to close the garage door. This will also turn off the garage light.\n
-        Click on the garage lamp to activate the garage light\n
-        Temperature of the house:\n
-        Click the text box and write a value for the temperature, and then click CHANGE TEMPERATURE.\n
-        Click the ADD button to add and remove the schedules you are making.\n
-        Weather:\n
-        Click on the Outdoor Weather Menu to view the weather outside.\n
-        Thank you for using my program!
+    <string name="house_changetemprature">Change the house temperature</string>
+    <string name="house_delete">Delete</string>
+    <string name="house_timeinput">Input the time</string>
+    <string name="house_tempinput">Input the temperature</string>
+    <string name="house_currenttemp">Current Temperature</string>
+    <string name="house_mintemp">Min Temperature</string>
+    <string name="house_maxtemp">Max temperature</string>
+    <string name="house_introduction">Introduction</string>
+    <string name="house_introductiondetail">
+
+        \nAuthor: Boyang\n\n
+         Version: 1.0\n\n\n
+       House Garage:\n\n
+
+          Garage door\n
+              open/close the garage door\n
+
+           Open garage door also turn on garage light.\n
+           Close garage door also turn off the garage light.\n\n
+
+          Garage light\n
+               turn on/off the garage light\n\n\n
+
+
+        House Temperature:\n\n
+
+         Click the text box,input the time and temperature \n
+         then click Add button to show them on the list \n\n
+
+         Click the list to edit the  temperature with no time change \n\n\n
+
+        House Weather:\n
+        Click on to show outside temperature and weather
+
     </string>
 
     <string name = "auto_temperature_textview">Auto Temperature</string>
@@ -57,11 +78,6 @@
     <string name = "auto_radiostation_volumn">Volumn</string>
     <string name ="auto_light_setbutton">Set</string>
 
-    <array name="house_spinner_add">
-        <item>garage</item>
-        <item>temp</item>
-        <item>weather</item>
-    </array>
 
     <string name="lr_intro_title">Welcome to Living Room</string>
     <string name="lr_intro_author">Author: Sizhe Chen</string>
@@ -156,4 +172,5 @@
     <string name="kitchen_main_add_appliance_dialog_title">Add Appliance</string>
     <string name="kitchen_light_delete_appliance_dialog_message">Do you want to delete </string>
     <string name="kitchen_light_delete_appliance_dialog_title">Confirm Delete Light</string>
+    <string name="GarageDoor"></string>
 </resources>

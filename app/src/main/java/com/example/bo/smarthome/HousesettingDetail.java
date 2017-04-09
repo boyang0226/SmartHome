@@ -2,6 +2,7 @@ package com.example.bo.smarthome;
 
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentValues;
@@ -12,6 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -23,7 +25,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,9 +52,10 @@ public class HousesettingDetail extends AppCompatActivity {
     long id ;
     int LightSwitch ;
     int DoorSwitch ;
-    String Schedule ;
-    // String Time;
-//    String Temp ;
+  //  String Schedule ;
+    String Time;
+    String Temp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +70,10 @@ public class HousesettingDetail extends AppCompatActivity {
 
 
         ListView HouseView =(ListView)findViewById(R.id.house_listview);
-        String [] item = {"House Garage", "House Temperature", "House Weather"};
+       //String [] item = {"House Garage", "House Temperature", "House Weather"};
+      //  String[]item = R.array.house_spinner_add;
+        String [] item = {getString(R.string.house_garage), getString(R.string.house_temp), getString(R.string.house_weather)};
+
         arrayList= new ArrayList<>(Arrays.asList(item));
         adapter =new ArrayAdapter<>(this,R.layout.activity_house_setting,R.id.house_view,arrayList);
         HouseView.setAdapter(adapter);
@@ -81,9 +89,10 @@ public class HousesettingDetail extends AppCompatActivity {
                 new String[]{HouseDatabaseHelper.KEY_ID,
                         HouseDatabaseHelper.KEY_LightSwitch,
                         HouseDatabaseHelper.KEY_DoorSwitch,
-                      //  HouseDatabaseHelper.KEY_Time,
-                      //  HouseDatabaseHelper.Key_Temp
-                        HouseDatabaseHelper.KEY_Schedule},
+        //              HouseDatabaseHelper.KEY_Schedule
+                        HouseDatabaseHelper.KEY_Time,
+                        HouseDatabaseHelper.Key_Temp
+          },
                 null, null, null, null, null, null);
 
               results.moveToFirst();
@@ -98,35 +107,36 @@ public class HousesettingDetail extends AppCompatActivity {
 
 
                 Bundle bun = new Bundle();
-//             while(!results.isAfterLast() ) {
+                while(!results.isAfterLast()) {
                     id = results.getLong(results.getColumnIndex(HouseDatabaseHelper.KEY_ID));
-                    LightSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_LightSwitch));
-                    DoorSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_DoorSwitch));
-               //     Time = results.getString(results.getColumnIndex(HouseDatabaseHelper.Key_Temp));
-               //     Temp = results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
-                   Schedule=results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Schedule));
-//              }
-
+                     LightSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_LightSwitch));
+                     DoorSwitch = results.getInt(results.getColumnIndex(HouseDatabaseHelper.KEY_DoorSwitch));
+   //                  Schedule = results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Schedule));
+                    Time=results.getString(results.getColumnIndex(HouseDatabaseHelper.KEY_Time));
+                    Temp=results.getString(results.getColumnIndex(HouseDatabaseHelper.Key_Temp));
+                    results.moveToNext();
+                }
                     bun.putLong("_id", id);//l is the database ID of selected item
                     bun.putBoolean("DoorSwitch", DoorSwitch != 0);
                     bun.putBoolean("LightSwitch", LightSwitch != 0);
-                //    bun.putString("Time", Time);
-                    bun.putString("Schedule", Schedule);
+
+           //         bun.putString("Schedule", Schedule);
+                    bun.putString("Time",Time);
+                    bun.putString("Temp",Temp);
                     bun.putString("type", arrayList.get(i));
 
-                if (adapterView.getItemAtPosition(i).equals("House Weather")) {
+                if (adapterView.getItemAtPosition(i).equals(getString(R.string.house_weather))) {
                    if (isTablet) {
-
                         houseWeather = new HouseWeather(HousesettingDetail.this);
                         houseWeather.setArguments(bun);
                        getSupportFragmentManager().beginTransaction().replace(R.id.house_fragholder, houseWeather).commit();
                    }else {
-
-                       Intent HouseWeatherSetting = new Intent(HousesettingDetail.this, HouseWeather.class);
+                       Intent HouseWeatherSetting = new Intent(HousesettingDetail.this, Housegarage.class);
                        HouseWeatherSetting.putExtras(bun);
                        startActivityForResult(HouseWeatherSetting, 5);
                    }
-                }else if (adapterView.getItemAtPosition(i).equals("House Temperature")) {
+
+                }else if (adapterView.getItemAtPosition(i).equals(getString(R.string.house_temp))) {
 
                     if (isTablet) {
 
@@ -135,11 +145,11 @@ public class HousesettingDetail extends AppCompatActivity {
                        getSupportFragmentManager().beginTransaction().replace(R.id.house_fragholder, houseTemp).commit();
 
                     }else {
-                        Intent HouseTempSetting = new Intent(HousesettingDetail.this, HouseTemp.class);
+                        Intent HouseTempSetting = new Intent(HousesettingDetail.this, Housegarage.class);
                         HouseTempSetting.putExtras(bun);
                         startActivityForResult(HouseTempSetting, 5);
                     }
-                }else  if (adapterView.getItemAtPosition(i).equals("House Garage")) {
+                }else  if (adapterView.getItemAtPosition(i).equals(getString(R.string.house_garage)) ){
 
                     if (isTablet) {
                         houseGarageFragment = new HouseGarageFragment(HousesettingDetail.this);
@@ -151,9 +161,7 @@ public class HousesettingDetail extends AppCompatActivity {
                     else //isPhone
                     {
                         Intent HouseGarageSetting = new Intent(HousesettingDetail.this, Housegarage.class);
-//                        intnt.putExtra("_id", id);
-//                        intnt.putExtra("DoorSwitch",DoorSwitch);
-//                        intnt.putExtra("LightSwitch",LightSwitch);
+//
                         HouseGarageSetting.putExtras(bun);
                         startActivityForResult(HouseGarageSetting,5);
                     }
@@ -162,6 +170,12 @@ public class HousesettingDetail extends AppCompatActivity {
         });
     }
 
+
+    public void deleteschedule(long id){
+
+        db.delete(HouseDatabaseHelper.DATABASE_NAME, "_id=" + id , null);
+        refreshDB();
+    }
 
     public void updateGarage(long id, boolean door, boolean light) {
 
@@ -172,14 +186,23 @@ public class HousesettingDetail extends AppCompatActivity {
         refreshDB();
     }
 
-    public void updateTemp(long id,  String schedule) {
+    public void updateTemp(long id,  String Time, String Temp) {
 
         ContentValues values = new ContentValues();
-       // values.put(HouseDatabaseHelper.Key_Temp,time);
-        values.put(HouseDatabaseHelper.KEY_ID,id);
-      //  values.put(HouseDatabaseHelper.Key_Temp,temp);
-        values.put(HouseDatabaseHelper.KEY_Schedule,schedule);
-        db.insert(HouseDatabaseHelper.DATABASE_NAME,null, values);
+      //  values.put(HouseDatabaseHelper.KEY_Schedule,schedule);
+        values.put(HouseDatabaseHelper.KEY_Time,Time);
+        values.put(HouseDatabaseHelper.Key_Temp,Temp);
+        db.insert(HouseDatabaseHelper.DATABASE_NAME, null, values);
+        refreshDB();
+    }
+
+    public void EditTemp(long id,  String Temp) {
+
+        ContentValues values = new ContentValues();
+        //  values.put(HouseDatabaseHelper.KEY_Schedule,schedule);
+    //    values.put(HouseDatabaseHelper.KEY_Time,Time);
+        values.put(HouseDatabaseHelper.Key_Temp,Temp);
+        db.update(HouseDatabaseHelper.DATABASE_NAME,  values,HouseDatabaseHelper.KEY_ID + "=" + id, null);
         refreshDB();
     }
 
@@ -199,12 +222,12 @@ public class HousesettingDetail extends AppCompatActivity {
 
         }
 
-        if (requestCode==5 && resultCode == 0) {
+        if (requestCode==5 && resultCode == 1) {
             Long id = bun.getLong("_id");
-      //     String time = bun.getString("Time");
-       //     String temp = bun.getString("Schedule");
-            String sche =bun.getString("Schedule");
-            updateTemp(id,  sche);
+       //     String sche =bun.getString("Schedule");
+            String time =bun.getString("Time");
+            String temp =bun.getString("Temp");
+            updateTemp(id,  Time,Temp);
         }
         }
 
@@ -216,9 +239,10 @@ public class HousesettingDetail extends AppCompatActivity {
                 new String[] {  HouseDatabaseHelper.KEY_ID,
                         HouseDatabaseHelper.KEY_LightSwitch,
                         HouseDatabaseHelper.KEY_DoorSwitch,
-                  //      HouseDatabaseHelper.KEY_Time,
-                    //    HouseDatabaseHelper.Key_Temp
-                        HouseDatabaseHelper.KEY_Schedule },
+                    //    HouseDatabaseHelper.KEY_Schedule
+                        HouseDatabaseHelper.KEY_Time,
+                        HouseDatabaseHelper.Key_Temp
+                },
                 null, null, null, null, null, null);
 
         int rows = results.getCount(); //number of rows returned
@@ -269,16 +293,26 @@ public class HousesettingDetail extends AppCompatActivity {
             case R.id.househelp:
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(R.string.house_introduction)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                builder.setTitle(R.string.house_introduction)
+//                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int id) {
+//
+//
+//                            }
+//                        });
+//                builder.create().show();
 
+                Dialog  dialog=new Dialog(this);
+                dialog.setTitle(getString(R.string.house_introduction));
+                dialog.setContentView(R.layout.activity_house_help_dialog);
+                TextView editText =(TextView)dialog.findViewById(R.id.house_view2);
+                editText.setText(R.string.house_introductiondetail);
 
-                            }
-                        });
-                builder.create().show();
+                dialog.show();
+
                 break;
+
             case R.id.car:
 
                 startActivity(new Intent(this, AutoListView.class));

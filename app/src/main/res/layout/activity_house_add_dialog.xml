@@ -1,33 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:maxHeight="120dp"
+    android:maxWidth="80dp"
     android:orientation="vertical"
     >
 
 
-    <TextView
-        android:text="Device Add"
+    <EditText
+        android:text=""
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="50dp"
+        android:textSize="20dp"
         android:textAlignment="center"
-        android:id="@+id/house_device_add" />
+        android:id="@+id/house_temp"
+        android:layout_marginTop="91dp"
+        android:layout_below="@+id/house_temp_hold"
+        android:layout_centerHorizontal="true" />
 
-    <ImageView
-        android:src="@android:drawable/ic_menu_add"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:scaleType="center"
-        android:id="@+id/house_add_image"
-
-         />
-
-    <Spinner
-        android:id="@+id/house_add_spinner"
-        android:layout_width="match_parent"
+    <TextView
+        android:text="@string/house_changetemprature"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/house_spinner_add"
-         />
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:id="@+id/house_temp_hold"
 
-</LinearLayout>
+
+        android:layout_marginTop="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <Button
+        android:id="@+id/house_temp_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/house_Save"
+        android:layout_marginTop="48dp"
+        android:layout_below="@+id/house_temp"
+        android:layout_alignStart="@+id/house_temp_hold" />
+
+    <Button
+        android:id="@+id/house_temp_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/house_delete"
+        android:layout_alignBaseline="@+id/house_temp_save"
+        android:layout_alignBottom="@+id/house_temp_save"
+        android:layout_alignEnd="@+id/house_temp_hold" />
+
+
+</RelativeLayout>

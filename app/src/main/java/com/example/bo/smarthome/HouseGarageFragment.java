@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -21,6 +22,9 @@ public class HouseGarageFragment extends Fragment {
     Long id;
     Boolean DoorSwitch;
     Boolean LightSwitch;
+
+    ImageView doorcontrol;
+    ImageView lightcontrol;
 
  HousesettingDetail housesettingDetail = null;
 
@@ -62,11 +66,29 @@ public class HouseGarageFragment extends Fragment {
         door.setChecked(DoorSwitch);
         light.setChecked(LightSwitch);
 
+
+         doorcontrol =(ImageView)gui.findViewById(R.id.housedoor) ;
+         lightcontrol =(ImageView) gui.findViewById(R.id.houselight);
+
+
+
         Button save = (Button)gui.findViewById(R.id.house_garage_save);
 
-// if (door.isChecked()==true){
-//    light.setChecked(true);
-//}
+        if (door.isChecked()==true){
+            doorcontrol.setImageResource(R.drawable.dooropen);
+            lightcontrol.setImageResource(R.drawable.lighton);
+        }else{
+            doorcontrol.setImageResource(R.drawable.doorclose);
+            lightcontrol.setImageResource(R.drawable.lightoff);
+        }
+
+        if(light.isChecked()==true){
+
+                 lightcontrol.setImageResource(R.drawable.lighton);
+        }else{
+              lightcontrol.setImageResource(R.drawable.lightoff);
+        }
+
 
       door.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -75,15 +97,38 @@ public class HouseGarageFragment extends Fragment {
                                             Toast.makeText(view.getContext(), "Opening Garage", Toast.LENGTH_LONG).show();
                                         //    garagedoor = true;
                                             garagelight=true;
+
+                                            doorcontrol.setImageResource(R.drawable.dooropen);
+                                            lightcontrol.setImageResource(R.drawable.lighton);
+
                                         } else {
                                             Toast.makeText(view.getContext(), "Closing Garage", Toast.LENGTH_LONG).show();
                                          //   garagedoor = false;
                                             garagelight=false;
+                                            doorcontrol.setImageResource(R.drawable.doorclose);
+                                            lightcontrol.setImageResource(R.drawable.lightoff);
                                         }
                                         light.setChecked(garagelight);
 
                                     }
                                 });
+
+        light.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (light.isChecked()==true) {
+                    Toast.makeText(view.getContext(), "Opening light", Toast.LENGTH_LONG).show();
+                    lightcontrol.setImageResource(R.drawable.lighton);
+
+                } else {
+                    Toast.makeText(view.getContext(), "Closing Garage", Toast.LENGTH_LONG).show();
+                     lightcontrol.setImageResource(R.drawable.lightoff);
+                }
+
+
+            }
+        });
+
 
 
 //        DoorSwitch=   door.isChecked();

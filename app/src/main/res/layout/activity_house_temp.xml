@@ -12,9 +12,14 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="164dp"
-        android:layout_weight="0.07"
+        android:layout_weight="0.64"
         android:id="@+id/house_temp_listview"
+        android:fadeScrollbars="false"
+
+
         />
+
+
 
     <TextView
         android:id="@+id/house_temp_time"
@@ -22,52 +27,41 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
-        android:text="choose a time  "
+        android:textSize="20dp"
+        android:text="@string/house_timeinput"
         />
 
 
-    <TextView
-        android:id="@+id/house_time_getting"
+
+    <EditText
+        android:id="@+id/house_time_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:gravity="center_horizontal"
-        />
+        android:ems="10"
+        android:inputType="textPersonName"
 
-    <TimePicker
-        android:id="@+id/house_temp_timepicker"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:timePickerMode="spinner"
+
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/house_temp_number"
-        android:text="choose a temrature"
+        android:textSize="20dp"
+        android:text="@string/house_tempinput"
         android:gravity="center_horizontal"
         android:layout_marginBottom="20dp"
         />
 
 
-    <TextView
-        android:id="@+id/house_temp_getting"
+    <EditText
+        android:id="@+id/house_temp_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:gravity="center_horizontal"
+        android:inputType="textPersonName"
+
+
         />
-
-    <NumberPicker
-            android:id="@+id/house_temp_number_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:gravity="center_horizontal"
-            android:overScrollMode="always"
-            />
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,25 +69,16 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <Button
+    <Button
             android:id="@+id/house_temp_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="bottom"
-            android:text="ADD"
+            android:text="@string/house_Save"
             android:textAlignment="center"
             />
 
-        <Button
-            android:id="@+id/house_temp_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="bottom"
-            android:textAlignment="center"
-            android:text="Delete"
-          />
 
 
     </LinearLayout>

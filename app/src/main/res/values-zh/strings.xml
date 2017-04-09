@@ -65,4 +65,49 @@
     <string name="delete_confirm_message">确定要删除它吗？</string>
     <string name="delete_message">成功删除!</string>
     <string name="save_message">新项已创建！</string>
+    <string name="garageLight">车库灯</string>
+    <string name="house_Save">保存</string>
+    <string name="house_add">添加</string>
+    <string name="house_changetemprature">设定房子温度</string>
+    <string name="house_currenttemp">现在温度</string>
+    <string name="house_delete">删除</string>
+    <string name="house_garage">车库设置</string>
+    <string name="house_introduction">简介</string>
+    <string name="house_maxtemp">最高温度</string>
+    <string name="house_mintemp">最低温度</string>
+    <string name="house_temp">温度设置</string>
+    <string name="house_tempinput">输入温度</string>
+    <string name="house_timeinput">输入时间</string>
+    <string name="house_toolbar">工具</string>
+    <string name="house_weather">天气设置</string>
+    <string name="House_Help">帮助</string>
+    <string name="GarageDoor">车库门</string>
+    <string name="house_garagedoor">车库门</string>
+    <string name="house_introductiondetail">
+
+        \n作者： 杨波\n\n
+         版本号: 1.0\n\n\n
+       车库设置:\n\n
+
+          车库门的控制\n
+              控制车库门的开关\n
+
+           开车库门的同时打开车库灯\n
+           关车库门的时候关掉车库灯\n\n
+
+         车库灯的控制\n
+               打开或者关掉车库灯\n\n\n
+
+
+        室内温度设置:\n\n
+
+         输入时间跟温度 \n
+         点击添加按钮显示添加的时间跟温度 \n\n
+
+         点击现有的时间温度表来改变现有时间的温度 \n\n\n
+
+        天气设置:\n
+        点击天气设置来显示外边实时天气状况
+
+    </string>
 </resources>

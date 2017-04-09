@@ -60,7 +60,9 @@ public class HouseWeather extends Fragment {
 
             String in = "";
             try {
-                URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric");
+           //     URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric");
+                URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric"); //("http://www.google.com/");
+
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream inStream = urlConnection.getInputStream();
 

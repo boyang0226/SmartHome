@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 android:id="@+id/activity_house_garage_fragment"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
@@ -10,43 +11,55 @@ android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 tools:context="com.example.bo.smarthome.Housegarage">
 
-<TextView
 
-    android:text="@string/GarageDoor"
+
+
+    <TextView
+
+    android:text="@string/house_garagedoor"
     android:textSize="30sp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/house_frag_garage"
-    android:layout_marginTop="69dp"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentStart="true" />
+
+        android:layout_marginTop="61dp"
+        android:layout_below="@+id/housedoor"
+        android:layout_alignEnd="@+id/house_garage_light" />
 
 <Switch
 
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/house_garage_swith"
-
     android:layout_marginStart="47dp"
     android:layout_alignTop="@+id/house_frag_garage"
     android:layout_toEndOf="@+id/house_frag_garage" />
 
-<TextView
+    <ImageView
+        android:id="@+id/houselight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/alert_light_frame"
+        android:layout_marginBottom="45dp"
+        android:layout_above="@+id/house_garage_light"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
     android:text="@string/garageLight"
     android:textSize="30sp"
     android:id="@+id/house_garage_light"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignTop="@+id/house_garage_swith2"
-    android:layout_toStartOf="@+id/house_garage_swith" />
+        android:layout_marginBottom="102dp"
+        android:layout_above="@+id/house_garage_save"
+        android:layout_alignParentStart="true" />
 
 <Switch
 
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/house_garage_swith2"
-    android:layout_marginTop="96dp"
-    android:layout_below="@+id/house_frag_garage"
+    android:layout_below="@+id/houselight"
     android:layout_alignStart="@+id/house_garage_swith" />
 
     <Button
@@ -57,6 +70,15 @@ tools:context="com.example.bo.smarthome.Housegarage">
         android:text="@string/house_Save"
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@+id/house_garage_swith2" />
+
+    <ImageView
+        android:id="@+id/housedoor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        app:srcCompat="@android:drawable/alert_light_frame" />
 
 
 </RelativeLayout>
