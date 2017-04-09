@@ -10,15 +10,11 @@
     <string name="house_garage"> garage</string>
     <string name="house_temp">house temperature</string>
     <string name="house_weather">weather</string>
-    <string name="GarageDoor">Garage Door</string>
-    <string name="garageLight">Garage Light</string>
+
+
     <string name="house_add">ADD</string>
     <string name="house_toolbar">Tool Bar</string>
-    <string name="house_Save">Save</string>
-    <string name="Living_Room">Living Room</string>
-    <string name="Kitchen">Kitchen</string>
-    <string name="Automobile">Automobile</string>
-    <string name="House_Help">House Help</string>
+
     <string name="house_introduction">
         \nAuthor: Boyang\n
         Click one of the OK options to start\n
@@ -34,24 +30,24 @@
         Thank you for using my program!
     </string>
 
-    <string name="auto_temperature_textview">Auto Temperature</string>
-    <string name="auto_temperature_edittext_hint">Enter Temperature</string>
-    <string name="auto_temperature_setbutton">Set</string>
-    <string name="auto_normallight_textview">Normal Light</string>
-    <string name="auto_highlight_textview">High Light</string>
-    <string name="auto_dimmablelight_texview">Dimmable Light</string>
-    <string name="auto_gps_textview">Destination</string>
-    <string name="auto_gps_edittext_hint">Enter Address</string>
-    <string name="auto_gps_setbutton">Set</string>
-    <string name="auto_radiostation1_textview">RadioStation One</string>
-    <string name="auto_radiostation2_textview">RadioStation Two</string>
-    <string name="auto_radiostation3_textview">RadioStation Three</string>
-    <string name="auto_radiostation4_textview">RadioStation Four</string>
-    <string name="auto_radiostation5_textview">RadioStation Five</string>
-    <string name="auto_radiostation6_textview">RadioStation Six</string>
-    <string name="auto_radiostation_edittext_hint">Enter Station</string>
-    <string name="auto_radiostation_setbutton">Set</string>
-    <string name="auto_radiostation_clearbutton">Clear</string>
+    <string name = "auto_temperature_textview">Auto Temperature</string>
+    <string name = "auto_temperature_edittext_hint">Enter Temperature</string>
+    <string name = "auto_temperature_setbutton">Set</string>
+    <string name = "auto_normallight_textview">Normal Light</string>
+    <string name = "auto_highlight_textview">High Light</string>
+    <string name = "auto_dimmablelight_texview">Dimmable Light</string>
+    <string name = "auto_gps_textview">Destination</string>
+    <string name = "auto_gps_edittext_hint">Enter Address</string>
+    <string name = "auto_gps_setbutton">Set</string>
+    <string name = "auto_radiostation1_textview">RadioStation One</string>
+    <string name = "auto_radiostation2_textview">RadioStation Two</string>
+    <string name = "auto_radiostation3_textview">RadioStation Three</string>
+    <string name = "auto_radiostation4_textview">RadioStation Four</string>
+    <string name = "auto_radiostation5_textview">RadioStation Five</string>
+    <string name = "auto_radiostation6_textview">RadioStation Six</string>
+    <string name = "auto_radiostation_edittext_hint">Enter Station</string>
+    <string name = "auto_radiostation_setbutton">Set</string>
+    <string name = "auto_radiostation_clearbutton">Clear</string>
 
     <array name="house_spinner_add">
         <item>garage</item>
