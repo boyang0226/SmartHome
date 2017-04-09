@@ -7,6 +7,9 @@ import android.util.Log;
 
 public class KitchenMicrowaveDetail extends KitchenBase {
 
+    /**
+     * Display help Menu "About" message. Shows the instruction, version number and author.
+     */
     @Override
     protected void showHelp()
     {
@@ -22,6 +25,10 @@ public class KitchenMicrowaveDetail extends KitchenBase {
 
     }
 
+    /**
+     * Start the Microwave Android activity.
+     * @param savedInstanceState object of Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,5 +46,7 @@ public class KitchenMicrowaveDetail extends KitchenBase {
         loadKitchenFragment(fmg, R.id.frmKitchenMicrowaveDetailPortrait, bun);
 
     }
+
+
 
 }

@@ -91,6 +91,7 @@ public class KitchenLightFragment extends KitchenFragmentBase {
         SeekBar dimmerBar = (SeekBar) frgRootView.findViewById(R.id.skbDimmer);
         dimmerBar.setMax(100);
 
+        initializeDB();
         loadValuesFromDb();
         InitializeInuptControls();
         handleSwitchOnOff();
@@ -154,9 +155,7 @@ public class KitchenLightFragment extends KitchenFragmentBase {
 
     private void loadValuesFromDb() {
         String methodName = "ReadSetting";
-        KitchenDatabaseHelper dbHelper = new KitchenDatabaseHelper(getContext());
         lightSetting = new KitchenLightFragment.LightSetting();
-        db = dbHelper.getWritableDatabase();
         Cursor results = db.query(false, KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME,
                 new String[]{KitchenDatabaseHelper.KEY_ID, KitchenDatabaseHelper.KEY_MAINSWITCH, KitchenDatabaseHelper.KEY_DIMMER_LEVEL}, KitchenDatabaseHelper.KEY_ID +"=" + String.valueOf(applianceId), null, null, null, null, null);
 

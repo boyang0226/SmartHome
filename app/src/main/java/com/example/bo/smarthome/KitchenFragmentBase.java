@@ -19,6 +19,9 @@ public class KitchenFragmentBase extends Fragment {
     protected  View frgRootView;
     protected SQLiteDatabase db = null;
 
+    /**
+     * Default constructor
+     */
     public KitchenFragmentBase() {
         // Required empty public constructor
     }
@@ -30,14 +33,48 @@ public class KitchenFragmentBase extends Fragment {
         Bundle bun = getArguments();
         applianceId = bun.getInt("applianceId");
         applianceName = bun.getString("applianceName");
+        kitchenFragmentOnCreate();
     }
 
+    protected void kitchenFragmentOnCreate() {
+
+    }
+
+    /**
+     *
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
-        return textView;
+
+        return null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        kitchenFragmentOnPause();
+    }
+
+    protected void kitchenFragmentOnPause() {
+        saveSettingsToDB();
+    }
+
+    protected void saveSettingsToDB() {
+
+    }
+
+    /**
+     * Initialize DB instance
+     */
+    protected void initializeDB()
+    {
+        KitchenDatabaseHelper dbHelper = new KitchenDatabaseHelper(getContext());
+        db = dbHelper.getWritableDatabase();
     }
 
 }

@@ -68,14 +68,28 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
 
     }
 
-
+    /**
+     * Default constructor
+     */
     public KitchenFridgeFragment() {
         // Required empty public constructor
     }
-    public KitchenFridgeFragment(KitchenMain km) {
+
+    /**
+     * Create a new instance of KitchenFridgeFragment.
+     * @param km KitchenMain object
+     */
+    public KitchenFridgeFragment(KitchenMain km){
         this.km = km;
     }
 
+    /**
+     * Inflate the UI
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return frgRootView
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -87,29 +101,30 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
         Spinner spnFreezer = (Spinner) frgRootView.findViewById(R.id.spnFreezerTemp);
 
         initializeSpinnerControls(spnFridge, spnFreezer);
+        initializeDB();
         loadValuesFromDb();
         setSpinnerValues(spnFridge,spnFreezer);
-        
         attachSpinnerEventHandlers(spnFridge, spnFreezer);
-
         handleDeleteAppliance();
-        
-        
         return frgRootView;
 
     }
-
+    /**
+     *
+     * @param spnFridge
+     * @param spnFreezer
+     */
     private void attachSpinnerEventHandlers(Spinner spnFridge, Spinner spnFreezer) {
 
         spnFridge.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 int val = Integer.parseInt(parentView.getSelectedItem().toString());
-                CharSequence text = null;
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(getContext(), parentView.getSelectedItem().toString() , duration);
-                toast.show();
 
+//                CharSequence text = null;
+//                int duration = Toast.LENGTH_SHORT;
+//                Toast toast = Toast.makeText(getContext(), parentView.getSelectedItem().toString() , duration);
+//                toast.show();
                 fridgeSetting.setFridgeTemp(val);
                 saveFridgeSetting();
             }
@@ -120,15 +135,14 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
             }
 
         });
-
-        spnFreezer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            spnFreezer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 int val = Integer.parseInt(parentView.getSelectedItem().toString());
-                CharSequence text = null;
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(getContext(), parentView.getSelectedItem().toString() , duration);
-                toast.show();
+//                CharSequence text = null;
+//                int duration = Toast.LENGTH_SHORT;
+//                Toast toast = Toast.makeText(getContext(), parentView.getSelectedItem().toString() , duration);
+//                toast.show();
 
                 fridgeSetting.setFreezerTemp(val);
                 saveFridgeSetting();
@@ -142,6 +156,11 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
         });
     }
 
+    /**
+     * Define the range of fridge temperature and freezer temperature.
+     * @param spnFridge fridge spinner
+     * @param spnFreezer freezer spinner
+     */
     private void initializeSpinnerControls(Spinner spnFridge, Spinner spnFreezer)
     {
         Integer[] fridgeItems = new Integer[]{1,2,3,4,5,6,7};
@@ -153,7 +172,14 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
         spnFreezer.setAdapter(freezerAdapter);
 
     }
-    //http://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
+    /*How to set selected item of Spinner by value, not by position? [Webpage]. Retrieved from:
+     *http://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
+     */
+    /**
+     * Set the spinner values.
+     * @param spnFridge fridge spinner
+     * @param spnFreezer freezer spinner
+     */
     private void setSpinnerValues(Spinner spnFridge, Spinner spnFreezer) {
 
         ArrayAdapter<Integer> fridgeAdapter = (ArrayAdapter<Integer>)spnFridge.getAdapter();
@@ -166,11 +192,12 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
 
     }
 
+    /**
+     * Load the values from the database.
+     */
     private void loadValuesFromDb() {
         String methodName = "ReadSetting";
-        KitchenDatabaseHelper dbHelper = new KitchenDatabaseHelper(getContext());
         fridgeSetting = new KitchenFridgeFragment.FridgeSetting();
-        db = dbHelper.getWritableDatabase();
         Cursor results = db.query(false, KitchenDatabaseHelper.KITCHEN_FRIDGE_TABLE_NAME,
                 new String[]{KitchenDatabaseHelper.KEY_ID, KitchenDatabaseHelper.KEY_FRIDGE_SETTING, KitchenDatabaseHelper.KEY_FREEZER_SETTING}, KitchenDatabaseHelper.KEY_ID +"=" + String.valueOf(applianceId), null, null, null, null, null);
 
@@ -186,13 +213,18 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
         }
     }
 
+    /**
+     * Save the settings of the refrigerator.
+     */
     private void saveFridgeSetting() {
 
         ContentValues values = new ContentValues();
         values.put(KitchenDatabaseHelper.KEY_FRIDGE_SETTING, fridgeSetting.getFridgeTemp());
         values.put(KitchenDatabaseHelper.KEY_FREEZER_SETTING, fridgeSetting.getFreezerTemp());
 
-        //http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
+        /*Android SQLite: Update Statement [Webpage]. Retrieved from:
+         *http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
+         */
         if (fridgeSetting.getId() == 0)
         {
             db.insert(KitchenDatabaseHelper.KITCHEN_FRIDGE_TABLE_NAME, "", values);
@@ -204,6 +236,9 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
         }
     }
 
+    /**
+     * Handle the delete button when deleting a fridge item.
+     */
     private void handleDeleteAppliance() {
         Button btnDeleteAppliance = (Button) frgRootView.findViewById(R.id.btnDeleteKitchenFridge);
         btnDeleteAppliance.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +247,7 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
 
                 String msg = getString(R.string.kitchen_light_delete_appliance_dialog_message)  + " " + applianceName + "?";
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                // 2. Chain together various setter methods to set the dialog characteristics
+                //Chain together various setter methods to set the dialog characteristics
                 builder.setMessage(msg)
                         .setTitle(R.string.kitchen_fridge_delete_appliance_dialog_title)
                         .setPositiveButton(R.string.dialog_positive_text_ok, new DialogInterface.OnClickListener() {
@@ -228,35 +263,19 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
                         })
                         .setNegativeButton(R.string.dialog_negative_text_cancel, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                // buttonView.setChecked(false);
                                 dialog.cancel();
                             }
                         })
                         .show();
             }
         });
-
-
     }
-    private void deleteDatabaseRecords() {
 
-//        try {
-//            db.beginTransaction();
+    /**
+     * Handle delete the records in database.
+     */
+    private void deleteDatabaseRecords() {
         db.delete(KitchenDatabaseHelper.KITCHEN_FRIDGE_TABLE_NAME, "id="+applianceId , null);
         db.delete(KitchenDatabaseHelper.KITCHEN_APPLIANCE_TABLE_NAME, "id="+applianceId , null);
-//            db.endTransaction();
-//            db.setTransactionSuccessful();
-//            db.set
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-
     }
-
-
-
-
-
-
 }

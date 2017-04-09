@@ -18,6 +18,9 @@ import android.widget.Switch;
 
 public class KitchenLightDetail extends KitchenBase {
 
+    /**
+     * Display the help menu for the light. Shows instruction, version number and author.
+     */
     @Override
     protected void showHelp()
     {
@@ -32,6 +35,11 @@ public class KitchenLightDetail extends KitchenBase {
         kitchenbase_builder.create().show();
 
     }
+
+    /**
+     * Start the activity of Kitchen light.
+     * @param savedInstanceState object of Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

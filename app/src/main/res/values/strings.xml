@@ -153,8 +153,9 @@
     <string name="kitchen_light_delete_appliance_dialog_message">Do you want to delete </string>
     <string name="kitchen_light_delete_appliance_dialog_title">Confirm Delete Light</string>
     <string name="kitchen_fridge_delete_appliance_dialog_title">Confirm Delete Fridge</string>
-    <string name="kitchen_microwave_delete_appliance_dialog_title">Confirm Delete Fridge</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="kitchen_microwave_delete_appliance_dialog_title">Confirm Delete Microwave Oven</string>
+    <string name="kitchen_microwave_start_button_text">Start</string>
+    <string name="kitchen_microwave_resume_button_text">Resume</string>
+    <string name="kitchen_microwave_stop_button_text">Stop</string>
+    <string name="kitchen_microwave_reset_button_text">Reset</string>
 </resources>
