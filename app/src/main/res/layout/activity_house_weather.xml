@@ -28,7 +28,7 @@
         />
 
     <TextView
-        android:text="Current Temperature"
+        android:text="@string/house_currenttemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/house_current_temp"
@@ -37,7 +37,7 @@
         />
 
     <TextView
-        android:text="Min Temperature"
+        android:text="@string/house_mintemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/house_min_temp"
@@ -47,7 +47,7 @@
         />
 
     <TextView
-        android:text="Max Temperature"
+        android:text="@string/house_maxtemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/house_max_temp"

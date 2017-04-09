@@ -9,27 +9,24 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="@string/auto_radiostation1_textview"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="13dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignEnd="@+id/auto_radiostation5_textView" />
 
     <EditText
         android:id="@+id/auto_radiostation1_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/auto_radiostation1_textView"
-        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/auto_radiostation_edittext_hint"
-        android:text="" />
+        android:text=""
+        android:layout_below="@+id/auto_radiostation1_textView"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/auto_radiostation1_setbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:text="@string/auto_radiostation_setbutton"
         android:layout_alignTop="@+id/auto_radiostation1_editText"
         android:layout_toEndOf="@+id/auto_radiostation1_editText" />
@@ -38,9 +35,9 @@
         android:id="@+id/auto_radiostation1_clearbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/auto_radiostation1_editText"
-        android:layout_toEndOf="@+id/auto_radiostation1_setbutton"
-        android:text="@string/auto_radiostation_clearbutton" />
+        android:text="@string/auto_radiostation_clearbutton"
+        android:layout_alignBottom="@+id/auto_radiostation2_editText"
+        android:layout_toEndOf="@+id/auto_radiostation2_editText" />
 
     <TextView
         android:id="@+id/auto_radiostation2_textView"
@@ -48,7 +45,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="@string/auto_radiostation2_textview"
-        android:layout_below="@+id/auto_radiostation1_setbutton"
+        android:layout_below="@+id/auto_radiostation1_editText"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -57,27 +54,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/auto_radiostation_edittext_hint"
         android:ems="10"
-
         android:text=""
         android:layout_below="@+id/auto_radiostation2_textView"
         android:layout_alignParentStart="true" />
-
-    <Button
-        android:id="@+id/auto_radiostation2_setbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/auto_radiostation2_editText"
-        android:layout_toEndOf="@+id/auto_radiostation2_editText"
-        android:text="@string/auto_radiostation_setbutton" />
-
-    <Button
-        android:id="@+id/suto_radiostation2_clearbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/auto_radiostation_clearbutton"
-        android:layout_alignBaseline="@+id/auto_radiostation2_setbutton"
-        android:layout_alignBottom="@+id/auto_radiostation2_setbutton"
-        android:layout_toEndOf="@+id/auto_radiostation2_setbutton" />
 
     <TextView
         android:id="@+id/auto_radiostation3_textView"
@@ -96,35 +75,16 @@
         android:layout_below="@+id/auto_radiostation3_textView"
         android:hint="@string/auto_radiostation_edittext_hint"
         android:ems="10"
-
         android:text="" />
-
-    <Button
-        android:id="@+id/auto_radiostation3_setbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/auto_radiostation_setbutton"
-        android:layout_alignBaseline="@+id/auto_radiostation3_editText"
-        android:layout_alignBottom="@+id/auto_radiostation3_editText"
-        android:layout_toEndOf="@+id/auto_radiostation3_editText" />
-
-    <Button
-        android:id="@+id/auto_radiostation3_clearbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/auto_radiostation_clearbutton"
-        android:layout_alignBaseline="@+id/auto_radiostation3_setbutton"
-        android:layout_alignBottom="@+id/auto_radiostation3_setbutton"
-        android:layout_toEndOf="@+id/auto_radiostation3_setbutton" />
 
     <TextView
         android:id="@+id/auto_radiostation4_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/auto_radiostation3_setbutton"
         android:textSize="20dp"
-        android:text="@string/auto_radiostation4_textview" />
+        android:text="@string/auto_radiostation4_textview"
+        android:layout_below="@+id/auto_radiostation3_editText"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/auto_radiostation4_editText"
@@ -134,34 +94,16 @@
         android:layout_below="@+id/auto_radiostation4_textView"
         android:hint="@string/auto_radiostation_edittext_hint"
         android:ems="10"
-
         android:text="" />
-
-    <Button
-        android:id="@+id/auto_radiostation4_setbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/auto_radiostation_setbutton"
-        android:layout_alignBaseline="@+id/auto_radiostation4_editText"
-        android:layout_alignBottom="@+id/auto_radiostation4_editText"
-        android:layout_toEndOf="@+id/auto_radiostation4_editText" />
-
-    <Button
-        android:id="@+id/auto_radiostation4_clearbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/auto_radiostation_clearbutton"
-        android:layout_alignBottom="@+id/auto_radiostation4_setbutton"
-        android:layout_toEndOf="@+id/auto_radiostation4_setbutton" />
 
     <TextView
         android:id="@+id/auto_radiostation5_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/auto_radiostation4_setbutton"
         android:textSize="20dp"
-        android:text="@string/auto_radiostation5_textview" />
+        android:text="@string/auto_radiostation5_textview"
+        android:layout_below="@+id/auto_radiostation4_editText"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:id="@+id/auto_radiostation5_editText"
@@ -171,25 +113,7 @@
         android:layout_below="@+id/auto_radiostation5_textView"
         android:hint="@string/auto_radiostation_edittext_hint"
         android:ems="10"
-
         android:text="" />
-
-    <Button
-        android:id="@+id/auto_radiostation5_setbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/auto_radiostation_setbutton"
-        android:layout_alignBaseline="@+id/auto_radiostation5_editText"
-        android:layout_alignBottom="@+id/auto_radiostation5_editText"
-        android:layout_toEndOf="@+id/auto_radiostation5_editText" />
-
-    <Button
-        android:id="@+id/auto_radiostation5_clearbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/auto_radiostation5_editText"
-        android:layout_toEndOf="@+id/auto_radiostation5_setbutton"
-        android:text="@string/auto_radiostation_clearbutton" />
 
     <TextView
         android:id="@+id/auto_radiostation6_textView"
@@ -197,7 +121,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:text="@string/auto_radiostation6_textview"
-        android:layout_below="@+id/auto_radiostation5_clearbutton"
+        android:layout_below="@+id/auto_radiostation5_editText"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -210,19 +134,41 @@
         android:layout_below="@+id/auto_radiostation6_textView"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:id="@+id/auto_radiostation6_setbutton"
+    <Switch
+        android:id="@+id/auto_radio_mute_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/auto_radiostation6_editText"
-        android:layout_toEndOf="@+id/auto_radiostation6_editText"
-        android:text="@string/auto_radiostation_setbutton" />
+        android:layout_marginTop="15dp"
+        android:text=""
+        android:layout_below="@+id/auto_radiostation6_editText"
+        android:layout_alignStart="@+id/auto_radio_volumn_seekBar" />
 
-    <Button
-        android:id="@+id/auto_radiostation6_clearbutton"
+    <TextView
+        android:id="@+id/auto_radio_mute_textView"
+        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/auto_radiostation6_setbutton"
-        android:layout_toEndOf="@+id/auto_radiostation6_setbutton"
-        android:text="@string/auto_radiostation_clearbutton" />
+        android:text="@string/auto_radiostation_mute"
+        android:layout_alignBaseline="@+id/auto_radio_mute_switch"
+        android:layout_alignBottom="@+id/auto_radio_mute_switch"
+        android:layout_alignStart="@+id/auto_radio_volumn_textView" />
+
+    <SeekBar
+        android:id="@+id/auto_radio_volumn_seekBar"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/auto_radio_mute_switch"
+        android:layout_toEndOf="@+id/auto_radiostation6_editText"
+        android:layout_marginStart="25dp" />
+
+    <TextView
+        android:id="@+id/auto_radio_volumn_textView"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/auto_radiostation_volumn"
+        android:layout_alignTop="@+id/auto_radio_volumn_seekBar"
+        android:layout_alignEnd="@+id/auto_radiostation4_textView" />
+
 </RelativeLayout>

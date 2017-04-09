@@ -24,16 +24,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/house_listview"
         android:layout_below="@+id/toolbar"
-        android:layout_above="@+id/house_add"
+
         />
 
-    <Button
-        android:text="ADD"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/house_add"
-        android:layout_alignParentBottom="true"
-        />
 
 
 </RelativeLayout>

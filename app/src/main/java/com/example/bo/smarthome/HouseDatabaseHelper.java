@@ -15,7 +15,7 @@ import android.util.Log;
 
 public class HouseDatabaseHelper extends SQLiteOpenHelper {
 
-    public static final int VERSION_NUM = 1;
+    public static final int VERSION_NUM = 6;
     public static final String DATABASE_NAME = "HouseDatabase";
     public static final String KEY_ID = "_id";
     public static final String KEY_DoorSwitch="DoorSwitch";
@@ -23,8 +23,10 @@ public class HouseDatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_Time="Time";
     public static final String Key_Temp ="Temp";
 
+  //  public static final  String KEY_Schedule="Schedule";
 
-    protected HouseDatabaseHelper(Context ctx) {
+
+    public HouseDatabaseHelper(Context ctx) {
 
         super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
@@ -36,14 +38,8 @@ public class HouseDatabaseHelper extends SQLiteOpenHelper {
                 + KEY_LightSwitch+ " BOOLEAN DEFAULT 0, "
                 + KEY_Time + " TEXT, "
                 + Key_Temp + " TEXT); ");
-
-
-
-
-
-
-
-    }
+    //            + KEY_Schedule + " TEXT); "  );
+ }
 
 
 

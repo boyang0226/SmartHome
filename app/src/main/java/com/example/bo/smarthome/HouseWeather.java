@@ -4,10 +4,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,19 +28,29 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class HouseWeather extends AppCompatActivity {
+public class HouseWeather extends Fragment {
 
     String value, min, max;
     Bitmap bm;
+    View gui;
+    HousesettingDetail housesetting;
+    public HouseWeather(){}
+    public HouseWeather(HousesettingDetail housesettingDetail){
 
+        housesetting=housesettingDetail;
+    }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_house_weather);
+    public void onCreate(Bundle b) {
+        super.onCreate(b);
 
-        ForecastQuery thread = new ForecastQuery();
-        thread.execute();
 
+    }
+
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        //return super.onCreateView(inflater, container, savedInstanceState);
+         gui = inflater.inflate(R.layout.activity_house_weather, null);
+
+        return gui;
     }
 
     private class ForecastQuery extends AsyncTask<String, Integer, String>
@@ -46,7 +60,9 @@ public class HouseWeather extends AppCompatActivity {
 
             String in = "";
             try {
+           //     URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric");
                 URL url = new URL("http://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=d99666875e0e51521f0040a3d97d0f6a&mode=xml&units=metric"); //("http://www.google.com/");
+
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream inStream = urlConnection.getInputStream();
 
@@ -80,14 +96,14 @@ public class HouseWeather extends AppCompatActivity {
 
                                 URL ImageURL = new URL("http://openweathermap.org/img/w/" + icon + ".png");
                                 Bitmap image = getImage(ImageURL);
-                                FileOutputStream outputStream = openFileOutput(icon + ".png", Context.MODE_PRIVATE);
+                                FileOutputStream outputStream = getActivity().openFileOutput(icon + ".png", Context.MODE_PRIVATE);
                                 image.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
                                 outputStream.flush();
                                 outputStream.close();
 
                                 FileInputStream fis = null;
                                 try {
-                                    fis = openFileInput(icon + ".png");
+                                    fis = getActivity().openFileInput(icon + ".png");
 
                                 } catch (FileNotFoundException e) {
                                     e.printStackTrace();
@@ -97,7 +113,7 @@ public class HouseWeather extends AppCompatActivity {
                             } else {
                                 FileInputStream fis = null;
                                 try {
-                                    fis = openFileInput(icon + ".png");
+                                    fis = getActivity().openFileInput(icon + ".png");
 
                                 } catch (FileNotFoundException e) {
                                     e.printStackTrace();
@@ -124,7 +140,7 @@ public class HouseWeather extends AppCompatActivity {
         }
 
         public void onProgressUpdate(Integer... progress) {
-            ProgressBar progressBar = (ProgressBar) findViewById(R.id.house_progressBar);
+            ProgressBar progressBar = (ProgressBar)gui.findViewById(R.id.house_progressBar);
             progressBar.setVisibility(View.VISIBLE);
 
             progressBar.setProgress(progress[0]);
@@ -134,27 +150,27 @@ public class HouseWeather extends AppCompatActivity {
 
         public void onPostExecute(String work) {
 
-            ImageView imageView = (ImageView) findViewById(R.id.house_imageview);
+            ImageView imageView = (ImageView) gui.findViewById(R.id.house_imageview);
             imageView.setImageBitmap(bm);
 
-            TextView tx = (TextView) findViewById(R.id.house_current_temp);
+            TextView tx = (TextView) gui.findViewById(R.id.house_current_temp);
             tx.setText("Current Temperature is : " + value);
 
-            ProgressBar progressBar = (ProgressBar) findViewById(R.id.house_progressBar);
+            ProgressBar progressBar = (ProgressBar) gui.findViewById(R.id.house_progressBar);
             progressBar.setVisibility(View.INVISIBLE);
 
 
-            TextView tx2 = (TextView) findViewById(R.id.house_min_temp);
+            TextView tx2 = (TextView) gui.findViewById(R.id.house_min_temp);
             tx2.setText("\nMin Temperature is : " + min);
 
-            TextView tx3 = (TextView) findViewById(R.id.house_max_temp);
+            TextView tx3 = (TextView) gui.findViewById(R.id.house_max_temp);
             tx3.setText("\nMax Temperature is : " + max);
         }
 
 
         public boolean fileExist(String filename) {
 
-            File file = getBaseContext().getFileStreamPath(filename);
+            File file =getActivity().getBaseContext().getFileStreamPath(filename);
             return file.exists();
         }
 
