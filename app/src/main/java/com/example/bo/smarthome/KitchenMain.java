@@ -62,13 +62,17 @@ public class KitchenMain extends KitchenBase {
     protected static final String ONCREATE = "onCreate";
     protected static final String ADDAPPLIANCEBTN = "AddApplianceButton";
 
+    public static final String KITCHEN_MICROWAVE = "MICROWAVE";
+    public static final String KITCHEN_FRIDGE = "FRIDGE";
+    public static final String KITCHEN_LIGHT = "LIGHT";
+
     SQLiteDatabase db;
     ArrayList<KitchenAppliance> applianceList = new ArrayList<>();
     Cursor results;
     KitchenListAdapter listAdapter;
     boolean isLandscape = false;
 
-    KitchenLightFragment klf = null;
+    KitchenFragmentBase kfb = null;
 
     ArrayList<KitchenApplianceType> applianceTypeList = new ArrayList<>();
 
@@ -221,6 +225,7 @@ public class KitchenMain extends KitchenBase {
         }
     }
 
+
     public class KitchenApplianceQuery extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -365,46 +370,33 @@ public class KitchenMain extends KitchenBase {
                 //bun.putString("Msg", msg );
 
                 //String selectedAppliance = ((TextView) view).getText().toString();
-                KitchenAppliance selectedAppliance = (KitchenAppliance) listAdapter.getItem(position);
+                KitchenAppliance selectedAppliance = listAdapter.getItem(position);
 
                 String selectedApplianceName = selectedAppliance.getApplianceName();
                 String selectedApplianceType = selectedAppliance.getApplianceType();
                 int applianceId = selectedAppliance.getId();
 
+                // data for fragment or next activity
+                Bundle bun = new Bundle();
+                bun.putInt("applianceId", applianceId );
+                bun.putString("applianceName", selectedApplianceName);
+
+                KitchenFragmentBase kitchenFragment;
                 switch (selectedApplianceType) {
                     case "MICROWAVE":
                         Log.d(tag, "Clicked Microwave.");
-                        callActivity(KitchenMicrowaveDetail.class);
+                        kitchenFragment = new KitchenMicrowaveFragment(KitchenMain.this);
+                        CallFragmentOrActivity(kitchenFragment,KitchenMicrowaveDetail.class,bun);
                         break;
                     case "FRIDGE":
                         Log.d(tag, "Clicked Fridge.");
-                        callActivity(KitchenFridgeDetail.class);
+                        kitchenFragment = new KitchenFridgeFragment(KitchenMain.this);
+                        CallFragmentOrActivity(kitchenFragment,KitchenFridgeDetail.class,bun);
                         break;
                     case "LIGHT":
                         Log.d(tag, "Clicked on LIGHT device.");
-                        Bundle bun = new Bundle();
-                        bun.putInt("applianceId", applianceId );
-                        bun.putString("applianceName", selectedApplianceName);
-
-                        if (isLandscape)
-                        {
-                            FragmentManager fm = getSupportFragmentManager();
-                            FragmentTransaction ft = fm.beginTransaction();
-                            KitchenLightFragment f = new KitchenLightFragment(KitchenMain.this);
-                            f.setArguments(bun);
-                            if (klf != null) {
-                                ft.replace(R.id.frmKitchenDetail, f);
-                                klf = f;
-                            }
-                            else {
-                                ft.add(R.id.frmKitchenDetail, f);
-                                klf = f;
-                            }
-                            ft.commit();
-                        }
-                        else {
-                            callActivityWithData(KitchenLightDetail.class, bun);
-                        }
+                        kitchenFragment = new KitchenLightFragment(KitchenMain.this);
+                        CallFragmentOrActivity(kitchenFragment,KitchenLightDetail.class,bun);
                         break;
                     default:
                         break;
@@ -412,6 +404,29 @@ public class KitchenMain extends KitchenBase {
 
             }
         });
+    }
+
+    private void CallFragmentOrActivity(KitchenFragmentBase f, Class<?> cls, Bundle bun)
+    {
+        if (isLandscape)
+        {
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+
+            f.setArguments(bun);
+            if (kfb != null) {
+                ft.replace(R.id.frmKitchenDetail, f);
+                kfb = f;
+            }
+            else {
+                ft.add(R.id.frmKitchenDetail, f);
+                kfb = f;
+            }
+            ft.commit();
+        }
+        else {
+            callActivityWithData(cls, bun);
+        }
     }
 
     private void populateListView(String logTag) {
@@ -424,7 +439,6 @@ public class KitchenMain extends KitchenBase {
         if (kitchenListview != null)
                 kitchenListview.setAdapter(listAdapter);
     }
-
     private void addAppliance(String logTag) {
 
         Log.d(logTag, "Add appliance button event handler.");
@@ -475,15 +489,24 @@ public class KitchenMain extends KitchenBase {
                                     Long newId = db.insert(KitchenDatabaseHelper.KITCHEN_APPLIANCE_TABLE_NAME, "", applianceValues);
                                     ka.setId(Integer.parseInt(newId.toString()));
                                     if (newId > 0) {
-                                        if (ka.getApplianceType() == "LIGHT") {
-                                            ContentValues lightValues = new ContentValues();
-                                            lightValues.put(KitchenDatabaseHelper.KEY_ID, newId);
-                                            lightValues.put(KitchenDatabaseHelper.KEY_MAINSWITCH, 0);
-                                            lightValues.put(KitchenDatabaseHelper.KEY_DIMMER_LEVEL, 60);
-                                            db.insert(KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME, "", lightValues);
+                                        ContentValues values = new ContentValues();
+                                        if (ka.getApplianceType() == KITCHEN_LIGHT) {
+                                            values.put(KitchenDatabaseHelper.KEY_ID, newId);
+                                            values.put(KitchenDatabaseHelper.KEY_MAINSWITCH, 0);
+                                            values.put(KitchenDatabaseHelper.KEY_DIMMER_LEVEL, 60);
+                                            db.insert(KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME, "", values);
+                                        } else if (ka.getApplianceType() == KITCHEN_FRIDGE){
+                                            values.put(KitchenDatabaseHelper.KEY_ID, newId);
+                                            values.put(KitchenDatabaseHelper.KEY_FRIDGE_SETTING, 5);
+                                            values.put(KitchenDatabaseHelper.KEY_FREEZER_SETTING, -20);
+                                            db.insert(KitchenDatabaseHelper.KITCHEN_FRIDGE_TABLE_NAME, "", values);
+                                        } else if (ka.getApplianceType() == KITCHEN_MICROWAVE) {
+                                            values.put(KitchenDatabaseHelper.KEY_ID, newId);
+                                            values.put(KitchenDatabaseHelper.KEY_MICROWAVE_MINUTE, 0);
+                                            values.put(KitchenDatabaseHelper.KEY_MICROWAVE_SECOND, 0);
+                                            values.put(KitchenDatabaseHelper.KEY_MICROWAVE_STATE, "RESET");
+                                            db.insert(KitchenDatabaseHelper.KITCHEN_MICROWAVE_TABLE_NAME, "", values);
                                         }
-
-
                                         applianceList.add(ka);
                                         listAdapter.notifyDataSetChanged();
                                         if (isLandscape) {
@@ -491,8 +514,6 @@ public class KitchenMain extends KitchenBase {
                                             listAdapter.setSelectedItem(applianceList.size() - 1);
                                         }
                                     }
-
-
                                 } else {
                                         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(KitchenMain.this);
                                         // 2. Chain together various setter methods to set the dialog characteristics
@@ -503,7 +524,6 @@ public class KitchenMain extends KitchenBase {
                                                 }
                                             })
                                             .show();
-
                                 }
 
 
@@ -517,7 +537,6 @@ public class KitchenMain extends KitchenBase {
             }
         });
     }
-
     private void selectListViewItem(int position)
     {
         ListView kitchenListview = (ListView) findViewById(R.id.lvKitchenAppliance);
@@ -526,12 +545,11 @@ public class KitchenMain extends KitchenBase {
                 position,
                 kitchenListview.getAdapter().getItemId(position));
     }
-
     public void removeFragment()
     {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.remove(klf);
+        ft.remove(kfb);
         ft.commit();
         applianceList.clear();
         new KitchenApplianceQuery().execute("");
