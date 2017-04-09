@@ -30,7 +30,6 @@
         android:id="@+id/lr_blinds_seekBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/lr_blinds_brightness_label"
         android:layout_toStartOf="@+id/lr_blinds_seekBar_value"
         android:layout_below="@+id/lr_blinds_name"
@@ -55,15 +54,15 @@
         android:layout_height="wrap_content"
         android:text="@string/lr_save"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignEnd="@+id/lr_blinds_seekBar_value"
+        android:layout_toEndOf="@+id/lr_delete" />
 
     <Button
         android:id="@+id/lr_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/lr_save"
         android:layout_weight="1"
-        android:text="@string/lr_delete" />
+        android:text="@string/lr_delete"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
