@@ -1,0 +1,82 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layoutFragmentKitchenLight"
+    tools:context="com.example.bo.smarthome.KitchenLightFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Switch
+            android:id="@+id/swtMainSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/txtLightSwitch"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/txtLightSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="34dp"
+            android:text="@string/kitchen_light_main_switch_section_text"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="29dp" />
+
+        <SeekBar
+            android:id="@+id/skbDimmer"
+            style="@style/Widget.AppCompat.SeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="18dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_below="@+id/txtDimmer"
+            android:layout_alignStart="@+id/txtDimmer" />
+
+
+        <TextView
+            android:id="@+id/txtDimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/txtLightSwitch"
+            android:layout_below="@+id/txtLightSwitch"
+            android:layout_marginTop="28dp"
+            android:elevation="1dp"
+            android:text="@string/kitchen_light_dimmer_section_text" />
+
+        <Button
+            android:id="@+id/btnSetDimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/edtDimmerLevel"
+            android:layout_toEndOf="@+id/swtMainSwitch"
+            android:text="@string/kitchen_light_dimmer_button_text" />
+
+        <EditText
+            android:id="@+id/edtDimmerLevel"
+            style="@style/Widget.AppCompat.EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:ems="6"
+            android:inputType="number"
+            android:layout_below="@+id/skbDimmer"
+            android:layout_alignStart="@+id/txtDimmer" />
+
+        <Button
+            android:id="@+id/btnDeleteKitchenAppliance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/edtDimmerLevel"
+            android:layout_alignEnd="@+id/skbDimmer" />
+    </RelativeLayout>
+
+</FrameLayout>

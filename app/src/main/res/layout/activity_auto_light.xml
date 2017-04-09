@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/auto_normallight_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="153dp"
+        android:text="@string/auto_normallight_textview"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Switch
+        android:id="@+id/auto_normallight_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="89dp"
+        android:text=""
+        android:layout_alignBaseline="@+id/auto_normallight_textView"
+        android:layout_alignBottom="@+id/auto_normallight_textView"
+        android:layout_toEndOf="@+id/auto_normallight_textView" />
+
+    <TextView
+        android:id="@+id/auto_highlight_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/auto_normallight_textView"
+        android:layout_below="@+id/auto_normallight_switch"
+        android:layout_marginTop="50dp"
+        android:text="@string/auto_highlight_textview" />
+
+    <Switch
+        android:id="@+id/auto_highlight_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/auto_highlight_textView"
+        android:layout_alignEnd="@+id/auto_normallight_switch"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/auto_dimmablelight_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="58dp"
+        android:text="@string/auto_dimmablelight_texview"
+        android:layout_below="@+id/auto_highlight_textView"
+        android:layout_alignEnd="@+id/auto_highlight_textView" />
+
+    <SeekBar
+        android:id="@+id/auto_dimmablelight_seekBar"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/auto_dimmablelight_textView"
+        android:layout_alignStart="@+id/auto_highlight_switch" />
+
+    <Button
+        android:id="@+id/auto_light_setbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67dp"
+        android:text="@string/auto_light_setbutton"
+        android:layout_below="@+id/auto_dimmablelight_textView"
+        android:layout_toEndOf="@+id/auto_highlight_textView" />
+</RelativeLayout>

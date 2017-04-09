@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartHome</string>
+    <string name="app_name">Smart Home</string>
     <string name="title_activity_main2">Main2Activity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -10,11 +10,15 @@
     <string name="house_garage"> garage</string>
     <string name="house_temp">house temperature</string>
     <string name="house_weather">weather</string>
-
-
+     <string name="GarageDoor">Garage Door</string>
+    <string name="garageLight">Garage Light</string>
     <string name="house_add">ADD</string>
     <string name="house_toolbar">Tool Bar</string>
-
+    <string name="house_Save">Save</string>
+   <string name="Living_Room">Living Room</string>
+    <string name="Kitchen">Kitchen</string>
+    <string name="Automobile">Automobile</string>
+    <string name="House_Help">House Help</string>
     <string name="house_introduction">
         \nAuthor: Boyang\n
         Click one of the OK options to start\n
@@ -30,27 +34,66 @@
         Thank you for using my program!
     </string>
 
-    <string name="auto_listview_add_button">Add</string>
-    <string name="auto_add_new_unit_textview">Add New Unit</string>
-    <string name="auto_add_new_unit_edit_textinput">Enter Unit Name</string>
-    <string name="auto_add_new_unit_prompt">Choose a type</string>
-    <string-array name="auto_add_new_unit_arrays">
-        <item>Auto Temp</item>
-        <item>Auto Normal Light</item>
-        <item>Auto High Light</item>
-        <item>Auto Inside Light</item>
-        <item>Auto Radio Station</item>
-        <item>Auto GPS</item>
-    </string-array>
-    <string name="auto_add_new_unit_submitbutton">Submit</string>
-
+    <!--Auto-->
+    <string name = "auto_temperature_textview">Auto Temperature</string>
+    <string name = "auto_temperature_edittext_hint">Enter Temperature</string>
+    <string name = "auto_temperature_setbutton">Set</string>
+    <string name = "auto_normallight_textview">Normal Light</string>
+    <string name = "auto_highlight_textview">High Light</string>
+    <string name = "auto_dimmablelight_texview">Dimmable Light</string>
+    <string name = "auto_gps_textview">Destination</string>
+    <string name = "auto_gps_edittext_hint">Enter Address</string>
+    <string name = "auto_gps_setbutton">Set</string>
+    <string name = "auto_radiostation1_textview">RadioStation One</string>
+    <string name = "auto_radiostation2_textview">RadioStation Two</string>
+    <string name = "auto_radiostation3_textview">RadioStation Three</string>
+    <string name = "auto_radiostation4_textview">RadioStation Four</string>
+    <string name = "auto_radiostation5_textview">RadioStation Five</string>
+    <string name = "auto_radiostation6_textview">RadioStation Six</string>
+    <string name = "auto_radiostation_edittext_hint">Enter Station Number</string>
+    <string name = "auto_radiostation_setbutton">Set</string>
+    <string name = "auto_radiostation_clearbutton">Clear</string>
+    <string name = "auto_gps_entry_title">GPS Entry List</string>
+    <string name = "auto_radiostation_mute">Mute</string>
+    <string name = "auto_radiostation_volumn">Volumn</string>
+    <string name ="auto_light_setbutton">Set</string>
+    <string name ="auto_welcome">Welcome to Auto Settings</string>
+    <string name ="auto_temp">Auto Temperature</string>
+    <string name ="auto_lights">Auto Lights</string>
+    <string name ="auto_gps">Auto GPS</string>
+    <string name ="auto_radio">Auto Radio Station</string>
+    <string name ="auto_notice">Notification</string>
+    <string name ="auto_temp_setting">Auto Temperature Setting</string>
+    <string name ="auto_light_setting">Auto Lights Setting</string>
+    <string name ="auto_gps_setting">Auto GPS Setting</string>
+    <string name ="auto_radio_setting">Auto Radio Setting</string>
+    <string name ="auto_temp_toast">Auto Temperature is set</string>
+    <string name ="auto_light_toast">Auto Lights is set</string>
+    <string name ="auto_gps_toast">Auto GPS is set</string>
+    <string name ="auto_radio_toast">Auto Radio Station is set</string>
+    <string name ="auto_help_title">Welcome to Smart Home Auto Setting</string>
+    <string name ="auto_help_message">This is the Auto Setting part of the Smart Home App. You can set Temperature, Lights, Radio Stations and GPS of a car. Version 1.0 by Zhen Qu.</string>
+    <string name ="auto_ok">Ok</string>
+    <string name ="auto_temp_dialog">Do you want to set a new temperature?</string>
+    <string name ="auto_yes">Yes</string>
+    <string name ="auto_no">No</string>
+    <string name ="auto_switch_on">Switch is On</string>
+    <string name ="auto_switch_off">Switch is Off</string>
+    <string name ="auto_light_dialog">Do you want to set lights?</string>
+    <string name ="auto_gps_dialog">Do you want to set a new destination?</string>
+    <string name ="auto_radio_set_dialog">Do you want to set Radio Station?</string>
+    <string name ="auto_radio_clear_dialog">Do you want to clear settings of Radio Station?</string>
+    <string name ="auto_help_menuname">About</string>
+    <string name ="auto_help_livingroom">Living Room</string>
+    <string name ="auto_help_kitchen">Kitchen</string>
+    <string name ="auto_help_house">House</string>
+    <string name ="auto_gps_nav">Navigation</string>
 
     <array name="house_spinner_add">
         <item>garage</item>
         <item>temp</item>
-        <item>weather</item></array>
-
-
+        <item>weather</item>
+    </array>
 
     <string name="lr_help_title">Welcome to Living Room V1.0</string>
     <string name="lr_help_message">Author: Sizhe Chen \n\nThere are three types of devices: lamp, TV and window blinds. There are three types of lamps: simple lamp, dimmable lamp and smart lamp.\n\nClick Add button to add a new device.\nClick any device in the list to change the settings.\nClick Save or Delete button to save the new setting and delete the device.\nThe most frequently used device will be on the top of the list.\n\nThank you for using smart living room!
@@ -142,5 +185,8 @@
     <string name="kitchen_light_dimmer_button_text">Set Dimmer</string>
     <string name="kitchen_light_dimmer_section_text">Dimmer</string>
     <string name="kitchen_light_main_switch_section_text">Main Switch</string>
-
+    <string name="kitchen_main_add_appliance_dialog_warning_msg">Please enter an appliance name.</string>
+    <string name="kitchen_main_add_appliance_dialog_title">Add Appliance</string>
+    <string name="kitchen_light_delete_appliance_dialog_message">Do you want to delete </string>
+    <string name="kitchen_light_delete_appliance_dialog_title">Confirm Delete Light</string>
 </resources>
