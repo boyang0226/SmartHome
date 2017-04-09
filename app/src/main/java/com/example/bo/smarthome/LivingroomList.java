@@ -55,6 +55,9 @@ public class LivingroomList extends AppCompatActivity {
     FragmentTransaction fragTransaction;
     LivingroomFragment frag;
 
+    /*
+        Adapter to adapt living room device list
+     */
     private class DeviceAdapter extends ArrayAdapter<String>{
         public DeviceAdapter(Context ctx) {
             super(ctx, 0);
@@ -92,6 +95,8 @@ public class LivingroomList extends AppCompatActivity {
 
         final ListView listView = (ListView) findViewById(R.id.list_view);
         Button addButton = (Button) findViewById(R.id.lr_list_add);
+
+        // hide add button to show the progress bar
         addButton.setVisibility(View.INVISIBLE);
 
         final boolean isTablet = findViewById(R.id.fragment_holder) != null;
@@ -103,13 +108,16 @@ public class LivingroomList extends AppCompatActivity {
         setSupportActionBar(tb);
 
         ProgressBar progressBar= (ProgressBar) findViewById(R.id.lr_progressBar);
+        // show progress bar
         progressBar.setVisibility(View.VISIBLE);
 
+        // add listener when list item is clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView view, View arg1, int position, long id) {
                 String deviceName = (String)(listView.getItemAtPosition(position));
 
+                // generate the data for the bundle
                 Bundle bun = new Bundle();
                 bun.putLong("id", id);
                 bun.putString("deviceName", deviceName);
@@ -135,6 +143,7 @@ public class LivingroomList extends AppCompatActivity {
                 if (fragTransaction!=null && !fragTransaction.isEmpty())
                     removeFragment();
 
+                // if tablet, we send data to fragment, otherwise, we go to next activity
                 if (isTablet) {
                     bun.putBoolean("isTablet", true);
                     frag = new LivingroomFragment(LivingroomList.this);
@@ -147,7 +156,7 @@ public class LivingroomList extends AppCompatActivity {
                     intent.putExtras(bun);
                     startActivityForResult(intent, 5);
                 }
-
+                // update the frequency in the database
                 int frequency = results.getInt(results.getColumnIndex(LivingroomDBHelper.KEY_Frequency));
                 updateDbDeviceFrequency(id, frequency + 1);
             }
@@ -155,6 +164,7 @@ public class LivingroomList extends AppCompatActivity {
 
         refreshMessages();
 
+        // add listener when add button is clicked
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -183,6 +193,9 @@ public class LivingroomList extends AppCompatActivity {
         thread.execute();
     }
 
+    /*
+        Retrieve the latest data from DB and update the list
+     */
     public void refreshMessages(){
         dbHelper = new LivingroomDBHelper(this);
         db = dbHelper.getWritableDatabase();
@@ -216,6 +229,9 @@ public class LivingroomList extends AppCompatActivity {
         db.close();
     }
 
+    /*
+        Insert a device into DB
+     */
     public void insertDbDevice(String deviceName, String deviceTye){
         ContentValues values = new ContentValues();
         values.put(LivingroomDBHelper.KEY_Name, deviceName);
@@ -224,22 +240,37 @@ public class LivingroomList extends AppCompatActivity {
         refreshMessages();
     }
 
+    /*
+        Update the simple lamp in DB
+     */
     public void updateDbSimpleLamp(long deviceID, boolean deviceSwitch){
         ContentValues values = new ContentValues();
         values.put(LivingroomDBHelper.KEY_Switch, deviceSwitch ? 1 : 0);
         db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
     }
+
+    /*
+        Update the dimmable lamp in DB
+     */
     public void updateDbDimmableLamp(long deviceID, int brightness){
         ContentValues values = new ContentValues();
         values.put(LivingroomDBHelper.KEY_Brightness, brightness);
         db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
     }
+
+    /*
+        Update the smart lamp in DB
+     */
     public void updateDbSmartLamp(long deviceID, int brightness, String color){
         ContentValues values = new ContentValues();
         values.put(LivingroomDBHelper.KEY_Brightness, brightness);
         values.put(LivingroomDBHelper.KEY_Color, color);
         db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
     }
+
+    /*
+        Update tv in DB
+     */
     public void updateDbTV(long deviceID, boolean deviceSwitch, int channel, int volume){
         ContentValues values = new ContentValues();
         values.put(LivingroomDBHelper.KEY_Switch, deviceSwitch);
@@ -248,13 +279,18 @@ public class LivingroomList extends AppCompatActivity {
         db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
     }
 
+    /*
+        Update blinds in DB
+     */
     public void updateDbBlinds(long deviceID, int height){
         ContentValues values = new ContentValues();
         values.put(LivingroomDBHelper.KEY_Height, height);
         db.update(LivingroomDBHelper.TABLENAME, values, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
     }
 
-
+    /*
+        Update the frequency of device in DB
+     */
     public void updateDbDeviceFrequency(long deviceID, int frequency){
         ContentValues values = new ContentValues();
         values.put(LivingroomDBHelper.KEY_Frequency, frequency);
@@ -262,32 +298,50 @@ public class LivingroomList extends AppCompatActivity {
 
     }
 
+    /*
+        Delete a device in DB
+     */
     public void deleteDbDevice(Long deviceID){
         db.delete(LivingroomDBHelper.TABLENAME, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
         refreshMessages();
     }
 
+    /*
+        Show the update succeed message
+     */
     public void showUpdateMessage(){
         Snackbar.make(findViewById(android.R.id.content), R.string.update_message, Snackbar.LENGTH_LONG)
                 .show();
     }
 
+    /*
+        Show the save succeed message
+     */
     public void showSaveMessage(){
         Toast.makeText(this, R.string.save_message, Toast.LENGTH_LONG).show();
     }
 
+    /*
+        Show the delete succeed message
+     */
     public void showDeleteMessage(){
         Toast.makeText(this, R.string.delete_message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == 0)
+            return;
         final Bundle bun = data.getExtras();
         Long deviceID = bun.getLong("id");
-        if (requestCode==5 && resultCode == 0) {
+
+        // handle delete
+        if (requestCode==5 && resultCode == 3) {
             deleteDbDevice(deviceID);
             showDeleteMessage();
         }
+
+        // handle update
         if (requestCode==5 && resultCode == 1) {
             String deviceType = bun.getString("deviceType");
             if (deviceType.equals("Simple Lamp")){
@@ -311,12 +365,15 @@ public class LivingroomList extends AppCompatActivity {
             }
             showUpdateMessage();
         }
-        if (requestCode == 6 && resultCode == 0) {
+
+        // handle new device
+        if (requestCode == 6 && resultCode == 2) {
             String deviceName = bun.getString("deviceName");
             String deviceType = bun.getString("deviceType");
             insertDbDevice(deviceName, deviceType);
             showSaveMessage();
         }
+
         refreshMessages();
     }
 
@@ -363,8 +420,8 @@ public class LivingroomList extends AppCompatActivity {
                 break;
             case R.id.lr_help:
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Welcome to Living Room");
-                builder.setMessage("Version 1.0 by Sizhe Chen\n blablablablablablablabla");
+                builder.setTitle(R.string.lr_help_title);
+                builder.setMessage(R.string.lr_help_message);
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // User clicked OK button
@@ -378,7 +435,7 @@ public class LivingroomList extends AppCompatActivity {
         return true;
     }
 
-    //asyncTask Progress bar
+    //initialize DB and show Progress bar
     private class InitiaizeDB extends AsyncTask<String, Integer, String>
     {
 

@@ -78,19 +78,19 @@
         android:id="@+id/lr_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/lr_save"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:text="@string/lr_save" />
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/lr_delete" />
 
     <Button
         android:id="@+id/lr_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/lr_save"
         android:layout_weight="1"
-        android:text="@string/lr_delete" />
+        android:text="@string/lr_delete"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 
 

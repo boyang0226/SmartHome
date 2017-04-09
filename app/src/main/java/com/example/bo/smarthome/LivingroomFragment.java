@@ -49,7 +49,8 @@ public class LivingroomFragment extends Fragment {
     TextView heightLabel;
     Spinner typeSpinner;
     EditText deviceInput;
-
+    TextView tvVolumnLabel;
+    TextView tvChannelLabel;
     public LivingroomFragment(){}
 
     public LivingroomFragment(LivingroomList lrList){
@@ -79,14 +80,17 @@ public class LivingroomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (addNewDevice) {
+            // display add new device view
             gui = inflater.inflate(R.layout.activity_livingroom_add_item_content, null);
             deviceInput = (EditText)gui.findViewById(R.id.lr_add_device_name_edit);
             typeSpinner = (Spinner)gui.findViewById(R.id.lr_spinner);
         }else if (deviceType.equals("Simple Lamp")){
+            // display simple lamp view
             gui = inflater.inflate(R.layout.activity_livingroom_simple_lamp_content, null);
             SimpleLampSwitch = (Switch)gui.findViewById(R.id.lr_simple_lamp_switch);
             SimpleLampSwitch.setChecked(deviceSwitch);
         }else if (deviceType.equals("Dimmable Lamp")){
+            // display dimmable lamp view
             gui = inflater.inflate(R.layout.activity_livingroom_dimmable_lamp_content, null);
             dimmableLampSeekBar = (SeekBar)gui.findViewById(R.id.lr_dimmable_lamp_seekBar);
             dimmableLampSeekBar.setMax(0);
@@ -108,6 +112,7 @@ public class LivingroomFragment extends Fragment {
             brightnessLabel = (TextView)gui.findViewById(R.id.lr_dimmable_lamp_seekBar_value);
             brightnessLabel.setText(String.valueOf(brightness));
         }else if (deviceType.equals("Smart Lamp")){
+            // display smart lamp view
             gui = inflater.inflate(R.layout.activity_livingroom_smart_lamp_content, null);
             smartLampSeekBar = (SeekBar)gui.findViewById(R.id.lr_smart_lamp_seekBar);
             smartLampSeekBar.setMax(0);
@@ -138,6 +143,7 @@ public class LivingroomFragment extends Fragment {
             smartLampSpinner.setSelection(spinnerPosition);
 
         }else if (deviceType.equals("Television")){
+            // display tv view
             gui = inflater.inflate(R.layout.activity_livingroom_tv_content, null);
             tvSwitch = (Switch)gui.findViewById(R.id.lr_tv_switch);
             tvSwitch.setChecked(deviceSwitch);
@@ -149,6 +155,37 @@ public class LivingroomFragment extends Fragment {
             tvChannelSeekBar.setMax(0);
             tvChannelSeekBar.setMax(100);
             tvChannelSeekBar.setProgress(channel);
+
+            tvVolumnLabel = (TextView)gui.findViewById(R.id.lr_tv_volumn_seekBar_value);
+            tvVolumnLabel.setText(String.valueOf(volume));
+            tvChannelLabel= (TextView)gui.findViewById(R.id.lr_tv_channel_seekBar_value);
+            tvChannelLabel.setText(String.valueOf(channel));
+
+            tvVolumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar){
+                }
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                    tvVolumnLabel.setText(String.valueOf(progress));
+                }
+            });
+
+            tvChannelSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar){
+                }
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                    tvChannelLabel.setText(String.valueOf(progress));
+                }
+            });
 
             Button upButton = (Button)gui.findViewById(R.id.lr_tv_up_button);
             Button downButton = (Button)gui.findViewById(R.id.lr_tv_down_button);
@@ -189,11 +226,26 @@ public class LivingroomFragment extends Fragment {
             });
 
         }else if (deviceType.equals("Window Blinds")){
+            // display window blinds view
             gui = inflater.inflate(R.layout.activity_livingroom_blinds_content, null);
             BlindsSeekBar = (SeekBar)gui.findViewById(R.id.lr_blinds_seekBar);
             BlindsSeekBar.setMax(0);
             BlindsSeekBar.setMax(100);
             BlindsSeekBar.setProgress(height);
+
+            BlindsSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar){
+                }
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                    heightLabel.setText(String.valueOf(progress));
+                }
+            });
+
             heightLabel = (TextView)gui.findViewById(R.id.lr_blinds_seekBar_value);
             heightLabel.setText(String.valueOf(height));
         }
@@ -213,7 +265,7 @@ public class LivingroomFragment extends Fragment {
                             if (!isTablet){
                                 Intent intent = new Intent();
                                 intent.putExtra("id" ,id);
-                                getActivity().setResult(0, intent);
+                                getActivity().setResult(3, intent);
                                 getActivity().finish();
                             }
                             else{
@@ -249,7 +301,7 @@ public class LivingroomFragment extends Fragment {
                         Intent intent = new Intent();
                         intent.putExtra("deviceName", deviceName);
                         intent.putExtra("deviceType", deviceType);
-                        getActivity().setResult(0, intent);
+                        getActivity().setResult(2, intent);
                         getActivity().finish();
                     }
                     else{

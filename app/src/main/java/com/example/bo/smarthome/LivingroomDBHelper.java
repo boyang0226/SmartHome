@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class LivingroomDBHelper  extends SQLiteOpenHelper {
     public static final String TABLENAME = "LivingRoomDevice";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     public static final String KEY_ID = "_ID";
     public static final String KEY_Name = "DeviceName";
     public static final String KEY_Switch = "Switch";

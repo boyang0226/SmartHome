@@ -95,9 +95,10 @@
         <item>weather</item>
     </array>
 
-    <string name="lr_intro_title">Welcome to Living Room</string>
-    <string name="lr_intro_author">Author: Sizhe Chen</string>
-    <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
+    <string name="lr_help_title">Welcome to Living Room V1.0</string>
+    <string name="lr_help_message">Author: Sizhe Chen \n\nThere are three types of devices: lamp, TV and window blinds. There are three types of lamps: simple lamp, dimmable lamp and smart lamp.\n\nClick Add button to add a new device.\nClick any device in the list to change the settings.\nClick Save or Delete button to save the new setting and delete the device.\nThe most frequently used device will be on the top of the list.\n\nThank you for using smart living room!
+     </string>
+
 
     <string name="lr_list_add">ADD</string>
     <string name="lr_list_details_content_title">Create New Device</string>
