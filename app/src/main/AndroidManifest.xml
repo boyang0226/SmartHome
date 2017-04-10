@@ -3,6 +3,7 @@
     package="com.example.bo.smarthome">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -22,8 +23,9 @@
         <activity android:name=".AutoItemDetails" />
 
 
-
+        <activity android:name=".HouseDatabaseHelper"/>
         <activity android:name=".HousesettingDetail" />
+        <activity android:name=".HouseGarageFragment"/>
         <activity android:name=".HouseWeather" />
         <activity android:name=".HouseTemp"></activity>
         <activity android:name=".Housegarage"></activity>

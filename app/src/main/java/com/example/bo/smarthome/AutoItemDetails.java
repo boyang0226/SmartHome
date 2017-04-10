@@ -1,5 +1,6 @@
 package com.example.bo.smarthome;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -40,6 +41,12 @@ public class AutoItemDetails extends AppCompatActivity {  //activity used to tel
                 break;
         }
 
+
+    }
+    //when click back button(back button on phone), return to listview page
+    public void onBackPressed(){
+        Intent intent = new Intent(AutoItemDetails.this, AutoListView.class);
+        startActivity(intent);
     }
 }
 

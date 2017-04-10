@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">智能家庭</string>
-    <!--Living Room-->
-    <string name="lr_help_title">欢迎来到客厅 V1.0</string>
-    <string name="lr_help_message">作者：陈思哲 \n\n这里有三个装置：灯，电视，窗帘。 其中有三种灯：基础灯，可调节灯，智能灯.\n\n点击添加按钮添加一个新的装置.\n点击列表中的装置可更改设置.\n点击保存或删除来保存新的设置或删除此装置.\n点击次数越多的装置在列表中排名越考前.\n\n感谢您使用智能客厅！
-     </string>
+    <string name="lr_intro_title">欢迎来到客厅</string>
+    <string name="lr_intro_author">作者：陈思哲</string>
+    <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
 
     <string name="lr_list_add">添加</string>
     <string name="lr_list_details_content_title">创建新设备</string>
@@ -67,6 +65,51 @@
     <string name="delete_confirm_message">确定要删除它吗？</string>
     <string name="delete_message">成功删除!</string>
     <string name="save_message">新项已创建！</string>
+    <string name="garageLight">车库灯</string>
+    <string name="house_Save">保存</string>
+    <string name="house_add">添加</string>
+    <string name="house_changetemprature">设定房子温度</string>
+    <string name="house_currenttemp">现在温度</string>
+    <string name="house_delete">删除</string>
+    <string name="house_garage">车库设置</string>
+    <string name="house_introduction">简介</string>
+    <string name="house_maxtemp">最高温度</string>
+    <string name="house_mintemp">最低温度</string>
+    <string name="house_temp">温度设置</string>
+    <string name="house_tempinput">输入温度</string>
+    <string name="house_timeinput">输入时间</string>
+    <string name="house_toolbar">工具</string>
+    <string name="house_weather">天气设置</string>
+    <string name="House_Help">帮助</string>
+    <string name="GarageDoor">车库门</string>
+    <string name="house_garagedoor">车库门</string>
+    <string name="house_introductiondetail">
+
+        \n作者： 杨波\n\n
+         版本号: 1.0\n\n\n
+       车库设置:\n\n
+
+          车库门的控制\n
+              控制车库门的开关\n
+
+           开车库门的同时打开车库灯\n
+           关车库门的时候关掉车库灯\n\n
+
+         车库灯的控制\n
+               打开或者关掉车库灯\n\n\n
+
+
+        室内温度设置:\n\n
+
+         输入时间跟温度 \n
+         点击添加按钮显示添加的时间跟温度 \n\n
+
+         点击现有的时间温度表来改变现有时间的温度 \n\n\n
+
+        天气设置:\n
+        点击天气设置来显示外边实时天气状况
+
+    </string>
 
     <!--Auto-->
     <string name = "auto_temperature_textview">汽车温度</string>
@@ -122,6 +165,38 @@
     <string name ="auto_help_kitchen">厨房</string>
     <string name ="auto_help_house">房屋</string>
     <string name ="auto_gps_nav">导航</string>
+    <string name="Kitchen">厨房</string>
+    <string name="Living_Room">客厅</string>
+    <string name="app_name">智能家居</string>
+    <string name="button_add_appliance_text">添加</string>
+    <string name="dialog_negative_text_cancel">取消</string>
+    <string name="dialog_positive_text_ok">确定</string>
+    <string name="kitchen_light_delete_appliance_dialog_message">你确定要删除吗？</string>
+    <string name="kitchen_light_delete_appliance_dialog_title">确定删除</string>
+    <string name="kitchen_light_dimmer_button_text">调节灯亮度</string>
+    <string name="kitchen_light_dimmer_section_text">亮度</string>
+    <string name="kitchen_light_main_switch_section_text">主要开关</string>
+    <string name="kitchen_main_add_appliance_dialog_title">添加设置</string>
+    <string name="kitchen_main_add_appliance_dialog_warning_msg">请输入名字</string>
+    <string name="spinner_add_appliance_prompt">请选择类别</string>
+    <string name="title_activity_kitchen_base"></string>
+    <string name="title_activity_kitchen_fridge_detail">冰箱</string>
+    <string name="title_activity_kitchen_light_detail">灯</string>
+    <string name="title_activity_kitchen_main">我的厨房</string>
+    <string name="title_activity_kitchen_microwave_detail">微波炉</string>
+    <string name="title_toolbar_kitchen_car"></string>
+    <string name="title_toolbar_kitchen_house">房子设置</string>
+    <string name="title_toolbar_kitchen_living"></string>
+    <string name="house__garage_text1">点击打开/关闭车库门</string>
+    <string name="house__garage_text2">点击打开/关闭车库灯</string>
+    <string name="house_dialog_text">温度更新</string>
+    <string name="house_dialog_title">设置温度</string>
+    <string name="kitchen_fridge_delete_appliance_dialog_title">确定删除</string>
+    <string name="kitchen_microwave_delete_appliance_dialog_title">确认删除</string>
+    <string name="kitchen_microwave_reset_button_text">重新设置</string>
+    <string name="kitchen_microwave_resume_button_text">暂停</string>
+    <string name="kitchen_microwave_start_button_text">开始</string>
+    <string name="kitchen_microwave_stop_button_text">停止</string>
 
 
 </resources>

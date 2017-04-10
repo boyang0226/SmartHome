@@ -7,6 +7,9 @@ import android.util.Log;
 
 public class KitchenFridgeDetail extends KitchenBase {
 
+    /**
+     * Show Kitchen Help Menu. Display the instruction, version number and author.
+     */
     @Override
     protected void showHelp()
     {
@@ -21,6 +24,11 @@ public class KitchenFridgeDetail extends KitchenBase {
         kitchenbase_builder.create().show();
 
     }
+
+    /**
+     * Start Fridge activity.
+     * @param savedInstanceState object of Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +36,14 @@ public class KitchenFridgeDetail extends KitchenBase {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarkitchenfridge);
         setToolbarColor(toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle extras = getIntent().getExtras();
+        Bundle bun = new Bundle();
+        bun.putInt("applianceId", extras.getInt("applianceId"));
+        bun.putString("applianceName", extras.getString("applianceName"));
+
+        KitchenFridgeFragment frg = new KitchenFridgeFragment();
+        loadKitchenFragment(frg, R.id.frmKitchenFridgeDetailPortrait, bun);
 
     }
 

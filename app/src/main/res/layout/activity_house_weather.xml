@@ -11,7 +11,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.bo.smarthome.HouseWeather"
     android:orientation="vertical"
-    android:background="@drawable/g"
+
+
     >
 
 
@@ -28,31 +29,31 @@
         />
 
     <TextView
-        android:text="Current Temperature"
+        android:text="@string/house_currenttemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/house_current_temp"
         android:textSize="23sp"
-        android:textColor="@android:color/background_dark"
+
         />
 
     <TextView
-        android:text="Min Temperature"
+        android:text="@string/house_mintemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/house_min_temp"
         android:textSize="23sp"
-        android:textColor="@android:color/background_dark"
+
 
         />
 
     <TextView
-        android:text="Max Temperature"
+        android:text="@string/house_maxtemp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/house_max_temp"
         android:textSize="23sp"
-        android:textColor="@android:color/background_dark"
+
 
         />
 
