@@ -224,10 +224,9 @@ public class HousesettingDetail extends AppCompatActivity {
 
         if (requestCode==5 && resultCode == 1) {
             Long id = bun.getLong("_id");
-       //     String sche =bun.getString("Schedule");
-            String time =bun.getString("Time");
-            String temp =bun.getString("Temp");
-            updateTemp(id,  Time,Temp);
+            String times =bun.getString("Time");
+            String temps =bun.getString("Temp");
+            updateTemp(id,  times,temps);
         }
         }
 
@@ -239,7 +238,6 @@ public class HousesettingDetail extends AppCompatActivity {
                 new String[] {  HouseDatabaseHelper.KEY_ID,
                         HouseDatabaseHelper.KEY_LightSwitch,
                         HouseDatabaseHelper.KEY_DoorSwitch,
-                    //    HouseDatabaseHelper.KEY_Schedule
                         HouseDatabaseHelper.KEY_Time,
                         HouseDatabaseHelper.Key_Temp
                 },

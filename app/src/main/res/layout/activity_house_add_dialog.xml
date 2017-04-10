@@ -2,9 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:maxHeight="120dp"
-    android:maxWidth="80dp"
     android:orientation="vertical"
+    android:minHeight="100dp"
+    android:minWidth="150dp"
     >
 
 
@@ -15,9 +15,10 @@
         android:textSize="20dp"
         android:textAlignment="center"
         android:id="@+id/house_temp"
-        android:layout_marginTop="91dp"
+
+        android:layout_marginTop="76dp"
         android:layout_below="@+id/house_temp_hold"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="@string/house_changetemprature"
@@ -27,8 +28,6 @@
         android:textAlignment="center"
         android:id="@+id/house_temp_hold"
 
-
-        android:layout_marginTop="31dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -38,18 +37,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/house_Save"
-        android:layout_marginTop="48dp"
+
         android:layout_below="@+id/house_temp"
-        android:layout_alignStart="@+id/house_temp_hold" />
+
+        android:layout_alignParentLeft="true"
+        />
 
     <Button
         android:id="@+id/house_temp_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/house_delete"
-        android:layout_alignBaseline="@+id/house_temp_save"
-        android:layout_alignBottom="@+id/house_temp_save"
-        android:layout_alignEnd="@+id/house_temp_hold" />
+        android:layout_below="@+id/house_temp"
+        android:layout_alignParentRight="true" />
 
 
 </RelativeLayout>

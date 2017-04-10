@@ -42,8 +42,8 @@ public class HouseWeather extends Fragment {
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
-
-
+        ForecastQuery thread = new ForecastQuery();
+        thread.execute();
     }
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -154,17 +154,17 @@ public class HouseWeather extends Fragment {
             imageView.setImageBitmap(bm);
 
             TextView tx = (TextView) gui.findViewById(R.id.house_current_temp);
-            tx.setText("Current Temperature is : " + value);
+            tx.setText(getString(R.string.house_currenttemp) +" : " + value);
 
             ProgressBar progressBar = (ProgressBar) gui.findViewById(R.id.house_progressBar);
             progressBar.setVisibility(View.INVISIBLE);
 
 
             TextView tx2 = (TextView) gui.findViewById(R.id.house_min_temp);
-            tx2.setText("\nMin Temperature is : " + min);
+            tx2.setText(getString(R.string.house_mintemp)+" : " + min);
 
             TextView tx3 = (TextView) gui.findViewById(R.id.house_max_temp);
-            tx3.setText("\nMax Temperature is : " + max);
+            tx3.setText(getString(R.string.house_maxtemp)+" : " + max);
         }
 
 
