@@ -84,12 +84,12 @@ public class LivingroomFragment extends Fragment {
             gui = inflater.inflate(R.layout.activity_livingroom_add_item_content, null);
             deviceInput = (EditText)gui.findViewById(R.id.lr_add_device_name_edit);
             typeSpinner = (Spinner)gui.findViewById(R.id.lr_spinner);
-        }else if (deviceType.equals("Simple Lamp")){
+        }else if (deviceType.equals("Simple Lamp")|| deviceType.equals("普通灯")){
             // display simple lamp view
             gui = inflater.inflate(R.layout.activity_livingroom_simple_lamp_content, null);
             SimpleLampSwitch = (Switch)gui.findViewById(R.id.lr_simple_lamp_switch);
             SimpleLampSwitch.setChecked(deviceSwitch);
-        }else if (deviceType.equals("Dimmable Lamp")){
+        }else if (deviceType.equals("Dimmable Lamp")|| deviceType.equals("调节灯")){
             // display dimmable lamp view
             gui = inflater.inflate(R.layout.activity_livingroom_dimmable_lamp_content, null);
             dimmableLampSeekBar = (SeekBar)gui.findViewById(R.id.lr_dimmable_lamp_seekBar);
@@ -111,7 +111,7 @@ public class LivingroomFragment extends Fragment {
             });
             brightnessLabel = (TextView)gui.findViewById(R.id.lr_dimmable_lamp_seekBar_value);
             brightnessLabel.setText(String.valueOf(brightness));
-        }else if (deviceType.equals("Smart Lamp")){
+        }else if (deviceType.equals("Smart Lamp")|| deviceType.equals("智能灯")){
             // display smart lamp view
             gui = inflater.inflate(R.layout.activity_livingroom_smart_lamp_content, null);
             smartLampSeekBar = (SeekBar)gui.findViewById(R.id.lr_smart_lamp_seekBar);
@@ -142,7 +142,7 @@ public class LivingroomFragment extends Fragment {
             int spinnerPosition = adapter.getPosition(color);
             smartLampSpinner.setSelection(spinnerPosition);
 
-        }else if (deviceType.equals("Television")){
+        }else if (deviceType.equals("Television") || deviceType.equals("电视")){
             // display tv view
             gui = inflater.inflate(R.layout.activity_livingroom_tv_content, null);
             tvSwitch = (Switch)gui.findViewById(R.id.lr_tv_switch);
@@ -225,7 +225,7 @@ public class LivingroomFragment extends Fragment {
                 }
             });
 
-        }else if (deviceType.equals("Window Blinds")){
+        }else if (deviceType.equals("Window Blinds")|| deviceType.equals("窗帘")){
             // display window blinds view
             gui = inflater.inflate(R.layout.activity_livingroom_blinds_content, null);
             BlindsSeekBar = (SeekBar)gui.findViewById(R.id.lr_blinds_seekBar);
