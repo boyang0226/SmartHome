@@ -132,11 +132,11 @@ HouseDatabaseHelper houseDatabaseHelper;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, final long id) {
                 dialog=new Dialog(getActivity());
-                dialog.setTitle("Edit Temprature");
+                dialog.setTitle(R.string.house_dialog_title);
 
                 dialog.setContentView(R.layout.activity_house_add_dialog);
                 TextView txtMessage=(TextView)dialog.findViewById(R.id.house_temp_hold);
-                txtMessage.setText("Update Temperature");
+                txtMessage.setText(R.string.house_dialog_text);
                 txtMessage.setTextColor(Color.parseColor("#ff2222"));
                 final EditText editText=(EditText)dialog.findViewById(R.id.house_temp);
                 Button bt=(Button)dialog.findViewById(R.id.house_temp_save);
