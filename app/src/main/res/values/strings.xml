@@ -25,8 +25,13 @@
     <string name="house_tempinput">Input the temperature</string>
     <string name="house_currenttemp">Current Temperature</string>
     <string name="house_mintemp">Min Temperature</string>
-    <string name="house_maxtemp">Max temperature</string>
+    <string name="house_maxtemp">Max Temperature</string>
     <string name="house_introduction">Introduction</string>
+    <string name="house__garage_text1">Click to open/close garage door</string>
+   <string name="house__garage_text2">Click to turn on/off light</string>
+   <string name="house_dialog_title">Edit Temperature</string>
+   <string name="house_dialog_text">Update Temperature</string>
+
     <string name="house_introductiondetail">
 
         \nAuthor: Boyang\n\n

@@ -165,6 +165,38 @@
     <string name ="auto_help_kitchen">厨房</string>
     <string name ="auto_help_house">房屋</string>
     <string name ="auto_gps_nav">导航</string>
+    <string name="Kitchen">厨房</string>
+    <string name="Living_Room">客厅</string>
+    <string name="app_name">智能家居</string>
+    <string name="button_add_appliance_text">添加</string>
+    <string name="dialog_negative_text_cancel">取消</string>
+    <string name="dialog_positive_text_ok">确定</string>
+    <string name="kitchen_light_delete_appliance_dialog_message">你确定要删除吗？</string>
+    <string name="kitchen_light_delete_appliance_dialog_title">确定删除</string>
+    <string name="kitchen_light_dimmer_button_text">调节灯亮度</string>
+    <string name="kitchen_light_dimmer_section_text">亮度</string>
+    <string name="kitchen_light_main_switch_section_text">主要开关</string>
+    <string name="kitchen_main_add_appliance_dialog_title">添加设置</string>
+    <string name="kitchen_main_add_appliance_dialog_warning_msg">请输入名字</string>
+    <string name="spinner_add_appliance_prompt">请选择类别</string>
+    <string name="title_activity_kitchen_base"></string>
+    <string name="title_activity_kitchen_fridge_detail">冰箱</string>
+    <string name="title_activity_kitchen_light_detail">灯</string>
+    <string name="title_activity_kitchen_main">我的厨房</string>
+    <string name="title_activity_kitchen_microwave_detail">微波炉</string>
+    <string name="title_toolbar_kitchen_car"></string>
+    <string name="title_toolbar_kitchen_house">房子设置</string>
+    <string name="title_toolbar_kitchen_living"></string>
+    <string name="house__garage_text1">点击打开/关闭车库门</string>
+    <string name="house__garage_text2">点击打开/关闭车库灯</string>
+    <string name="house_dialog_text">温度更新</string>
+    <string name="house_dialog_title">设置温度</string>
+    <string name="kitchen_fridge_delete_appliance_dialog_title">确定删除</string>
+    <string name="kitchen_microwave_delete_appliance_dialog_title">确认删除</string>
+    <string name="kitchen_microwave_reset_button_text">重新设置</string>
+    <string name="kitchen_microwave_resume_button_text">暂停</string>
+    <string name="kitchen_microwave_start_button_text">开始</string>
+    <string name="kitchen_microwave_stop_button_text">停止</string>
 
 
 </resources>
