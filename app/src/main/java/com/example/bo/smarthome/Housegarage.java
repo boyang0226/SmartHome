@@ -18,8 +18,8 @@ public class Housegarage extends AppCompatActivity {
         setContentView(R.layout.activity_house_garage_fragment);
 
         Bundle bun = new Bundle();
-    //String   type = bun.getString("type");
-  String type =getIntent().getExtras().getString("type");
+//    String   type = bun.getString("type");
+ String type =getIntent().getExtras().getString("type");
         if (type == "House Weather") {
             HouseWeather weather = new HouseWeather(null);
 //            Bundle    houseweather = getIntent().getExtras();

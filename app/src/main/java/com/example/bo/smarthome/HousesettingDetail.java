@@ -119,19 +119,21 @@ public class HousesettingDetail extends AppCompatActivity {
                     bun.putLong("_id", id);//l is the database ID of selected item
                     bun.putBoolean("DoorSwitch", DoorSwitch != 0);
                     bun.putBoolean("LightSwitch", LightSwitch != 0);
-
-           //         bun.putString("Schedule", Schedule);
                     bun.putString("Time",Time);
                     bun.putString("Temp",Temp);
-                    bun.putString("type", arrayList.get(i));
+//                    bun.putString("type", arrayList.get(i));
 
                 if (adapterView.getItemAtPosition(i).equals(getString(R.string.house_weather))) {
                    if (isTablet) {
                         houseWeather = new HouseWeather(HousesettingDetail.this);
                         houseWeather.setArguments(bun);
+
+
                        getSupportFragmentManager().beginTransaction().replace(R.id.house_fragholder, houseWeather).commit();
                    }else {
                        Intent HouseWeatherSetting = new Intent(HousesettingDetail.this, Housegarage.class);
+
+                       HouseWeatherSetting.putExtra("type", "House Weather");
                        HouseWeatherSetting.putExtras(bun);
                        startActivityForResult(HouseWeatherSetting, 5);
                    }
@@ -147,6 +149,7 @@ public class HousesettingDetail extends AppCompatActivity {
                     }else {
                         Intent HouseTempSetting = new Intent(HousesettingDetail.this, Housegarage.class);
                         HouseTempSetting.putExtras(bun);
+                        HouseTempSetting.putExtra("type", "House Temperature");
                         startActivityForResult(HouseTempSetting, 5);
                     }
                 }else  if (adapterView.getItemAtPosition(i).equals(getString(R.string.house_garage)) ){
@@ -163,6 +166,7 @@ public class HousesettingDetail extends AppCompatActivity {
                         Intent HouseGarageSetting = new Intent(HousesettingDetail.this, Housegarage.class);
 //
                         HouseGarageSetting.putExtras(bun);
+                        HouseGarageSetting.putExtra("type", "House Garage");
                         startActivityForResult(HouseGarageSetting,5);
                     }
                 }
