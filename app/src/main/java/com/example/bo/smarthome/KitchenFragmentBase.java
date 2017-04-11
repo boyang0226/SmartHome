@@ -41,7 +41,7 @@ public class KitchenFragmentBase extends Fragment {
     }
 
     /**
-     *
+     *set the fragment layout
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -50,20 +50,18 @@ public class KitchenFragmentBase extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         return null;
     }
-
     @Override
     public void onPause() {
         super.onPause();
         kitchenFragmentOnPause();
     }
-
+    //Save setting to database when pause.
     protected void kitchenFragmentOnPause() {
         saveSettingsToDB();
     }
-
+    //Save setting to database
     protected void saveSettingsToDB() {
 
     }

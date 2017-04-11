@@ -22,6 +22,9 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
     private static final int MAX_MINUTE = 30;
     private static final int MAX_SECOND = 59;
 
+    /**
+     * Initialize the microwave setting.
+     */
     private class MicrowaveSetting {
 
         public static final String STATE_START = "START";
@@ -29,33 +32,34 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
         public static final String STATE_RESET = "RESET";
         private int id = 0;
         private int minute = 0;
-
+         //getter
         public int getMinute() {
             return minute;
         }
-
+        //setter
         public void setMinute(int minute) {
             this.minute = minute;
         }
-
+        //getter
         public int getSecond() {
             return second;
         }
-
+        //setter
         public void setSecond(int second) {
             this.second = second;
         }
-
+        //getter
         public String getState() {
             return state;
         }
-
+        //setter
         public void setState(String state) {
             this.state = state;
         }
 
         private int second = 0;
         private String state = "RESET";
+        //constructor
         public MicrowaveSetting()
         {
         }
@@ -65,6 +69,7 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
             this.second = second;
             this.state = state;
         }
+        //return id
         public int getId()
         {
             return this.id;
@@ -100,13 +105,21 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
     }
 
 
+    /**
+     * Create the fragment.
+     */
     @Override
     protected void kitchenFragmentOnCreate() {
         super.kitchenFragmentOnCreate();
+        //Store the initial value in database
         initializeDB();
+        //Load values from database
         loadValuesFromDb();
     }
 
+    /**
+     * This method load the values from the database.
+     */
     private void loadValuesFromDb() {
         String methodName = "ReadMicrowaveSetting";
         microwaveSetting = new KitchenMicrowaveFragment.MicrowaveSetting();
@@ -122,10 +135,13 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
             int tempMinute = results.getInt(results.getColumnIndex(KitchenDatabaseHelper.KEY_MICROWAVE_MINUTE));
             int tempSecond = results.getInt(results.getColumnIndex(KitchenDatabaseHelper.KEY_MICROWAVE_SECOND));
             String tempState = results.getString(results.getColumnIndex(KitchenDatabaseHelper.KEY_MICROWAVE_STATE));
-            microwaveSetting = new KitchenMicrowaveFragment.MicrowaveSetting(tempId, tempMinute, tempSecond, tempState);        }
-
+            microwaveSetting = new KitchenMicrowaveFragment.MicrowaveSetting(tempId, tempMinute, tempSecond, tempState);
+        }
     }
 
+    /**
+     * Save the microwave settings to database.
+     */
     @Override
     protected void saveSettingsToDB() {
         super.saveSettingsToDB();
@@ -136,7 +152,9 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
             values.put(KitchenDatabaseHelper.KEY_MICROWAVE_SECOND, microwaveSetting.getSecond());
             values.put(KitchenDatabaseHelper.KEY_MICROWAVE_STATE, microwaveSetting.getState());
 
-            //http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
+            /* Android SQLite: Update Statement [Webpage]. Retrieved from:
+             * http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
+             */
             if (microwaveSetting.getId() == 0) {
                 db.insert(KitchenDatabaseHelper.KITCHEN_MICROWAVE_TABLE_NAME, "", values);
             } else {
@@ -146,20 +164,25 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
     }
 
     /**
-     *
+     * Set the fragment layout.
      * @param inflater
      * @param container
      * @param savedInstanceState
-     * @return
+     * @return the fragment root view.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         frgRootView = inflater.inflate(R.layout.fragment_kitchen_microwave, container, false);
-
         return frgRootView;
     }
+
+    /**
+     * Set the activity layout.
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -213,10 +236,20 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
         });
 
     }
+
+    /**
+     * Set the number picker for minutes and seconds.
+     * @param setting
+     */
     private void setMinutesSecondsFrom(MicrowaveSetting setting) {
         npMinute.setValue(setting.getMinute());
         npSecond.setValue(setting.getSecond());
     }
+
+    /**
+     * Set the button state.
+     * @param state
+     */
     private void setButtonsByState(String state) {
         try {
             switch (state){
@@ -242,16 +275,17 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
         } catch (Exception ex)
         {
 
-
         }
-
-
     }
+    //set button text.
     private void setButtonText(Button btnStart, int text, boolean enable) {
         btnStart.setText(text);
         btnStart.setEnabled(enable);
     }
 
+    /**
+     * Handle reset button.
+     */
     private void handleResetButton() {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,6 +298,9 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
         });
     }
 
+    /**
+     * Stop count down action.
+     */
     private void stopCountDown() {
         if (counterDownTimer != null) {
             counterDownTimer.cancel();
@@ -274,6 +311,9 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
         saveSettingsToDB();
     }
 
+    /**
+     * Handle stop button.
+     */
     private void handleStopButton() {
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -283,6 +323,10 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
             }
         });
     }
+
+    /**
+     * Handle start button.
+     */
     private void handleStartButton() {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,27 +363,31 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
                             recordValues(nextSecVal, nextMinVal);
                             saveSettingsToDB();
                         }
-
+                        //When counting down stops, save setting to database, start vibration
                         public void onFinish() {
 
                             recordValues(npSecond.getValue(), npMinute.getValue());
                             microwaveSetting.setState(MicrowaveSetting.STATE_RESET);
                             setButtonsByState(microwaveSetting.getState());
                             saveSettingsToDB();
+                            //Set the vibrator when countdown stops.
                             Vibrator v = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                             // Vibrate for 500 milliseconds
                             v.vibrate(500);
                             //if(!runningBackground)
-
                         }
                     };
-
                     counterDownTimer.start();
                     saveSettingsToDB();
             }
         });
     }
 
+    /**
+     * Record the minute and second state.
+     * @param nextSecVal second new state
+     * @param nextMinVal minute new state
+     */
     private void recordValues(int nextSecVal, int nextMinVal) {
         microwaveSetting.setMinute(nextMinVal);
         microwaveSetting.setSecond(nextSecVal);
@@ -378,18 +426,19 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
                         .show();
             }
         });
-
-
     }
 
     /**
-     * delete microwave recrod
+     * delete microwave recrod.
       */
     private void deleteDatabaseRecords() {
         db.delete(KitchenDatabaseHelper.KITCHEN_MICROWAVE_TABLE_NAME, "id="+applianceId , null);
         db.delete(KitchenDatabaseHelper.KITCHEN_APPLIANCE_TABLE_NAME, "id="+applianceId , null);
    }
 
+    /**
+     * Pause the action.
+     */
     @Override
     public void onPause() {
         recordValues(npSecond.getValue(), npMinute.getValue());
@@ -397,6 +446,10 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
         runningBackground = true;
     }
 
+    /**
+     * Show toast message.
+     * @param msg toast message.
+     */
     private void ShowToaster(String msg) {
         CharSequence text = null;
         int duration = Toast.LENGTH_SHORT;

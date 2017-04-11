@@ -25,9 +25,9 @@ public class KitchenLightDetail extends KitchenBase {
     protected void showHelp()
     {
         android.app.AlertDialog.Builder kitchenbase_builder = new android.app.AlertDialog.Builder(KitchenLightDetail.this);
-        kitchenbase_builder.setTitle("Welcome to Smart Home Kitchen Setting")
-                .setMessage("Click the switch to turn on/off the kitchen main light. Slide or enter to set the dimmer as you wish. Version 1.0 by Qiuju Zhu.")
-                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+        kitchenbase_builder.setTitle(R.string.kitchen_toobar_welcome_text)
+                .setMessage(R.string.kitchen_light_instruction)
+                .setNegativeButton(R.string.kitchen_toolbar_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.i("No", "No");
                     }

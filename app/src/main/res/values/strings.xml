@@ -217,6 +217,19 @@
     <string name="kitchen_microwave_resume_button_text">Resume</string>
     <string name="kitchen_microwave_stop_button_text">Stop</string>
     <string name="kitchen_microwave_reset_button_text">Reset</string>
-
+    <string name="kitchen_toobar_welcome_text">Welcome to Smart Home Kitchen Setting</string>
+    <string name="kitchen_toolbar_instructon_text">Click the appliance you wish to modify the setting.
+                                                   Set the Ceiling light brightness, the fridge and freezer temperature, the microwave cooking time as you desire.
+                                                   Version 1.0 by Qiuju Zhu.</string>
+    <string name="kitchen_toolbar_ok">OK</string>
+    <string name="kitchen_fridge_instruction">Set the fridge and freezer temperature. Version 1.0 by Qiuju Zhu.</string>
+    <string name="kitchen_light_instruction">Click the switch to turn on/off the kitchen main light. Slide or enter to set the dimmer as you wish. Version 1.0 by Qiuju Zhu.</string>
+    <string name="kitchen_microwave_instruction">Set the microwave cooking time. You are able to start, stop or reset the time.Version 1.0 by Qiuju Zhu.</string>
+    <string name="kitchen_fridge_temp">Fridge Temperature (°C)</string>
+    <string name="kitchen_freezer_temp">Freezer Temperature (°C)</string>
+    <string name="kitchen_delete">Delete</string>
+    <string name="kitchen_microwave">Microwave Oven</string>
+    <string name="kitchen_refrigerator">Refrigerator</string>
+    <string name="kitchen_light">Light</string>
     <string name="GarageDoor"></string>
 </resources>

@@ -36,16 +36,16 @@ public class LivingroomDBHelper  extends SQLiteOpenHelper {
                 Key_Volume + " INT DEFAULT 0," + KEY_Channel + " INT DEFAULT 1," +
                 KEY_Height + " INT DEFAULT 0," + KEY_Type + " VARCHAR(20)," +
                 KEY_Frequency + " INT DEFAULT 0);");
-
-
         Log.i("LivingroomDBHelper", "Calling onCreate");
     }
+
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + TABLENAME);
         onCreate(db);
         Log.i("LivingroomDBHelper", "Calling onUpgrade, oldVersion=" + oldVersion + "newVersion=" + newVersion);
     }
+
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + TABLENAME);

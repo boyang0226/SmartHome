@@ -61,21 +61,20 @@ public class KitchenMain extends KitchenBase {
     protected static final String TOOLBAR_AREA = "Toolbar";
     protected static final String ONCREATE = "onCreate";
     protected static final String ADDAPPLIANCEBTN = "AddApplianceButton";
-
     public static final String KITCHEN_MICROWAVE = "MICROWAVE";
     public static final String KITCHEN_FRIDGE = "FRIDGE";
     public static final String KITCHEN_LIGHT = "LIGHT";
-
     SQLiteDatabase db;
     ArrayList<KitchenAppliance> applianceList = new ArrayList<>();
     Cursor results;
     KitchenListAdapter listAdapter;
     boolean isLandscape = false;
-
     KitchenFragmentBase kfb = null;
-
     ArrayList<KitchenApplianceType> applianceTypeList = new ArrayList<>();
 
+    /**
+     * Data source for dropdown box
+     */
     private class KitchenApplianceType {
         public int getId() {
             return id;
@@ -86,63 +85,63 @@ public class KitchenMain extends KitchenBase {
         }
 
         private int id;
-
+        //getter
         public String getApplianceType() {
             return applianceType;
         }
-
+        //setter
         public void setApplianceType(String applianceType) {
             this.applianceType = applianceType;
         }
-
+        //getter
         public String getApplianceTypeDescription() {
             return applianceTypeDescription;
         }
-
+        //setter
         public void setApplianceTypeDescription(String applianceTypeDescription) {
             this.applianceTypeDescription = applianceTypeDescription;
         }
 
         private String applianceType;
         private String applianceTypeDescription;
-
+        //Constructor
         public KitchenApplianceType(int id, String applianceType, String applianceTypeDescription) {
             this.id = id;
             this.applianceType = applianceType;
             this.applianceTypeDescription = applianceTypeDescription;
         }
-
+        //make a meaningful string
         public String toString()
         {
             return( getApplianceTypeDescription() );
         }
     }
-
+    //Listview data source
     private class KitchenAppliance {
         private int id = 0;
-
+        //getter
         public String getApplianceType() {
             return applianceType;
         }
-
+         //setter
         public void setApplianceType(String applianceType) {
             this.applianceType = applianceType;
         }
 
         private String applianceType = "";
-
+        //getter
         public String getApplianceName() {
             return applianceName;
         }
-
+        //setter
         public void setApplianceName(String applianceName) {
             this.applianceName = applianceName;
         }
-
+        //getter
         public String getApplianceSetting() {
             return applianceSetting;
         }
-
+        //setter
         public void setApplianceSetting(String applianceSetting) {
             this.applianceSetting = applianceSetting;
         }
@@ -150,57 +149,55 @@ public class KitchenMain extends KitchenBase {
         private String applianceName = "";
         private String applianceSetting = "";
 
-
+        //constructor
         public KitchenAppliance()
         {
 
         }
-
+        //setter
         public void setId(int id) {
             this.id = id;
         }
-
+        //set the kitchen appliances
         public KitchenAppliance(int id, String applianceType, String applianceName, String applianceSetting)
         {   this.id = id;
             this.applianceType = applianceType;
             this.applianceName = applianceName;
             this.applianceSetting = applianceSetting;
         }
+        //getter
         public int getId()
         {
             return id;
         }
-
-
     }
-
+    //Populate list
     public class KitchenListAdapter extends ArrayAdapter<KitchenAppliance> {
 
         private int selectedItem = -1;
         public KitchenListAdapter(Context ctx){
             super(ctx,0);
         }
-
+        //getter
         public long getItemId(int position)
         {
             //results.moveToPosition(position);
             //return results.getLong( results.getColumnIndex(KitchenDatabaseHelper.KEY_ID) );
             return applianceList.get(position).getId();
-
-
         }
-
+         //get the list item size
         @Override
         public int getCount() {
             return applianceList.size();
         }
 
+        //get list item position
         @Nullable
         @Override
         public KitchenAppliance getItem(int position) {
             return applianceList.get(position);
         }
-
+        //get list item view
         @NonNull
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -218,16 +215,16 @@ public class KitchenMain extends KitchenBase {
             message.setText(listItemText);
             return result;
         }
-
+        //set selected item of the list
         public void setSelectedItem(int selecteItem)
         {
             this.selectedItem = selecteItem;
         }
     }
 
-
+    //AsyncTask
     public class KitchenApplianceQuery extends AsyncTask<String, Integer, String> {
-
+        //run small group in background
         @Override
         protected String doInBackground(String ... params) {
 
@@ -264,9 +261,7 @@ public class KitchenMain extends KitchenBase {
 
              return "";
         }
-
-
-
+        //update progress bar.
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
@@ -276,9 +271,8 @@ public class KitchenMain extends KitchenBase {
                 pb.setVisibility(View.VISIBLE);
             }
             listAdapter.notifyDataSetChanged();
-
         }
-
+        //set the progress bar.
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -288,25 +282,30 @@ public class KitchenMain extends KitchenBase {
                 pb.setVisibility(View.INVISIBLE);
             }
             //listAdapter.notifyDataSetChanged();
-
         }
     }
 
+    /**
+     * Show the Help message.
+     */
     @Override
     protected void showHelp()
     {
         android.app.AlertDialog.Builder kitchenbase_builder = new android.app.AlertDialog.Builder(KitchenMain.this);
-        kitchenbase_builder.setTitle("Welcome to Smart Home Kitchen Setting")
-                .setMessage("Click the appliance you wish to modify the setting. Click the 'ADD' button to add the appliances you wish. Version 1.0 by Qiuju Zhu.")
-                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+        kitchenbase_builder.setTitle(R.string.kitchen_toobar_welcome_text)
+                .setMessage(R.string.kitchen_toolbar_instructon_text)
+                .setNegativeButton(R.string.kitchen_toolbar_ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.i("No", "No");
                     }
                 });
         kitchenbase_builder.create().show();
-
     }
 
+    /**
+     * Create the layout.
+     * @param savedInstanceState Bundle object
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -314,14 +313,17 @@ public class KitchenMain extends KitchenBase {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kitchen_main);
+        //set the toolBar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarkitchenmain);
         setToolbarColor(toolbar);
         setSupportActionBar(toolbar);
-
-
-        applianceTypeList.add( new KitchenApplianceType(1,"MICROWAVE","Microware Oven"));
-        applianceTypeList.add( new KitchenApplianceType(2,"FRIDGE","Refrigerator"));
-        applianceTypeList.add( new KitchenApplianceType(3,"LIGHT","Light"));
+        //add button category
+        String microwave = getString(R.string.kitchen_microwave);
+        String refrigerator = getString(R.string.kitchen_refrigerator);
+        String light = getString(R.string.kitchen_light);
+        applianceTypeList.add( new KitchenApplianceType(1,"MICROWAVE",microwave));
+        applianceTypeList.add( new KitchenApplianceType(2,"FRIDGE",refrigerator));
+        applianceTypeList.add( new KitchenApplianceType(3,"LIGHT",light));
 
         isLandscape = IsLandscapeLayout();
 
@@ -339,7 +341,7 @@ public class KitchenMain extends KitchenBase {
 
         addAppliance(logTag);
     }
-
+    // Show activity result.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -347,14 +349,18 @@ public class KitchenMain extends KitchenBase {
         new KitchenApplianceQuery().execute("");
 
     }
-
+    // Landscape layout.
     private boolean IsLandscapeLayout()
     {
         FrameLayout f = (FrameLayout) findViewById(R.id.frmKitchenDetail);
         return (f != null);
     }
-    private void handleListViewItemClick(String logTag) {
 
+    /**
+     * Choose an activity
+     * @param logTag
+     */
+    private void handleListViewItemClick(String logTag) {
 
         final ListView applianceListView = (ListView) findViewById(R.id.lvKitchenAppliance);
         if (applianceListView != null)
@@ -406,6 +412,12 @@ public class KitchenMain extends KitchenBase {
         });
     }
 
+    /**
+     * Handle replace/add situation in fragment.
+     * @param f
+     * @param cls
+     * @param bun
+     */
     private void CallFragmentOrActivity(KitchenFragmentBase f, Class<?> cls, Bundle bun)
     {
         if (isLandscape)
@@ -429,6 +441,10 @@ public class KitchenMain extends KitchenBase {
         }
     }
 
+    /**
+     * Display the list view.
+     * @param logTag
+     */
     private void populateListView(String logTag) {
 
         Log.d(logTag, "Populating appliance list view.");
@@ -439,6 +455,11 @@ public class KitchenMain extends KitchenBase {
         if (kitchenListview != null)
                 kitchenListview.setAdapter(listAdapter);
     }
+
+    /**
+     * This method is for add an appliance
+     * @param logTag
+     */
     private void addAppliance(String logTag) {
 
         Log.d(logTag, "Add appliance button event handler.");
@@ -509,6 +530,7 @@ public class KitchenMain extends KitchenBase {
                                         }
                                         applianceList.add(ka);
                                         listAdapter.notifyDataSetChanged();
+                                        //Handle landscape view
                                         if (isLandscape) {
                                             selectListViewItem(applianceList.size() - 1);
                                             listAdapter.setSelectedItem(applianceList.size() - 1);
@@ -526,7 +548,6 @@ public class KitchenMain extends KitchenBase {
                                             .show();
                                 }
 
-
                             }
                         }).setNegativeButton(R.string.dialog_negative_text_cancel, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) { }
@@ -537,6 +558,11 @@ public class KitchenMain extends KitchenBase {
             }
         });
     }
+
+    /**
+     * Select an appliance.
+     * @param position item position
+     */
     private void selectListViewItem(int position)
     {
         ListView kitchenListview = (ListView) findViewById(R.id.lvKitchenAppliance);
@@ -545,6 +571,10 @@ public class KitchenMain extends KitchenBase {
                 position,
                 kitchenListview.getAdapter().getItemId(position));
     }
+
+    /**
+     * Remove fragement.
+     */
     public void removeFragment()
     {
         FragmentManager fm = getSupportFragmentManager();

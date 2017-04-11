@@ -30,16 +30,13 @@ public class KitchenLightFragment extends KitchenFragmentBase {
     private static final String ACTIVITY_NAME = "KitchenLight_";
     private KitchenLightFragment.LightSetting lightSetting;
 
-
+    //set the light.
     private class LightSetting {
         private int id = 0;
         private boolean mainSwitch = false;
         private int dimmerLevel = 100;
 
-
-
-        public LightSetting()
-        {
+        public LightSetting(){
 
         }
         public LightSetting(int id, boolean mainSwitch, int dimmerLevel)
@@ -51,7 +48,6 @@ public class KitchenLightFragment extends KitchenFragmentBase {
         {
             return this.id;
         }
-
         public boolean getMainSwitch()
         {
             return mainSwitch;
@@ -60,7 +56,6 @@ public class KitchenLightFragment extends KitchenFragmentBase {
         {
             this.mainSwitch = isChecked;
         }
-
         public int getDimmerLevel()
         {
             return this.dimmerLevel;
@@ -73,15 +68,21 @@ public class KitchenLightFragment extends KitchenFragmentBase {
 
     KitchenMain km = null;
 
-
+    //constructor.
     public KitchenLightFragment() {
         // Required empty public constructor
     }
-
     public KitchenLightFragment(KitchenMain km) {
         this.km = km;
     }
 
+    /**
+     * Create the layout of the fragment.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return the fragment root view.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -102,6 +103,9 @@ public class KitchenLightFragment extends KitchenFragmentBase {
         return frgRootView;
     }
 
+    /**
+     * Delete an appliance.
+     */
     private void handleDeleteAppliance() {
         Button btnDeleteAppliance = (Button) frgRootView.findViewById(R.id.btnDeleteKitchenAppliance);
         btnDeleteAppliance.setOnClickListener(new View.OnClickListener() {
@@ -134,9 +138,8 @@ public class KitchenLightFragment extends KitchenFragmentBase {
             }
         });
 
-
     }
-
+    //Delete the database records.
     private void deleteDatabaseRecords() {
 
 //        try {
@@ -149,10 +152,11 @@ public class KitchenLightFragment extends KitchenFragmentBase {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
-
     }
 
+    /**
+     * Load the setting values from the database.
+     */
     private void loadValuesFromDb() {
         String methodName = "ReadSetting";
         lightSetting = new KitchenLightFragment.LightSetting();
@@ -170,6 +174,9 @@ public class KitchenLightFragment extends KitchenFragmentBase {
             lightSetting = new KitchenLightFragment.LightSetting(tempId, tempMainSwith, tempDimmerLevel);        }
     }
 
+    /**
+     * Handle the light switch on/off.
+     */
     private void handleSwitchOnOff() {
         Switch mainSWitch=(Switch)frgRootView.findViewById(R.id.swtMainSwitch);
         mainSWitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -185,13 +192,14 @@ public class KitchenLightFragment extends KitchenFragmentBase {
                 }
 
                 saveLightSetting();
-
-
-
             }
         });
     }
 
+    /**
+     * Show the toast message when the light switch changes state.
+     * @param isChecked
+     */
     private void showToastMessage(boolean isChecked) {
         CharSequence text = null;
         int duration = Toast.LENGTH_SHORT;
@@ -208,6 +216,9 @@ public class KitchenLightFragment extends KitchenFragmentBase {
         toast.show();
     }
 
+    /**
+     * Save the light setting.
+     */
     private void saveLightSetting() {
 
         final Switch mainSWitch=(Switch)frgRootView.findViewById(R.id.swtMainSwitch);
@@ -224,7 +235,9 @@ public class KitchenLightFragment extends KitchenFragmentBase {
         values.put(KitchenDatabaseHelper.KEY_MAINSWITCH, lightSetting.getMainSwitch()?1:0 );
         values.put(KitchenDatabaseHelper.KEY_DIMMER_LEVEL, lightSetting.getDimmerLevel() );
 
-        //http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
+        /* Android SQLite: Update Statement [Webpage]. Retrieved from:
+         * http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
+         */
         if (lightSetting.getId() == 0)
         {
             db.insert(KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME, "", values);
@@ -234,10 +247,12 @@ public class KitchenLightFragment extends KitchenFragmentBase {
             db.update(KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME, values, KitchenDatabaseHelper.KEY_ID + "=" + lightSetting.getId(),null );
 
         }
-
-
     }
 
+    /**
+     * Disable button
+     * @param enabled
+     */
     private void DisableInuptControls (boolean enabled) {
 
         final EditText dimmerLevel = (EditText)frgRootView.findViewById(R.id.edtDimmerLevel);
@@ -248,6 +263,7 @@ public class KitchenLightFragment extends KitchenFragmentBase {
         btnSetDimmer.setEnabled(enabled);
         dimmerBar.setEnabled(enabled);
     }
+    //initialize the dimmer input
     private void InitializeInuptControls () {
         Switch mainSWitch=(Switch)frgRootView.findViewById(R.id.swtMainSwitch);
         final EditText dimmerLevel = (EditText)frgRootView.findViewById(R.id.edtDimmerLevel);
@@ -272,14 +288,14 @@ public class KitchenLightFragment extends KitchenFragmentBase {
             btnSetDimmer.setEnabled(false);
             dimmerBar.setEnabled(false);
         }
-
-
-
     }
+
+    /**
+     * Handle the Dimmer seekBar.
+     */
     private void handleDimmerSeekBarChange() {
 
         SeekBar dimmerBar = (SeekBar) frgRootView.findViewById(R.id.skbDimmer);
-
         dimmerBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
@@ -303,8 +319,13 @@ public class KitchenLightFragment extends KitchenFragmentBase {
 
         });
     }
+
+    /**
+     * Handle the light dimmer setting button.
+     */
     private void handleSetDimmerBtn() {
         Button btnSetDimmer = (Button) frgRootView.findViewById(R.id.btnSetDimmer);
+        //button handler
         btnSetDimmer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -313,12 +334,17 @@ public class KitchenLightFragment extends KitchenFragmentBase {
 
                 String dimmerLevelValue = dimmerLevel.getText().toString();
                 dimmerBar.setProgress(Integer.parseInt(dimmerLevelValue));
-
+                //show snackbar message
                 saveLightSetting();
                 showSnackbarMessage(dimmerLevelValue);
             }
         });
     }
+
+    /**
+     * Show snackBar message.
+     * @param dimmerLevelValue light dimmer percentage
+     */
     private void showSnackbarMessage(String dimmerLevelValue) {
 
         String snackBarMsg = applianceName + " dimmer level " + dimmerLevelValue +"% saved.";
