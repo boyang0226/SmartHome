@@ -1,16 +1,13 @@
 package com.example.bo.smarthome;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -94,16 +91,16 @@ public class HouseGarageFragment extends Fragment {
                                     @Override
                                     public void onClick(View view) {
                                         if (door.isChecked()==true) {
-                                            Toast.makeText(view.getContext(), "Opening Garage", Toast.LENGTH_LONG).show();
-                                        //    garagedoor = true;
+                                            Toast.makeText(view.getContext(), R.string.house_dooropen, Toast.LENGTH_LONG).show();
+
                                             garagelight=true;
 
                                             doorcontrol.setImageResource(R.drawable.dooropen);
                                             lightcontrol.setImageResource(R.drawable.lighton);
 
                                         } else {
-                                            Toast.makeText(view.getContext(), "Closing Garage", Toast.LENGTH_LONG).show();
-                                         //   garagedoor = false;
+                                            Toast.makeText(view.getContext(), R.string.house_doorclose, Toast.LENGTH_LONG).show();
+
                                             garagelight=false;
                                             doorcontrol.setImageResource(R.drawable.doorclose);
                                             lightcontrol.setImageResource(R.drawable.lightoff);
@@ -117,11 +114,11 @@ public class HouseGarageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (light.isChecked()==true) {
-                    Toast.makeText(view.getContext(), "Opening light", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), R.string.house_lightopen, Toast.LENGTH_LONG).show();
                     lightcontrol.setImageResource(R.drawable.lighton);
 
                 } else {
-                    Toast.makeText(view.getContext(), "Closing Garage", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext(), R.string.house_lightclose, Toast.LENGTH_LONG).show();
                      lightcontrol.setImageResource(R.drawable.lightoff);
                 }
 
@@ -130,24 +127,6 @@ public class HouseGarageFragment extends Fragment {
         });
 
 
-
-//        DoorSwitch=   door.isChecked();
-//        LightSwitch=  light.isChecked();
-////
-//        light.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (light.isChecked()) {
-//                    Toast.makeText(view.getContext(), "Opening Garage", Toast.LENGTH_LONG).show();
-//                    garagelight = true;
-//                } else {
-//                    Toast.makeText(view.getContext(), "Closing Garage", Toast.LENGTH_LONG).show();
-//                    garagelight = false;
-//                }
-//
-//
-//            }
-//        });
 
         save.setOnClickListener(new View.OnClickListener() {
 
@@ -171,7 +150,7 @@ public class HouseGarageFragment extends Fragment {
                         housesettingDetail.updateGarage(id,DoorSwitch,LightSwitch);
                         housesettingDetail.removeFragment();
 
-                        Toast.makeText(view.getContext(), " Data saved", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), R.string.house_datasave, Toast.LENGTH_LONG).show();
                     }
 
 

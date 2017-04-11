@@ -1,33 +1,29 @@
 package com.example.bo.smarthome;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.icu.util.Calendar;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
+
+
+/**
+ *
+ */
 
 public class HouseTemp extends Fragment {
 
@@ -69,7 +65,7 @@ HouseDatabaseHelper houseDatabaseHelper;
         time = bun.getString("Time");
         temp = bun.getString("Temp");
 
-         //  schedule=bun.getString("Schedule");
+
     }
 
 
@@ -83,9 +79,9 @@ HouseDatabaseHelper houseDatabaseHelper;
     public  Cursor  getCursor(){
        Cursor cursor1 =db.query(false, HouseDatabaseHelper.DATABASE_NAME,
                 new String[]{
-                        HouseDatabaseHelper.KEY_ID,
-                    //    HouseDatabaseHelper.KEY_Schedule
+
                         HouseDatabaseHelper.KEY_Time,
+                        HouseDatabaseHelper.KEY_ID,
                         HouseDatabaseHelper.Key_Temp,
                         },
                 null, null, null, null, HouseDatabaseHelper.KEY_Time + " DESC", null);
@@ -130,7 +126,7 @@ HouseDatabaseHelper houseDatabaseHelper;
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, final long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position,  long l) {
                 dialog=new Dialog(getActivity());
                 dialog.setTitle(R.string.house_dialog_title);
 
@@ -146,14 +142,14 @@ HouseDatabaseHelper houseDatabaseHelper;
                     public void onClick(View v) {
                         tempupdate=editText.getText().toString();
                         if (housesettingDetail==null){
+
                             Intent intent = new Intent();
                             intent.putExtra("_id", id);
                             intent.putExtra("Temp",tempupdate);
-                            getActivity().setResult(0, intent);
+                            getActivity().setResult(3, intent);
                             getActivity().finish();
                         } else
                         {
-
                             housesettingDetail.EditTemp(id,tempupdate);
                             housesettingDetail.removetempFragment();
                         }
@@ -178,11 +174,8 @@ HouseDatabaseHelper houseDatabaseHelper;
 
                         if (housesettingDetail==null){
                             Intent intent = new Intent();
-
-                            intent.putExtra("Schedule", schedule);
                             intent.putExtra("_id", id);
-
-                            getActivity().setResult(0, intent);
+                            getActivity().setResult(2, intent);
                             getActivity().finish();
                         } else
                         {
@@ -236,16 +229,15 @@ HouseDatabaseHelper houseDatabaseHelper;
 
                 if (housesettingDetail==null){
                     Intent intent = new Intent();
-             //       intent.putExtra("Schedule", schedule);
-                    intent.putExtra("_id", id);
+
                     intent.putExtra("Time",timeupdate);
                     intent.putExtra("Temp",tempupdate);
-                    getActivity().setResult(0, intent);
+                    getActivity().setResult(1, intent);
                     getActivity().finish();
                 } else
                 {
 
-               //     housesettingDetail.updateTemp(id,schedule);
+
                     housesettingDetail.updateTemp(id,timeupdate,tempupdate);
                     housesettingDetail.removetempFragment();
                 }
