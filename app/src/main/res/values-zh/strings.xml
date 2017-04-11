@@ -5,7 +5,7 @@
     <string name="lr_help_title">欢迎来到客厅 V1.0</string>
     <string name="lr_help_message">作者：陈思哲 \n\n这里有三个装置：灯，电视，窗帘。 其中有三种灯：基础灯，可调节灯，智能灯.\n\n点击添加按钮添加一个新的装置.\n点击列表中的装置可更改设置.\n点击保存或删除来保存新的设置或删除此装置.\n点击次数越多的装置在列表中排名越考前.\n\n感谢您使用智能客厅！
      </string>
-
+    <string name="lr_help">帮助</string>
     <string name="lr_list_add">添加</string>
     <string name="lr_list_details_content_title">创建新设备</string>
     <string name="lr_add_device_name_label">名字</string>
