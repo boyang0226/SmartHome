@@ -25,15 +25,12 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.Toast;
 
-public class KitchenLightFragment extends Fragment {
+public class KitchenLightFragment extends KitchenFragmentBase {
 
     private static final String ACTIVITY_NAME = "KitchenLight_";
     private KitchenLightFragment.LightSetting lightSetting;
 
-    private int applianceId = 0;
-    private String applianceName = "";
 
-    View frgRootView;
     private class LightSetting {
         private int id = 0;
         private boolean mainSwitch = false;
@@ -76,7 +73,6 @@ public class KitchenLightFragment extends Fragment {
 
     KitchenMain km = null;
 
-    SQLiteDatabase db = null;
 
     public KitchenLightFragment() {
         // Required empty public constructor
@@ -84,15 +80,6 @@ public class KitchenLightFragment extends Fragment {
 
     public KitchenLightFragment(KitchenMain km) {
         this.km = km;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        Bundle bun = getArguments();
-        applianceId = bun.getInt("applianceId");
-        applianceName = bun.getString("applianceName");
     }
 
     @Override
@@ -104,15 +91,15 @@ public class KitchenLightFragment extends Fragment {
         SeekBar dimmerBar = (SeekBar) frgRootView.findViewById(R.id.skbDimmer);
         dimmerBar.setMax(100);
 
+        initializeDB();
         loadValuesFromDb();
         InitializeInuptControls();
         handleSwitchOnOff();
         handleSetDimmerBtn();
         handleDimmerSeekBarChange();
         handleDeleteAppliance();
-        return frgRootView;
 
-        //View v = inflater.inflate(R.layout.fragment_mssage, null);
+        return frgRootView;
     }
 
     private void handleDeleteAppliance() {
@@ -168,9 +155,7 @@ public class KitchenLightFragment extends Fragment {
 
     private void loadValuesFromDb() {
         String methodName = "ReadSetting";
-        KitchenDatabaseHelper dbHelper = new KitchenDatabaseHelper(getContext());
         lightSetting = new KitchenLightFragment.LightSetting();
-        db = dbHelper.getWritableDatabase();
         Cursor results = db.query(false, KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME,
                 new String[]{KitchenDatabaseHelper.KEY_ID, KitchenDatabaseHelper.KEY_MAINSWITCH, KitchenDatabaseHelper.KEY_DIMMER_LEVEL}, KitchenDatabaseHelper.KEY_ID +"=" + String.valueOf(applianceId), null, null, null, null, null);
 

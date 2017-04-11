@@ -18,54 +18,9 @@ import android.widget.Switch;
 
 public class KitchenLightDetail extends KitchenBase {
 
-    private static final String ACTIVITY_NAME = "KitchenLight_";
-    private LightSetting lightSetting;
-    SQLiteDatabase db = null;
-
-    private class LightSetting {
-        private int id = 0;
-        private boolean mainSwitch = false;
-        private int dimmerLevel = 100;
-
-
-
-        public LightSetting()
-        {
-
-        }
-        public LightSetting(int id, boolean mainSwitch, int dimmerLevel)
-        {   this.id = id;
-            this.mainSwitch = mainSwitch;
-            this.dimmerLevel = dimmerLevel;
-        }
-        public int getId()
-        {
-            return id;
-        }
-
-        public boolean getMainSwitch()
-        {
-            return mainSwitch;
-        }
-        public void setMainSwitch(boolean isChecked)
-        {
-            this.mainSwitch = isChecked;
-        }
-
-        public int getDimmerLevel()
-        {
-            return dimmerLevel;
-        }
-
-        public void setDimmerLevel(int dimmerLevel)
-        {
-            this.dimmerLevel = dimmerLevel;
-        }
-    }
-
-    protected KitchenDatabaseHelper dbHelper;
-    Cursor results;
-
+    /**
+     * Display the help menu for the light. Shows instruction, version number and author.
+     */
     @Override
     protected void showHelp()
     {
@@ -80,6 +35,11 @@ public class KitchenLightDetail extends KitchenBase {
         kitchenbase_builder.create().show();
 
     }
+
+    /**
+     * Start the activity of Kitchen light.
+     * @param savedInstanceState object of Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,16 +49,11 @@ public class KitchenLightDetail extends KitchenBase {
         setSupportActionBar(toolbar);
 
         Bundle extras = getIntent().getExtras();
-
         Bundle bun = new Bundle();
         bun.putInt("applianceId", extras.getInt("applianceId"));
         bun.putString("applianceName", extras.getString("applianceName"));
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
         KitchenLightFragment frg = new KitchenLightFragment();
-        frg.setArguments(bun);
-        ft.replace(R.id.frmKitchenDetailPortrait, frg);
-        ft.commit();
+        loadKitchenFragment(frg, R.id.frmKitchenDetailPortrait, bun);
     }
 }
