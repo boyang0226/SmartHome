@@ -344,22 +344,22 @@ public class LivingroomList extends AppCompatActivity {
         // handle update
         if (requestCode==5 && resultCode == 1) {
             String deviceType = bun.getString("deviceType");
-            if (deviceType.equals("Simple Lamp")){
+            if (deviceType.equals("Simple Lamp") || deviceType.equals("普通灯")){
                 boolean deviceSwith = bun.getBoolean("switch");
                 updateDbSimpleLamp(deviceID, deviceSwith);
-            }else if (deviceType.equals("Dimmable Lamp")){
+            }else if (deviceType.equals("Dimmable Lamp") || deviceType.equals("调节灯")){
                 int brightness = bun.getInt("brightness");
                 updateDbDimmableLamp(deviceID, brightness);
-            }else if (deviceType.equals("Smart Lamp")){
+            }else if (deviceType.equals("Smart Lamp") || deviceType.equals("智能灯")){
                 int brightness = bun.getInt("brightness");
                 String color = bun.getString("color");
                 updateDbSmartLamp(deviceID, brightness, color);
-            }else if (deviceType.equals("Television")){
+            }else if (deviceType.equals("Television") || deviceType.equals("电视")){
                 boolean deviceSwith = bun.getBoolean("switch");
                 int channel = bun.getInt("channel");
                 int volume = bun.getInt("volume");
                 updateDbTV(deviceID, deviceSwith, channel, volume);
-            }else if (deviceType.equals("Window Blinds")){
+            }else if (deviceType.equals("Window Blinds") || deviceType.equals("窗帘")){
                 int height = bun.getInt("height");
                 updateDbBlinds(deviceID, height);
             }
