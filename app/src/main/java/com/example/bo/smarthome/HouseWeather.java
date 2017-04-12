@@ -22,7 +22,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -153,20 +152,20 @@ public class HouseWeather extends Fragment {
 
         //set the value of the icon and temp to the layout
         public void onPostExecute(String work) {
-
+                //icon
             ImageView imageView = (ImageView) gui.findViewById(R.id.house_imageview);
             imageView.setImageBitmap(bm);
-
+               //current temp
             TextView tx = (TextView) gui.findViewById(R.id.house_current_temp);
             tx.setText(getString(R.string.house_currenttemp) +" : " + value);
-
+            //progressBar
             ProgressBar progressBar = (ProgressBar) gui.findViewById(R.id.house_progressBar);
             progressBar.setVisibility(View.INVISIBLE);
 
-
+             //min temp
             TextView tx2 = (TextView) gui.findViewById(R.id.house_min_temp);
             tx2.setText(getString(R.string.house_mintemp)+" : " + min);
-
+            //max temp
             TextView tx3 = (TextView) gui.findViewById(R.id.house_max_temp);
             tx3.setText(getString(R.string.house_maxtemp)+" : " + max);
         }
@@ -178,7 +177,7 @@ public class HouseWeather extends Fragment {
             return file.exists();
         }
 
-
+// get the image
         public Bitmap getImage(URL url) {
             HttpURLConnection connection = null;
             try {
@@ -198,14 +197,7 @@ public class HouseWeather extends Fragment {
             }
         }
 
-//        public Bitmap getImage(String urlString) {
-//            try {
-//                URL url = new URL(urlString);
-//                return getImage(url);
-//            } catch (MalformedURLException e) {
-//                return null;
-//            }
-//        }
+
 
     }
 

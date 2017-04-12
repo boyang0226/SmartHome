@@ -46,7 +46,7 @@ public class HouseDatabaseHelper extends SQLiteOpenHelper {
                 + Key_Temp + " TEXT); ");
 
 
-
+// set the default value for the database
         ContentValues values = new ContentValues();
         values.put(HouseDatabaseHelper.KEY_DoorSwitch, true);
         values.put(HouseDatabaseHelper.KEY_DoorSwitch, true);
@@ -58,7 +58,7 @@ public class HouseDatabaseHelper extends SQLiteOpenHelper {
  }
 
 
-
+      //onupgrage with the database version
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_NAME);
@@ -67,7 +67,7 @@ public class HouseDatabaseHelper extends SQLiteOpenHelper {
         Log.i("HouseDatabasehelper", "Calling onUpgrade, oldVersion=" + oldVersion + "newVersion=" + newVersion);
     }
 
-
+//ondowngrade with the database version
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_NAME);
