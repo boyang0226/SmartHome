@@ -87,6 +87,7 @@
     <string name="House_Help">帮助</string>
     <string name="GarageDoor">车库门</string>
     <string name="house_garagedoor">车库门</string>
+    <string name="house_toolbar_title">房屋设置</string>
     <string name="house_introductiondetail">
 
         \n作者： 杨波\n\n
@@ -156,8 +157,8 @@
     <string name ="auto_help_message">这是智能家庭应用的汽车设置部分。你可以设置汽车温度，汽车灯光，汽车导航和汽车广播电台。版本1.0，设计 曲震。</string>
     <string name ="auto_ok">确认</string>
     <string name ="auto_temp_dialog">设置汽车温度？</string>
-    <string name ="auto_yes">是</string>
-    <string name ="auto_no">否</string>
+    <string name ="auto_yes">确认</string>
+    <string name ="auto_no">取消</string>
     <string name ="auto_switch_on">开关已打开</string>
     <string name ="auto_switch_off">开关已关闭</string>
     <string name ="auto_light_dialog">设置汽车灯光？</string>
@@ -201,6 +202,14 @@
     <string name="kitchen_microwave_resume_button_text">暂停</string>
     <string name="kitchen_microwave_start_button_text">开始</string>
     <string name="kitchen_microwave_stop_button_text">停止</string>
+    <string name="auto_toolbar_title">汽车设置</string>
+    <string name="house_ok">确认</string>
+    <string name="Automobile"></string>
+    <string name="house_datasave">数据以保存</string>
+    <string name="house_doorclose">关门</string>
+    <string name="house_dooropen">开门</string>
+    <string name="house_lightclose">关灯</string>
+    <string name="house_lightopen">开灯</string>
 
 
 </resources>

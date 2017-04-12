@@ -1,4 +1,6 @@
 package com.example.bo.smarthome;
+// author  Zhen Qu
+// student number 040587623
 
 import android.app.Activity;
 import android.app.AlertDialog;

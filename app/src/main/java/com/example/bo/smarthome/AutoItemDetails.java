@@ -1,4 +1,7 @@
 package com.example.bo.smarthome;
+// author  Zhen Qu
+// student number 040587623
+//http://stackoverflow.com/questions/18337536/android-overriding-onbackpressed
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -43,10 +46,13 @@ public class AutoItemDetails extends AppCompatActivity {  //activity used to tel
 
 
     }
-    //when click back button(back button on phone), return to listview page
-    public void onBackPressed(){
-        Intent intent = new Intent(AutoItemDetails.this, AutoListView.class);
-        startActivity(intent);
+
+    public void onBackPressed(){ //when click back button(back button on phone), return to listview page
+        super.onBackPressed();
+        Intent intentBack = new Intent(AutoItemDetails.this, AutoListView.class);
+        intentBack.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intentBack);
+        finish();
     }
 }
 

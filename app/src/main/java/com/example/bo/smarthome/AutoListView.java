@@ -1,4 +1,6 @@
 package com.example.bo.smarthome;
+// author  Zhen Qu
+// student number 040587623
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
@@ -11,7 +13,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -249,16 +250,6 @@ public class AutoListView extends AppCompatActivity {
         toast.show();
     }
 
-//    public void insertGPSEntry(long gpsentryid, String gpsentry){   //insert new gps entry and set toast
-//        ContentValues values = new ContentValues();
-//        values.put(AutoDatabaseHelper.KEY_GPS_ENTRY, gpsentry);
-//        db.insert(AutoDatabaseHelper.DATABASE_NAME, null, values);
-//        refreshDB();
-//        String toastText = getString(R.string.auto_gps_toast);
-//        Toast toast = Toast.makeText(AutoListView.this, toastText, Toast.LENGTH_SHORT);
-//        toast.show();
-//    }
-
     public void updateRadio(long radioid, Boolean mute, int volumn, String radio1, String radio2, String radio3, String radio4, String radio5, String radio6){
         // update auto radio setting and set toast
         ContentValues values = new ContentValues();
@@ -295,12 +286,6 @@ public class AutoListView extends AppCompatActivity {
             updateLights(lightsID, nswitch, hswitch, ibrightness);
         }
 
-//        if (requestCode==5 && resultCode == 2) {    //if the return data from auto gps setting, insert database gps entry column
-//            Long gpsid = bun.getLong("id");
-//            String gpsentry = bun.getString("GPSEntry");
-//            insertGPSEntry(gpsid, gpsentry);
-//        }
-
         if (requestCode==5 && resultCode == 3) {    ////if the return data from auto radio setting, update database radios columns
             Long radioid = bun.getLong("id");
             boolean mute = bun.getBoolean("Mute");
@@ -335,10 +320,6 @@ public class AutoListView extends AppCompatActivity {
     public void removeLightsFragment() {   //remove auto lights fragment
         getSupportFragmentManager().beginTransaction().remove(fragLights).commit();
     }
-
-//    public void removeGPSFragment() {   //remove auto gps fragment
-//        getSupportFragmentManager().beginTransaction().remove(fragGPS).commit();
-//    }
 
     public void removeRadioFragment() {   //remove auto radio fragment
         getSupportFragmentManager().beginTransaction().remove(fragRadio).commit();
