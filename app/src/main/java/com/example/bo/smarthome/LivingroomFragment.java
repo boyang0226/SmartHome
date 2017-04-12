@@ -331,25 +331,25 @@ public class LivingroomFragment extends Fragment {
                     Intent intent = new Intent();
                     intent.putExtra("id" ,id);
                     intent.putExtra("deviceType" ,deviceType);
-                    if (deviceType.equals("Simple Lamp")){
+                    if (deviceType.equals("Simple Lamp") || deviceType.equals("普通灯")){
                         simpleLampSwitchValue = SimpleLampSwitch.isChecked();
                         intent.putExtra("switch", simpleLampSwitchValue);
-                    }else if (deviceType.equals("Dimmable Lamp")){
+                    }else if (deviceType.equals("Dimmable Lamp") || deviceType.equals("调节灯")){
                         dimmableLampBrightness = dimmableLampSeekBar.getProgress();
                         intent.putExtra("brightness", dimmableLampBrightness);
-                    }else if (deviceType.equals("Smart Lamp")){
+                    }else if (deviceType.equals("Smart Lamp") || deviceType.equals("智能灯")){
                         smartLampBrighteness = smartLampSeekBar.getProgress();
                         smartLampColor = smartLampSpinner.getSelectedItem().toString();
                         intent.putExtra("brightness", smartLampBrighteness);
                         intent.putExtra("color", smartLampColor);
-                    }else if (deviceType.equals("Television")){
+                    }else if (deviceType.equals("Television") || deviceType.equals("电视")){
                         tvChannel = tvChannelSeekBar.getProgress();
                         tvVolume = tvVolumeSeekBar.getProgress();
                         tvSwitchValue = tvSwitch.isChecked();
                         intent.putExtra("channel", tvChannel);
                         intent.putExtra("volume", tvVolume);
                         intent.putExtra("switch", tvSwitchValue);
-                    }else if (deviceType.equals("Window Blinds")){
+                    }else if (deviceType.equals("Window Blinds") || deviceType.equals("窗帘")){
                         blindsHeight = BlindsSeekBar.getProgress();
                         intent.putExtra("height", blindsHeight);
                     }
@@ -359,15 +359,15 @@ public class LivingroomFragment extends Fragment {
                         getActivity().finish();
                     }
                     else{
-                        if (deviceType.equals("Simple Lamp")){
+                        if (deviceType.equals("Simple Lamp") || deviceType.equals("普通灯")){
                             livingroomList.updateDbSimpleLamp(id, simpleLampSwitchValue);
-                        }else if (deviceType.equals("Dimmable Lamp")){
+                        }else if (deviceType.equals("Dimmable Lamp") || deviceType.equals("调节灯")){
                             livingroomList.updateDbDimmableLamp(id, dimmableLampBrightness);
-                        }else if (deviceType.equals("Smart Lamp")){
+                        }else if (deviceType.equals("Smart Lamp") || deviceType.equals("智能灯")){
                             livingroomList.updateDbSmartLamp(id, smartLampBrighteness, smartLampColor);
-                        }else if (deviceType.equals("Television")){
+                        }else if (deviceType.equals("Television") || deviceType.equals("电视")){
                             livingroomList.updateDbTV(id, tvSwitchValue, tvChannel, tvVolume);
-                        }else if (deviceType.equals("Window Blinds")){
+                        }else if (deviceType.equals("Window Blinds") || deviceType.equals("窗帘")){
                             livingroomList.updateDbBlinds(id, blindsHeight);
                         }
                         livingroomList.showUpdateMessage();
