@@ -231,5 +231,9 @@
     <string name="kitchen_microwave">Microwave Oven</string>
     <string name="kitchen_refrigerator">Refrigerator</string>
     <string name="kitchen_light">Light</string>
+    <string name="kitchen_on">Switch is On</string>
+    <string name="kitchen_off">Switch is Off</string>
+    <string name="kitchen_dimmer">Dimmer level saved</string>
+    <string name="kitchen_about">About</string>
     <string name="GarageDoor"></string>
 </resources>

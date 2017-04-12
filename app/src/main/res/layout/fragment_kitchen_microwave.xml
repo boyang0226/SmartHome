@@ -72,7 +72,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_toStartOf="@+id/btnMicrowaveReset"
-            android:text="Delete" />
+            android:text="@string/kitchen_delete" />
     </RelativeLayout>
 
 

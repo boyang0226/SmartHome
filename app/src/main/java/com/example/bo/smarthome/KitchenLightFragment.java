@@ -204,12 +204,14 @@ public class KitchenLightFragment extends KitchenFragmentBase {
         CharSequence text = null;
         int duration = Toast.LENGTH_SHORT;
 
+        String on = getString(R.string.kitchen_on);
+        String off = getString(R.string.kitchen_off);
         if (isChecked) {
-            text = "Switch is On";
+            text = on;
             duration = Toast.LENGTH_SHORT;
         } else
         {
-            text = "Switch is Off";
+            text = off;
             duration = Toast.LENGTH_LONG;
         }
         Toast toast = Toast.makeText(getContext(), text, duration);
@@ -347,7 +349,9 @@ public class KitchenLightFragment extends KitchenFragmentBase {
      */
     private void showSnackbarMessage(String dimmerLevelValue) {
 
-        String snackBarMsg = applianceName + " dimmer level " + dimmerLevelValue +"% saved.";
+       // String snackBarMsg = applianceName + " dimmer level " + dimmerLevelValue +"% saved.";
+
+        String snackBarMsg = getString(R.string.kitchen_dimmer);
         FrameLayout coordinatorLayout = (FrameLayout) frgRootView.findViewById(R.id.layoutFragmentKitchenLight);
 
         Snackbar.make(coordinatorLayout, snackBarMsg, Snackbar.LENGTH_LONG)

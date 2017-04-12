@@ -185,7 +185,7 @@
     <string name="title_activity_kitchen_main">我的厨房</string>
     <string name="title_activity_kitchen_microwave_detail">微波炉</string>
     <string name="title_toolbar_kitchen_car"></string>
-    <string name="title_toolbar_kitchen_house">房子设置</string>
+    <string name="title_toolbar_kitchen_house"></string>
     <string name="title_toolbar_kitchen_living"></string>
     <string name="house__garage_text1">点击打开/关闭车库门</string>
     <string name="house__garage_text2">点击打开/关闭车库灯</string>
@@ -197,6 +197,23 @@
     <string name="kitchen_microwave_resume_button_text">暂停</string>
     <string name="kitchen_microwave_start_button_text">开始</string>
     <string name="kitchen_microwave_stop_button_text">停止</string>
+    <string name="kitchen_microwave">微波炉</string>
+    <string name="kitchen_microwave_instruction">设置微波炉时间。你可以选择开始，停止或者重置时间。版本1.0 作者 朱秋菊</string>
+    <string name="kitchen_toobar_welcome_text">欢迎来到智能家庭厨房设置</string>
+    <string name="kitchen_toolbar_instructon_text">点击你想设置的家电。设置顶灯的亮度，冰箱冰柜的温度并设置微波炉烹调时间。版本1.0 作者：朱秋菊</string>
+    <string name="kitchen_toolbar_ok">确定</string>
+    <string name="kitchen_delete">删除</string>
+    <string name="kitchen_freezer_temp">冰柜温度（摄氏度）</string>
+    <string name="kitchen_fridge_instruction">设置冰箱冰柜温度。版本1.0 作者：朱秋菊</string>
+    <string name="kitchen_fridge_temp">冰箱温度（摄氏度）</string>
+    <string name="kitchen_light">灯</string>
+    <string name="kitchen_light_instruction">点击开关开灯或关灯。拉动滑条设置灯的亮度。版本1.0 作者 朱秋菊</string>
+    <string name="title_activity_main2"></string>
+    <string name="navigation_drawer_close"></string>
+    <string name="kitchen_dimmer">亮度已设置</string>
+    <string name="kitchen_off">灯已关</string>
+    <string name="kitchen_on">灯已开</string>
+    <string name="kitchen_refrigerator">"冰箱 "</string>
 
 
 </resources>
