@@ -29,7 +29,7 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
 
     private static final String ACTIVITY_NAME = "KitchenFridge_";
     private KitchenFridgeFragment.FridgeSetting fridgeSetting;
-
+    //define fridge ui setting
     private class FridgeSetting {
         private int id = 0;
         private int fridgeTemp = 5;
@@ -49,7 +49,7 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
         public void setFreezerTemp(int freezerTemp) {
             this.freezerTemp = freezerTemp;
         }
-
+        //default vaue for freezer
         private int freezerTemp = -20;
 
         public FridgeSetting()
@@ -110,9 +110,9 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
 
     }
     /**
-     *
-     * @param spnFridge
-     * @param spnFreezer
+     * Spinner handler
+     * @param spnFridge fridge spinner
+     * @param spnFreezer freezer spinner
      */
     private void attachSpinnerEventHandlers(Spinner spnFridge, Spinner spnFreezer) {
 
