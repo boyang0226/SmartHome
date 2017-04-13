@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="lr_intro_title">欢迎来到客厅</string>
-    <string name="lr_intro_author">作者：陈思哲</string>
-    <string name="lr_intro_description">BLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKABLABLABLABLABLABLABLABKA</string>
+
+
+    <!--Living Room-->
+    <string name="lr_help_title">欢迎来到客厅 V1.0</string>
+    <string name="lr_help_message">作者：陈思哲 \n\n这里有三个装置：灯，电视，窗帘。 其中有三种灯：基础灯，可调节灯，智能灯.\n\n点击添加按钮添加一个新的装置.\n点击列表中的装置可更改设置.\n点击保存或删除来保存新的设置或删除此装置.\n点击次数越多的装置在列表中排名越考前.\n\n感谢您使用智能客厅！
+     </string>
+    <string name="lr_help">帮助</string>
 
     <string name="lr_list_add">添加</string>
     <string name="lr_list_details_content_title">创建新设备</string>
@@ -83,6 +87,7 @@
     <string name="House_Help">帮助</string>
     <string name="GarageDoor">车库门</string>
     <string name="house_garagedoor">车库门</string>
+    <string name="house_toolbar_title">房屋设置</string>
     <string name="house_introductiondetail">
 
         \n作者： 杨波\n\n
@@ -152,8 +157,8 @@
     <string name ="auto_help_message">这是智能家庭应用的汽车设置部分。你可以设置汽车温度，汽车灯光，汽车导航和汽车广播电台。版本1.0，设计 曲震。</string>
     <string name ="auto_ok">确认</string>
     <string name ="auto_temp_dialog">设置汽车温度？</string>
-    <string name ="auto_yes">是</string>
-    <string name ="auto_no">否</string>
+    <string name ="auto_yes">确认</string>
+    <string name ="auto_no">取消</string>
     <string name ="auto_switch_on">开关已打开</string>
     <string name ="auto_switch_off">开关已关闭</string>
     <string name ="auto_light_dialog">设置汽车灯光？</string>
@@ -197,6 +202,14 @@
     <string name="kitchen_microwave_resume_button_text">暂停</string>
     <string name="kitchen_microwave_start_button_text">开始</string>
     <string name="kitchen_microwave_stop_button_text">停止</string>
+    <string name="auto_toolbar_title">汽车设置</string>
+    <string name="house_ok">确认</string>
+    <string name="Automobile"></string>
+    <string name="house_datasave">数据以保存</string>
+    <string name="house_doorclose">关门</string>
+    <string name="house_dooropen">开门</string>
+    <string name="house_lightclose">关灯</string>
+    <string name="house_lightopen">开灯</string>
     <string name="kitchen_microwave">微波炉</string>
     <string name="kitchen_microwave_instruction">设置微波炉时间。你可以选择开始，停止或者重置时间。版本1.0 作者 朱秋菊</string>
     <string name="kitchen_toobar_welcome_text">欢迎来到智能家庭厨房设置</string>

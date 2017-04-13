@@ -1,8 +1,8 @@
 package com.example.bo.smarthome;
-
+// author  Zhen Qu
+// student number 040587623
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -38,11 +38,6 @@ public class AutoDatabaseHelper extends SQLiteOpenHelper {
                 + KEY_RADIO_STATION_TWO + " TEXT, " + KEY_RADIO_STATION_THREE + " TEXT, " + KEY_RADIO_STATION_FOUR + " TEXT, "
                 + KEY_RADIO_STATION_FIVE + " TEXT, " + KEY_RADIO_STATION_SIX + " TEXT);");
 
-//        Cursor results = db.query(false, AutoDatabaseHelper.DATABASE_NAME,
-//                new String[] {},
-//                null, null, null, null, null, null);
-//        int rows = results.getCount() ; //number of rows returned
-//        if (rows == 0) {
         ContentValues values = new ContentValues();
         values.put(AutoDatabaseHelper.KEY_GPS_ENTRY, "city hall, ottawa, on");
         values.put(AutoDatabaseHelper.KEY_TEMPERATURE, "20");
@@ -58,7 +53,7 @@ public class AutoDatabaseHelper extends SQLiteOpenHelper {
         values.put(AutoDatabaseHelper.KEY_RADIO_STATION_FIVE, "66");
         values.put(AutoDatabaseHelper.KEY_RADIO_STATION_SIX, "77");
         db.insert(AutoDatabaseHelper.DATABASE_NAME, null, values);
-//        }
+
         Log.i("AutoDatabaseHelper", "Calling onCreate");
     }
 
@@ -69,7 +64,7 @@ public class AutoDatabaseHelper extends SQLiteOpenHelper {
         Log.i("AutoDatabaseHelper", "Calling onUpgrade, oldVersion=" + oldVersion + " newVersion=" + newVersion);
     }
 
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {  ////when the database  new version number is lower than old one, upgrade database
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {  //when the database  new version number is lower than old one, upgrade database
         db.execSQL("DROP TABLE IF EXISTS " + DATABASE_NAME);
         onCreate(db);
         Log.i("AutoDatabaseHelper", "Calling onDowngrade, oldVersion=" + oldVersion + "newVersion=" + newVersion);

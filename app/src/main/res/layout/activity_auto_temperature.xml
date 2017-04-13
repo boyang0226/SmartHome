@@ -12,6 +12,7 @@
         android:layout_marginTop="186dp"
         android:ems="10"
         android:hint="@string/auto_temperature_edittext_hint"
+        android:inputType="numberDecimal"
         android:text="" />
 
     <Button

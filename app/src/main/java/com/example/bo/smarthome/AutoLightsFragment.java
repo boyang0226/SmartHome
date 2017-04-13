@@ -1,4 +1,7 @@
 package com.example.bo.smarthome;
+// author  Zhen Qu
+// student number 040587623
+// http://stackoverflow.com/questions/29677812/why-is-onattach-called-before-oncreate
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,8 +19,6 @@ import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.Toast;
-
-// http://stackoverflow.com/questions/29677812/why-is-onattach-called-before-oncreate
 
 public class AutoLightsFragment extends Fragment {   //auto lights fragment
     boolean nSwitch;

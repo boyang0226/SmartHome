@@ -28,11 +28,18 @@
     <string name="house_maxtemp">Max Temperature</string>
     <string name="house_introduction">Introduction</string>
     <string name="house__garage_text1">Click to open/close garage door</string>
-   <string name="house__garage_text2">Click to turn on/off light</string>
-   <string name="house_dialog_title">Edit Temperature</string>
-   <string name="house_dialog_text">Update Temperature</string>
-
+    <string name="house__garage_text2">Click to turn on/off light</string>
+    <string name="house_dialog_title">Edit Temperature</string>
+    <string name="house_dialog_text">Update Temperature</string>
+    <string name="house_toolbar_title">My House</string>
+    <string name="house_ok">OK</string>
+   <string name="house_dooropen">Door Opened</string>
+   <string name="house_doorclose">Door Closed</string>
+   <string name="house_lightopen">Light On</string>
+   <string name="house_lightclose">Light Off</string>
+    <string name="house_datasave">Data Saved</string>
     <string name="house_introductiondetail">
+
 
         \nAuthor: Boyang\n\n
          Version: 1.0\n\n\n
@@ -114,12 +121,13 @@
     <string name ="auto_help_kitchen">Kitchen</string>
     <string name ="auto_help_house">House</string>
     <string name ="auto_gps_nav">Navigation</string>
+    <string name ="auto_toolbar_title">My Auto</string>
 
 
     <string name="lr_help_title">Welcome to Living Room V1.0</string>
     <string name="lr_help_message">Author: Sizhe Chen \n\nThere are three types of devices: lamp, TV and window blinds. There are three types of lamps: simple lamp, dimmable lamp and smart lamp.\n\nClick Add button to add a new device.\nClick any device in the list to change the settings.\nClick Save or Delete button to save the new setting and delete the device.\nThe most frequently used device will be on the top of the list.\n\nThank you for using smart living room!
      </string>
-
+    <string name="lr_help">Living Room Help</string>
 
     <string name="lr_list_add">ADD</string>
     <string name="lr_list_details_content_title">Create New Device</string>
