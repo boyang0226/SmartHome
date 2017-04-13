@@ -140,7 +140,7 @@ public class HouseWeather extends Fragment {
             return in;
         }
 
-        //set the progressBar visible
+        //set onProgressUpdate for progressBar visible
         public void onProgressUpdate(Integer... progress) {
             ProgressBar progressBar = (ProgressBar)gui.findViewById(R.id.house_progressBar);
             progressBar.setVisibility(View.VISIBLE);

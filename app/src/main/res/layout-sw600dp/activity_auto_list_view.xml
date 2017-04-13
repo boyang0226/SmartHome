@@ -48,7 +48,7 @@
         android:layout_height="match_parent"
         android:layout_toRightOf="@+id/auto_ListView"
         android:id="@+id/auto_FragmentHolder"
-        android:background="@color/colorSHNavigationBar"
+
         android:layout_below="@+id/auto_AppBarLayout">
     </FrameLayout>
 

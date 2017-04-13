@@ -6,32 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+
      tools:context="com.example.bo.smarthome.Housegarage"
     >
 
 
-    <TextView
-        android:id="@+id/house_garage_text1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/house__garage_text1"
-        android:textColor="@android:color/holo_red_dark"
-        android:textSize="20sp"
-        android:layout_marginBottom="20dp"
-        />
+
 
     <GridLayout
+
         android:id="@+id/house_garage_gradlayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:columnCount="2"
-        android:layout_below="@+id/house_garage_text1"
-        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+
         >
 
         <TextView
@@ -39,52 +29,36 @@
             android:id="@+id/house_frag_garage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_marginEnd="30dp"
+            android:layout_marginEnd="30dp"
             android:text="@string/house_garagedoor"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            />
 
         <Switch
-
             android:id="@+id/house_garage_swith"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            />
 
-             />
 
-    </GridLayout>
 
     <ImageView
         android:id="@+id/housedoor"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:srcCompat="@android:drawable/alert_light_frame"
         android:layout_below="@+id/house_garage_gradlayout"
         android:layout_marginBottom="20dp"
+        android:layout_columnSpan="2"
         />
 
-    <TextView
-        android:id="@+id/house_garage_text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/house__garage_text2"
-        android:textColor="@android:color/holo_red_dark"
-        android:layout_below="@+id/housedoor"
-        android:textSize="20sp"
-        android:layout_marginBottom="20dp"
-        />
 
-    <GridLayout
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/house_garage_text2"
-      android:id="@+id/house_garage_gradlayout2"
-        android:columnCount="2"
-        android:layout_marginBottom="20dp"
 
-       >
+
+
 
 
         <TextView
@@ -103,27 +77,29 @@
             android:id="@+id/house_garage_swith2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:layout_marginBottom="20dp"
             />
 
-    </GridLayout>
+
 
 
     <ImageView
         android:id="@+id/houselight"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         app:srcCompat="@android:drawable/alert_light_frame"
-        android:layout_below="@+id/house_garage_gradlayout2"
-        android:layout_marginEnd="30dp"
+        android:layout_columnSpan="2"
+
         />
+
+    </GridLayout>
 
     <Button
         android:id="@+id/house_garage_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/houselight"
+        android:layout_alignParentBottom="true"
 
         android:text="@string/house_Save" />
 

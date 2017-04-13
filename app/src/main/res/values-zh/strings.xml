@@ -199,7 +199,7 @@
     <string name="kitchen_fridge_delete_appliance_dialog_title">确定删除</string>
     <string name="kitchen_microwave_delete_appliance_dialog_title">确认删除</string>
     <string name="kitchen_microwave_reset_button_text">重新设置</string>
-    <string name="kitchen_microwave_resume_button_text">暂停</string>
+    <string name="kitchen_microwave_resume_button_text">继续</string>
     <string name="kitchen_microwave_start_button_text">开始</string>
     <string name="kitchen_microwave_stop_button_text">停止</string>
     <string name="auto_toolbar_title">汽车设置</string>
