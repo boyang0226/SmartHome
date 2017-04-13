@@ -344,15 +344,14 @@ public class AutoListView extends AppCompatActivity {
         switch (mi.getItemId()) {
             case R.id.auto_living:
                 Log.i("Navigation", "1");
-                Intent livingIntro = new Intent(this, LivingroomList.class);
-                startActivityForResult(livingIntro, 1);
 
+                startActivity(new Intent(this, LivingroomList.class));
                 break;
 
             case R.id.auto_kitchen:
                 Log.i("Navigation", "2");
-                Intent itntKitchenMain = new Intent(this, KitchenMain.class);
-                startActivityForResult(itntKitchenMain, 5);
+
+                startActivity(new Intent(this, KitchenMain.class));
                 break;
 
             case R.id.auto_house:

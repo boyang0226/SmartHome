@@ -306,15 +306,15 @@ ctx=this;
         {
           //living roon
             case R.id.living:
-                Intent livingIntro = new Intent(this, LivingroomList.class);
-                startActivityForResult(livingIntro, 1);
+
+                startActivity(new Intent(this, LivingroomList.class));
 
                 break;
             //kitchen
             case R.id.kitchen:
 
-                Intent itntKitchenMain = new Intent(this, KitchenMain.class);
-                startActivityForResult(itntKitchenMain, 5);
+
+                startActivity(new Intent(this, KitchenMain.class));
                 break;
 
             //house help menu
