@@ -44,7 +44,10 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-
+/**
+ * Created by Sizhe on 2017-04-03.
+ * this is the List view for the Living room.
+ */
 public class LivingroomList extends AppCompatActivity {
     protected static final String ACTIVITY_NAME = "StartActivity";
     private ArrayList<String> devices = new ArrayList<>();
@@ -92,7 +95,7 @@ public class LivingroomList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livingroom_list);
-
+        //find a list view and a button in layout
         final ListView listView = (ListView) findViewById(R.id.list_view);
         Button addButton = (Button) findViewById(R.id.lr_list_add);
 
@@ -100,17 +103,16 @@ public class LivingroomList extends AppCompatActivity {
         addButton.setVisibility(View.INVISIBLE);
 
         final boolean isTablet = findViewById(R.id.fragment_holder) != null;
-
+        //create an adapter for the list view
         deviceAdapter = new DeviceAdapter(this);
         listView.setAdapter(deviceAdapter);
-
+        //find the tool bar in layout
         Toolbar tb =(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(tb);
-
+        //find the progress bar in layout
         ProgressBar progressBar= (ProgressBar) findViewById(R.id.lr_progressBar);
         // show progress bar
         progressBar.setVisibility(View.VISIBLE);
-
         // add listener when list item is clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -121,9 +123,10 @@ public class LivingroomList extends AppCompatActivity {
                 Bundle bun = new Bundle();
                 bun.putLong("id", id);
                 bun.putString("deviceName", deviceName);
-
+                // move the cursor to the position
                 results.moveToPosition(position);
 
+                //define the fields in the bundle
                 String deviceType = results.getString(results.getColumnIndex(LivingroomDBHelper.KEY_Type));
                 int deviceSwitch = results.getInt(results.getColumnIndex(LivingroomDBHelper.KEY_Switch));
                 int brightness = results.getInt(results.getColumnIndex(LivingroomDBHelper.KEY_Brightness));
@@ -140,6 +143,7 @@ public class LivingroomList extends AppCompatActivity {
                 bun.putInt("volume", volume);
                 bun.putInt("height", height);
 
+                //remove the fragment to avoid overlapping
                 if (fragTransaction!=null && !fragTransaction.isEmpty())
                     removeFragment();
 
@@ -162,7 +166,7 @@ public class LivingroomList extends AppCompatActivity {
             }
         });
 
-        refreshMessages();
+        refreshDevices();
 
         // add listener when add button is clicked
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -170,10 +174,10 @@ public class LivingroomList extends AppCompatActivity {
             public void onClick(View view) {
                 Bundle bun = new Bundle();
                 bun.putBoolean("addNewDevice", true);
-
+                //remove the fragment to avoid overlapping
                 if (fragTransaction!=null && !fragTransaction.isEmpty())
                     removeFragment();
-
+                // if tablet, we send data to fragment, otherwise, we go to next activity
                 if (isTablet) {
                     bun.putBoolean("isTablet", true);
                     frag = new LivingroomFragment(LivingroomList.this);
@@ -196,10 +200,11 @@ public class LivingroomList extends AppCompatActivity {
     /*
         Retrieve the latest data from DB and update the list
      */
-    public void refreshMessages(){
+    public void refreshDevices(){
         dbHelper = new LivingroomDBHelper(this);
         db = dbHelper.getWritableDatabase();
 
+        //make a select query to database to find all the devices sorted by frequency
         results = db.query(false, LivingroomDBHelper.TABLENAME,
                 new String[] {LivingroomDBHelper.KEY_ID, LivingroomDBHelper.KEY_Name,
                             LivingroomDBHelper.KEY_Switch, LivingroomDBHelper.KEY_Brightness,
@@ -208,7 +213,6 @@ public class LivingroomList extends AppCompatActivity {
                             LivingroomDBHelper.KEY_Type, LivingroomDBHelper.KEY_Frequency
                 },
                 null, null, null, null, LivingroomDBHelper.KEY_Frequency+ " DESC", null);
-        int rows = results.getCount() ; //number of rows returned
         results.moveToFirst(); //move to first result
 
         Log.i(ACTIVITY_NAME, "Cursor’s column count = " + results.getColumnCount());
@@ -216,6 +220,7 @@ public class LivingroomList extends AppCompatActivity {
             Log.i(ACTIVITY_NAME, "Cursor’s column name = " + results.getColumnName(i));
 
         devices.clear();
+        //add items from db into the device list
         while(!results.isAfterLast() ) {
             Log.i(ACTIVITY_NAME, "SQL MESSAGE:" + results.getString(results.getColumnIndex(LivingroomDBHelper.KEY_Name)));
             devices.add(results.getString(results.getColumnIndex(LivingroomDBHelper.KEY_Name)));
@@ -237,7 +242,7 @@ public class LivingroomList extends AppCompatActivity {
         values.put(LivingroomDBHelper.KEY_Name, deviceName);
         values.put(LivingroomDBHelper.KEY_Type, deviceTye);
         db.insert(LivingroomDBHelper.TABLENAME, null, values);
-        refreshMessages();
+        refreshDevices();
     }
 
     /*
@@ -303,7 +308,7 @@ public class LivingroomList extends AppCompatActivity {
      */
     public void deleteDbDevice(Long deviceID){
         db.delete(LivingroomDBHelper.TABLENAME, LivingroomDBHelper.KEY_ID + "=" + deviceID, null);
-        refreshMessages();
+        refreshDevices();
     }
 
     /*
@@ -374,9 +379,10 @@ public class LivingroomList extends AppCompatActivity {
             showSaveMessage();
         }
 
-        refreshMessages();
+        refreshDevices();
     }
 
+    //remove fragment
     public void removeFragment()
     {
         FragmentManager fm = getFragmentManager();
@@ -395,6 +401,7 @@ public class LivingroomList extends AppCompatActivity {
         return true;
 
     }
+    // toolbar
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 
@@ -435,7 +442,8 @@ public class LivingroomList extends AppCompatActivity {
         return true;
     }
 
-    //initialize DB and show Progress bar
+    // Async.
+    // initialize DB and show Progress bar
     private class InitiaizeDB extends AsyncTask<String, Integer, String>
     {
 
@@ -446,37 +454,39 @@ public class LivingroomList extends AppCompatActivity {
                     new String[] {},
                     null, null, null, null, null, null);
             int rows = results.getCount() ; //number of rows returned
+            //only show the progress bar when the list view loads in first time
             if (rows == 0) {
                 try {
                     publishProgress(0);
+                    //insert a Simple lamp
                     ContentValues values = new ContentValues();
                     values.put(LivingroomDBHelper.KEY_Name, "Simple Lamp 1");
                     values.put(LivingroomDBHelper.KEY_Type, "Simple Lamp");
                     db.insert(LivingroomDBHelper.TABLENAME, null, values);
                     Thread.sleep(500);
                     publishProgress(20);
-
+                    //insert a Dimmable lamp
                     values = new ContentValues();
                     values.put(LivingroomDBHelper.KEY_Name, "Dimmable Lamp 1");
                     values.put(LivingroomDBHelper.KEY_Type, "Dimmable Lamp");
                     db.insert(LivingroomDBHelper.TABLENAME, null, values);
                     Thread.sleep(500);
                     publishProgress(40);
-
+                    //insert a Smart lamp
                     values = new ContentValues();
                     values.put(LivingroomDBHelper.KEY_Name, "Smart Lamp 1");
                     values.put(LivingroomDBHelper.KEY_Type, "Smart Lamp");
                     db.insert(LivingroomDBHelper.TABLENAME, null, values);
                     Thread.sleep(500);
                     publishProgress(60);
-
+                    //insert a TV
                     values = new ContentValues();
                     values.put(LivingroomDBHelper.KEY_Name, "TV 1");
                     values.put(LivingroomDBHelper.KEY_Type, "Television");
                     db.insert(LivingroomDBHelper.TABLENAME, null, values);
                     Thread.sleep(500);
                     publishProgress(80);
-
+                    //insert a Window Blinds
                     values = new ContentValues();
                     values.put(LivingroomDBHelper.KEY_Name, "Blinds 1");
                     values.put(LivingroomDBHelper.KEY_Type, "Window Blinds");
@@ -495,6 +505,7 @@ public class LivingroomList extends AppCompatActivity {
 
         }
 
+        //update the progress bar when item inserted
         public void onProgressUpdate(Integer... progress)
         {
             ProgressBar progressBar= (ProgressBar) findViewById(R.id.lr_progressBar);
@@ -502,35 +513,19 @@ public class LivingroomList extends AppCompatActivity {
             Log.i("ASYNCTASK", "" + progress[0]);
         }
 
+
         public void onPostExecute(String work)
         {
+            //hide the progress bar when all the items are inserted
             ProgressBar progressBar= (ProgressBar) findViewById(R.id.lr_progressBar);
             progressBar.setVisibility(View.INVISIBLE);
 
+            //show the "Add" button
             Button addButton = (Button) findViewById(R.id.lr_list_add);
             addButton.setVisibility(View.VISIBLE);
 
-            refreshMessages();
+            refreshDevices();
             Log.i("ASYNC TASK DONE", work);
-        }
-
-        private Bitmap getImage(URL url) {
-            HttpURLConnection connection = null;
-            try {
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-                int responseCode = connection.getResponseCode();
-                if (responseCode == 200) {
-                    return BitmapFactory.decodeStream(connection.getInputStream());
-                } else
-                    return null;
-            } catch (Exception e) {
-                return null;
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-            }
         }
 
     }
