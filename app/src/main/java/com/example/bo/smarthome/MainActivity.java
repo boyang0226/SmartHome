@@ -7,7 +7,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
+/**
+ * This class is the main page for the project login
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Sizhe Chen, Qu Zhen, Bo Yang, Qiuju Zhu
+ *
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    // create the menu for toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -30,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
 
     }
+    //option selected
+
     public boolean onOptionsItemSelected(MenuItem item){
         int id = item.getItemId();
 

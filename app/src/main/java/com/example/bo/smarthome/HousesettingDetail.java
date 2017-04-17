@@ -114,6 +114,8 @@ ctx=this;
                     // String temp
                     bun.putString("Temp", Temp);
 
+
+
                     // the listView get click, if is house wather
                     if (adapterView.getItemAtPosition(i).equals(getString(R.string.house_weather))) {
 
