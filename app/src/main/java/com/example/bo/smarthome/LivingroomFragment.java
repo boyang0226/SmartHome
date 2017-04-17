@@ -18,7 +18,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 /**
- * Created by Open on 3/21/2017.
+ * Created by Sizhe on 3/21/2017.
+ * this is the frament class for living room
  */
 
 public class LivingroomFragment extends Fragment {
@@ -96,7 +97,7 @@ public class LivingroomFragment extends Fragment {
             dimmableLampSeekBar.setMax(0);
             dimmableLampSeekBar.setMax(100);
             dimmableLampSeekBar.setProgress(brightness);
-
+            //bind listener for dimmable lamp
             dimmableLampSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
@@ -121,7 +122,7 @@ public class LivingroomFragment extends Fragment {
 
             brightnessLabel = (TextView)gui.findViewById(R.id.lr_smart_lamp_seekBar_value);
             brightnessLabel.setText(String.valueOf(brightness));
-
+            //bind listener for smart lamp
             smartLampSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
@@ -160,7 +161,7 @@ public class LivingroomFragment extends Fragment {
             tvVolumnLabel.setText(String.valueOf(volume));
             tvChannelLabel= (TextView)gui.findViewById(R.id.lr_tv_channel_seekBar_value);
             tvChannelLabel.setText(String.valueOf(channel));
-
+            //bind listener for TV volume seek bar
             tvVolumeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
@@ -173,7 +174,7 @@ public class LivingroomFragment extends Fragment {
                     tvVolumnLabel.setText(String.valueOf(progress));
                 }
             });
-
+            //bind listener for TV channel seek bar
             tvChannelSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
@@ -186,12 +187,12 @@ public class LivingroomFragment extends Fragment {
                     tvChannelLabel.setText(String.valueOf(progress));
                 }
             });
-
+            // find four buttons in layout
             Button upButton = (Button)gui.findViewById(R.id.lr_tv_up_button);
             Button downButton = (Button)gui.findViewById(R.id.lr_tv_down_button);
             Button leftButton = (Button)gui.findViewById(R.id.lr_tv_left_button);
             Button rightButton = (Button)gui.findViewById(R.id.lr_tv_right_button);
-
+            //add onClickListener for each button
             upButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -232,7 +233,7 @@ public class LivingroomFragment extends Fragment {
             BlindsSeekBar.setMax(0);
             BlindsSeekBar.setMax(100);
             BlindsSeekBar.setProgress(height);
-
+            //bind listener for blinds seek bar
             BlindsSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
@@ -253,6 +254,7 @@ public class LivingroomFragment extends Fragment {
         //Delete event handler
         Button deleteButton = (Button)gui.findViewById(R.id.lr_delete);
         if (deleteButton != null)
+            //bind listener for delete button
             deleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -292,6 +294,7 @@ public class LivingroomFragment extends Fragment {
         //Submit event handler
         if (gui.findViewById(R.id.lr_list_details_content_submit) != null){
             Button submitButton = (Button)gui.findViewById(R.id.lr_list_details_content_submit);
+            //bind listener for submit button
             submitButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -317,6 +320,7 @@ public class LivingroomFragment extends Fragment {
         //save event handler
         Button saveButton = (Button)gui.findViewById(R.id.lr_save);
         if (saveButton != null)
+            //bind listener for save button
             saveButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -331,6 +335,8 @@ public class LivingroomFragment extends Fragment {
                     Intent intent = new Intent();
                     intent.putExtra("id" ,id);
                     intent.putExtra("deviceType" ,deviceType);
+
+                    //save each value for different devices in the intent
                     if (deviceType.equals("Simple Lamp") || deviceType.equals("普通灯")){
                         simpleLampSwitchValue = SimpleLampSwitch.isChecked();
                         intent.putExtra("switch", simpleLampSwitchValue);
@@ -354,10 +360,12 @@ public class LivingroomFragment extends Fragment {
                         intent.putExtra("height", blindsHeight);
                     }
 
+
                     if (!isTablet){
                         getActivity().setResult(1, intent);
                         getActivity().finish();
                     }
+                    //save each value for different devices in the DB
                     else{
                         if (deviceType.equals("Simple Lamp") || deviceType.equals("普通灯")){
                             livingroomList.updateDbSimpleLamp(id, simpleLampSwitchValue);
@@ -371,7 +379,7 @@ public class LivingroomFragment extends Fragment {
                             livingroomList.updateDbBlinds(id, blindsHeight);
                         }
                         livingroomList.showUpdateMessage();
-                        livingroomList.refreshMessages();
+                        livingroomList.refreshDevices();
                         livingroomList.removeFragment();
                     }
 

@@ -3,7 +3,10 @@ package com.example.bo.smarthome;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+/**
+ * Created by Sizhe on 3/21/2017.
+ * this is the item detail for living room
+ */
 public class LivingroomItemDetails extends AppCompatActivity {
 
     @Override
