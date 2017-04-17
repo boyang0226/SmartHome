@@ -314,7 +314,12 @@ ctx=this;
             case R.id.kitchen:
 
 
+                Intent itntKitchenMain = new Intent(this, KitchenMain.class);
+                startActivity(itntKitchenMain);
+
+
                 startActivity(new Intent(this, KitchenMain.class));
+
                 break;
 
             //house help menu

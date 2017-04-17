@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
+ * This class creates the database.
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Qiuju Zhu
  * Created by qiu on 2017-04-01.
  */
 
@@ -59,6 +63,7 @@ public class KitchenDatabaseHelper extends SQLiteOpenHelper {
         ContentValues fridgeValues = new ContentValues();
         ContentValues lightValues = new ContentValues();
         ContentValues microwaveValues = new ContentValues();
+
         //Microwave database
         applianceValues.put(KitchenDatabaseHelper.KEY_APPLIANCE_TYPE, "MICROWAVE" );
         applianceValues.put(KitchenDatabaseHelper.KEY_APPLIANCE_NAME, "Panosonic Microwave" );
@@ -69,6 +74,7 @@ public class KitchenDatabaseHelper extends SQLiteOpenHelper {
         microwaveValues.put(KitchenDatabaseHelper.KEY_MICROWAVE_SECOND, 0);
         microwaveValues.put(KitchenDatabaseHelper.KEY_MICROWAVE_STATE, "RESET");
         db.insert(KitchenDatabaseHelper.KITCHEN_MICROWAVE_TABLE_NAME, "", microwaveValues);
+
         //Fridge database
         applianceValues.put(KitchenDatabaseHelper.KEY_APPLIANCE_TYPE, "FRIDGE" );
         applianceValues.put(KitchenDatabaseHelper.KEY_APPLIANCE_NAME, "Samsung Fridge" );
@@ -78,6 +84,7 @@ public class KitchenDatabaseHelper extends SQLiteOpenHelper {
         fridgeValues.put(KitchenDatabaseHelper.KEY_FRIDGE_SETTING, 5);
         fridgeValues.put(KitchenDatabaseHelper.KEY_FREEZER_SETTING, -20);
         db.insert(KitchenDatabaseHelper.KITCHEN_FRIDGE_TABLE_NAME, "", fridgeValues);
+
         //Light database
         applianceValues.put(KitchenDatabaseHelper.KEY_APPLIANCE_TYPE, "LIGHT" );
         applianceValues.put(KitchenDatabaseHelper.KEY_APPLIANCE_NAME, "Main Ceiling light" );

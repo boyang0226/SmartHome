@@ -1,7 +1,5 @@
 package com.example.bo.smarthome;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,22 +7,16 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.media.tv.TvContract;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.Xml;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,28 +25,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 
+/**
+ * This class shows the main page of the Kitchen.
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Qiuju Zhu
+ */
+/*Android - configure Spinner to use array [Webpage] Retrieved from:
+ *http://stackoverflow.com/questions/1587028/android-configure-spinner-to-use-array
+ */
+/*Android AlertDialog Builder [Webpage]. Retrieved from:
+ *http://stackoverflow.com/questions/13675822/android-alertdialog-builder
+ */
 public class KitchenMain extends KitchenBase {
 
     protected static final String ACTIVITY_NAME = "KitchenMain_";
@@ -222,7 +210,9 @@ public class KitchenMain extends KitchenBase {
         }
     }
 
-    //AsyncTask
+    /**
+     * AsyncTask
+     */
     public class KitchenApplianceQuery extends AsyncTask<String, Integer, String> {
         //run small group in background
         @Override
@@ -261,7 +251,10 @@ public class KitchenMain extends KitchenBase {
 
              return "";
         }
-        //update progress bar.
+
+        /**
+         *  ProgressUpdate.
+         */
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
@@ -272,7 +265,7 @@ public class KitchenMain extends KitchenBase {
             }
             listAdapter.notifyDataSetChanged();
         }
-        //set the progress bar.
+        //postExecute.
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -317,7 +310,8 @@ public class KitchenMain extends KitchenBase {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarkitchenmain);
         setToolbarColor(toolbar);
         setSupportActionBar(toolbar);
-        //add button category
+
+        //add appliance category
         String microwave = getString(R.string.kitchen_microwave);
         String refrigerator = getString(R.string.kitchen_refrigerator);
         String light = getString(R.string.kitchen_light);
@@ -331,17 +325,20 @@ public class KitchenMain extends KitchenBase {
         pb.setProgressTintList(ColorStateList.valueOf(Color.RED));
 
         populateListView(logTag);
-
+        //open datebase
         KitchenDatabaseHelper dbHelper = new KitchenDatabaseHelper(KitchenMain.this);
         db = dbHelper.getWritableDatabase();
 
         new KitchenApplianceQuery().execute("");
-
+        //Handle list view item select.
         handleListViewItemClick(logTag);
-
+        //Add button handle. handle add appliance button
         addAppliance(logTag);
     }
-    // Show activity result.
+
+    /**
+     * Show activity result.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -358,7 +355,7 @@ public class KitchenMain extends KitchenBase {
 
     /**
      * Choose an activity
-     * @param logTag
+     * @param logTag log identifier
      */
     private void handleListViewItemClick(String logTag) {
 
@@ -414,9 +411,9 @@ public class KitchenMain extends KitchenBase {
 
     /**
      * Handle replace/add situation in fragment.
-     * @param f
-     * @param cls
-     * @param bun
+     * @param f kitchenFragementBase object
+     * @param cls view object
+     * @param bun Bundle object
      */
     private void CallFragmentOrActivity(KitchenFragmentBase f, Class<?> cls, Bundle bun)
     {
@@ -443,7 +440,7 @@ public class KitchenMain extends KitchenBase {
 
     /**
      * Display the list view.
-     * @param logTag
+     * @param logTag log identifier
      */
     private void populateListView(String logTag) {
 
@@ -458,7 +455,7 @@ public class KitchenMain extends KitchenBase {
 
     /**
      * This method is for add an appliance
-     * @param logTag
+     * @param logTag log identifier
      */
     private void addAppliance(String logTag) {
 
@@ -481,11 +478,11 @@ public class KitchenMain extends KitchenBase {
 
                 Spinner spinner = (Spinner)dlgView.findViewById(R.id.spnKitchenAddAppliance);
 
-                // Step 2: Create and fill an ArrayAdapter with a bunch of "State" objects
+                //Create and fill an ArrayAdapter with a bunch of "State" objects
                 ArrayAdapter<KitchenApplianceType> spinnerArrayAdapter = new ArrayAdapter(KitchenMain.this,
                         android.R.layout.simple_spinner_item, applianceTypeList.toArray());
 
-                // Step 3: Tell the spinner about our adapter
+                //Tell the spinner about our adapter
                 spinner.setAdapter(spinnerArrayAdapter);
 
                 dlgBuilder.setView(dlgView)
@@ -538,7 +535,7 @@ public class KitchenMain extends KitchenBase {
                                     }
                                 } else {
                                         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(KitchenMain.this);
-                                        // 2. Chain together various setter methods to set the dialog characteristics
+                                        //Chain together various setter methods to set the dialog characteristics
                                             builder.setMessage(R.string.kitchen_main_add_appliance_dialog_warning_msg) //Add a dialog message to strings.xml
                                             .setTitle(R.string.kitchen_main_add_appliance_dialog_title)
                                             .setPositiveButton(R.string.dialog_positive_text_ok, new DialogInterface.OnClickListener() {

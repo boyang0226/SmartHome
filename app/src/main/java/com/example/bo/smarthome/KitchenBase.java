@@ -1,8 +1,6 @@
 package com.example.bo.smarthome;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -14,7 +12,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * This class sets the main page, offer user to select different UI.
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Qiuju Zhu
+ */
 public class KitchenBase extends AppCompatActivity {
 
     /**
@@ -25,7 +28,7 @@ public class KitchenBase extends AppCompatActivity {
 
     /**
      * Set log tag.
-     * @param logTag
+     * @param logTag log identifier
      */
     protected void setLogTag(String logTag)
     {
@@ -44,7 +47,7 @@ public class KitchenBase extends AppCompatActivity {
 
     /**
      * Open houseSetting, Auto, LivingRoom activities
-     * @param cls
+     * @param cls parent
      */
     protected void callActivity(Class<?> cls)    {
 
@@ -63,7 +66,7 @@ public class KitchenBase extends AppCompatActivity {
         intnt.putExtras(bun);
         startActivityForResult(intnt,5);
     }
-    //Show help menu
+    //Show help menu on different ui.
     protected void showHelp() {
     }
     //Load the kitchen fragment
