@@ -1,18 +1,11 @@
 package com.example.bo.smarthome;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +17,18 @@ import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.Toast;
+
+
+/**
+ * This class creates the light fragment.
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Qiuju Zhu
+ */
+
+ /* Android SQLite: Update Statement [Webpage]. Retrieved from:
+  * http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
+  */
 
 public class KitchenLightFragment extends KitchenFragmentBase {
 
@@ -68,7 +73,9 @@ public class KitchenLightFragment extends KitchenFragmentBase {
 
     KitchenMain km = null;
 
-    //constructor.
+    /**
+     * Constructor
+     */
     public KitchenLightFragment() {
         // Required empty public constructor
     }
@@ -78,9 +85,9 @@ public class KitchenLightFragment extends KitchenFragmentBase {
 
     /**
      * Create the layout of the fragment.
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
+     * @param inflater correspond layout(xml) file
+     * @param container ViewGroup object
+     * @param savedInstanceState reference to a Bundle object
      * @return the fragment root view.
      */
     @Override
@@ -198,7 +205,7 @@ public class KitchenLightFragment extends KitchenFragmentBase {
 
     /**
      * Show the toast message when the light switch changes state.
-     * @param isChecked
+     * @param isChecked boolean
      */
     private void showToastMessage(boolean isChecked) {
         CharSequence text = null;
@@ -237,9 +244,7 @@ public class KitchenLightFragment extends KitchenFragmentBase {
         values.put(KitchenDatabaseHelper.KEY_MAINSWITCH, lightSetting.getMainSwitch()?1:0 );
         values.put(KitchenDatabaseHelper.KEY_DIMMER_LEVEL, lightSetting.getDimmerLevel() );
 
-        /* Android SQLite: Update Statement [Webpage]. Retrieved from:
-         * http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
-         */
+
         if (lightSetting.getId() == 0)
         {
             db.insert(KitchenDatabaseHelper.KITCHEN_LIGHT_TABLE_NAME, "", values);
@@ -253,7 +258,7 @@ public class KitchenLightFragment extends KitchenFragmentBase {
 
     /**
      * Disable button
-     * @param enabled
+     * @param enabled boolean
      */
     private void DisableInuptControls (boolean enabled) {
 

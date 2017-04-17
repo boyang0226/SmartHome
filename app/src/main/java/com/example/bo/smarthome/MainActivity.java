@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.house:
                 Intent HouseSetting = new Intent(MainActivity.this, HousesettingDetail.class);
-                startActivityForResult(HouseSetting, 5);
+                startActivityForResult(HouseSetting, 3);
 
                 break;
             case R.id.car:
