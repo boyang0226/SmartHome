@@ -25,10 +25,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/btnKitchenMainAdd"
 
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
             android:textAlignment="center"
-             />
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"/>
+
 
     <ProgressBar
         android:id="@+id/prgKitchenApplianceBar"

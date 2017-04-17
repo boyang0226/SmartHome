@@ -7,9 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 /**
+ * This class creates the light fragment.
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Qiuju Zhu
  * A simple {@link Fragment} subclass.
  */
 public class KitchenFragmentBase extends Fragment {
@@ -42,10 +45,10 @@ public class KitchenFragmentBase extends Fragment {
 
     /**
      *set the fragment layout
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @param inflater correspond layout(xml) file
+     * @param container ViewGroup object
+     * @param savedInstanceState reference to a Bundle object
+     * @return null
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

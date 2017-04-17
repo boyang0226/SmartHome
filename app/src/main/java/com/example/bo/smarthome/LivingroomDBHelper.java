@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * Created by Open on 3/21/2017.
+ * Created by Sizhe on 3/21/2017.
+ * the is the db helper class for living room
+ * It helps to access the database
  */
 
 public class LivingroomDBHelper  extends SQLiteOpenHelper {

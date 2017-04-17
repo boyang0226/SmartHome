@@ -14,15 +14,30 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.SeekBar;
 import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.Toast;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * This class creates the light fragment.
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Qiuju Zhu
  */
+
+ /*How to set selected item of Spinner by value, not by position? [Webpage]. Retrieved from:
+  *http://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
+  */
+ /*Android SQLite: Update Statement [Webpage]. Retrieved from:
+  *http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
+  */
+ /*Android AlertDialog Builder [Webpage]. Retrieved from:
+  *http://stackoverflow.com/questions/13675822/android-alertdialog-builder
+  */
+ /*REFRIGERATOR AND FREEZER TEMPERATURE SETTINGS [Webpage]. Retrieved from:
+  *http://www.subzero-wolf.com/assistance/answers/refrigerator-and-freezer-temperature-settings
+  */
+
+ //A simple {@link Fragment} subclass.
 public class KitchenFridgeFragment extends KitchenFragmentBase {
 
     KitchenMain km;
@@ -84,10 +99,10 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
     }
 
     /**
-     * Inflate the UI
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
+     * Inflate the UI fragment
+     * @param inflater correspond layout(xml) file
+     * @param container ViewGroup object
+     * @param savedInstanceState reference to a Bundle object
      * @return frgRootView
      */
     @Override
@@ -172,9 +187,7 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
         spnFreezer.setAdapter(freezerAdapter);
 
     }
-    /*How to set selected item of Spinner by value, not by position? [Webpage]. Retrieved from:
-     *http://stackoverflow.com/questions/2390102/how-to-set-selected-item-of-spinner-by-value-not-by-position
-     */
+
     /**
      * Set the spinner values.
      * @param spnFridge fridge spinner
@@ -222,9 +235,7 @@ public class KitchenFridgeFragment extends KitchenFragmentBase {
         values.put(KitchenDatabaseHelper.KEY_FRIDGE_SETTING, fridgeSetting.getFridgeTemp());
         values.put(KitchenDatabaseHelper.KEY_FREEZER_SETTING, fridgeSetting.getFreezerTemp());
 
-        /*Android SQLite: Update Statement [Webpage]. Retrieved from:
-         *http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
-         */
+
         if (fridgeSetting.getId() == 0)
         {
             db.insert(KitchenDatabaseHelper.KITCHEN_FRIDGE_TABLE_NAME, "", values);

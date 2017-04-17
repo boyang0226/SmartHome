@@ -5,6 +5,14 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+
+/**
+ * This class creates the fridge UI.
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Qiuju Zhu
+ */
+
 public class KitchenFridgeDetail extends KitchenBase {
 
     /**

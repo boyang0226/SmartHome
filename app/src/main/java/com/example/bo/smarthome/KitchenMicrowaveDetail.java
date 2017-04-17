@@ -5,6 +5,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
+/**
+ * This class creates the microwave user interface
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Qiuju Zhu
+ */
+
 public class KitchenMicrowaveDetail extends KitchenBase {
 
     /**

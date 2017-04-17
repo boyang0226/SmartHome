@@ -17,9 +17,31 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import android.widget.Toast;
 
-public class KitchenMicrowaveFragment extends KitchenFragmentBase {
+/**
+ * This class creates the microwave fragment.
+ * Assignment: Project SmartHome
+ * Professor: Eric Torunski
+ * author: Qiuju Zhu
+ */
 
+/* Android SQLite: Update Statement [Webpage]. Retrieved from:
+ * http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
+ */
+/* Add leading zeroes to number in Java? [Webpage]. Retrieved from:
+ * http://stackoverflow.com/questions/275711/add-leading-zeroes-to-number-in-java
+ */
+/*How to make a countdown Timer in android? [Webpage]. Retrieved from:
+ *http://stackoverflow.com/questions/10032003/how-to-make-a-countdown-timer-in-android
+ */
+/*How to use NumberPicker in Android [Webpage]. Retrieved from:
+ *https://android--examples.blogspot.ca/2015/05/how-to-use-numberpicker-in-android.html
+ */
+
+
+public class KitchenMicrowaveFragment extends KitchenFragmentBase {
+    //microwave maximum 30 in minutes
     private static final int MAX_MINUTE = 30;
+    //microwave maximum 59 in seconds.
     private static final int MAX_SECOND = 59;
 
     /**
@@ -152,9 +174,7 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
             values.put(KitchenDatabaseHelper.KEY_MICROWAVE_SECOND, microwaveSetting.getSecond());
             values.put(KitchenDatabaseHelper.KEY_MICROWAVE_STATE, microwaveSetting.getState());
 
-            /* Android SQLite: Update Statement [Webpage]. Retrieved from:
-             * http://stackoverflow.com/questions/5987863/android-sqlite-update-statement
-             */
+
             if (microwaveSetting.getId() == 0) {
                 db.insert(KitchenDatabaseHelper.KITCHEN_MICROWAVE_TABLE_NAME, "", values);
             } else {
@@ -165,9 +185,9 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
 
     /**
      * Set the fragment layout.
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
+     * @param inflater correspond layout(xml) file
+     * @param container ViewGroup object
+     * @param savedInstanceState reference to a Bundle object
      * @return the fragment root view.
      */
     @Override
@@ -180,8 +200,8 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
 
     /**
      * Set the activity layout.
-     * @param view
-     * @param savedInstanceState
+     * @param view View object
+     * @param savedInstanceState reference to a Bundle object
      */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -225,9 +245,7 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
         np.setMinValue(0);
         np.setValue(0);
 
-        /* Add leading zeroes to number in Java? [Webpage]. Retrieved from:
-         * http://stackoverflow.com/questions/275711/add-leading-zeroes-to-number-in-java
-         */
+
         np.setFormatter(new NumberPicker.Formatter() {
             @Override
             public String format(int value) {
@@ -239,7 +257,7 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
 
     /**
      * Set the number picker for minutes and seconds.
-     * @param setting
+     * @param setting microwaveSetting object
      */
     private void setMinutesSecondsFrom(MicrowaveSetting setting) {
         npMinute.setValue(setting.getMinute());
@@ -247,8 +265,8 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
     }
 
     /**
-     * Set the button state.
-     * @param state
+     * Stores the data.
+     * @param state state value
      */
     private void setButtonsByState(String state) {
         try {
@@ -337,7 +355,7 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
 
                 microwaveSetting.setState(MicrowaveSetting.STATE_START);
                 setButtonsByState(microwaveSetting.getState());
-
+                //
                 long futureSec = startMin * 60 * 1000 + startSec * 1000 + 1000;
                     counterDownTimer = new CountDownTimer(futureSec, 1000) {
 
@@ -404,7 +422,7 @@ public class KitchenMicrowaveFragment extends KitchenFragmentBase {
 
                 String msg = getString(R.string.kitchen_light_delete_appliance_dialog_message)  + " " + applianceName + "?";
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                // 2. Chain together various setter methods to set the dialog characteristics
+                // Chain together various setter methods to set the dialog characteristics
                 builder.setMessage(msg)
                         .setTitle(R.string.kitchen_microwave_delete_appliance_dialog_title)
                         .setPositiveButton(R.string.dialog_positive_text_ok, new DialogInterface.OnClickListener() {
