@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
  *
  * determine with fragment should to go
  *
+ *
  */
 
 public class Housegarage extends AppCompatActivity {
@@ -45,6 +46,7 @@ public class Housegarage extends AppCompatActivity {
         }
     }
 
+   // http://stackoverflow.com/questions/18337536/android-overriding-onbackpressed
     //this method is control the onbackpressed action for the housesetting part
     public void onBackPressed(){
         super.onBackPressed();

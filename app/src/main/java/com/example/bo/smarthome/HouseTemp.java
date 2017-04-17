@@ -72,7 +72,7 @@ HouseDatabaseHelper houseDatabaseHelper;
 
 
 
-
+    // http://stackoverflow.com/questions/29677812/why-is-onattach-called-before-oncreate
     public void onAttach(Activity activity){
         super.onAttach(activity);
         ctx=activity;
