@@ -109,6 +109,7 @@ HouseDatabaseHelper houseDatabaseHelper;
         listview= (ListView)gui.findViewById(R.id.house_temp_listview);
            cursor = getCursor();
 
+        // http://stackoverflow.com/questions/12077955/android-using-simplecursoradapter-to-get-data-from-database-to-listview
         // simpleCursor that make the two column of the database to be one
         adapter = new SimpleCursorAdapter(ctx,
                 R.layout.activity_house_displayschedule,

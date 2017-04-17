@@ -30,7 +30,7 @@ public class LivingroomDBHelper  extends SQLiteOpenHelper {
     public LivingroomDBHelper(Context ctx) {
         super(ctx, TABLENAME, null, DATABASE_VERSION);
     }
-
+    //only called if not yet created
     public void onCreate(SQLiteDatabase db){
         db.execSQL("CREATE TABLE " + TABLENAME + "(" + KEY_ID + " INTEGER PRIMARY KEY, "+
                 KEY_Name+ " VARCHAR(256), " + KEY_Switch + " BOOLEAN DEFAULT 0," +
@@ -40,14 +40,14 @@ public class LivingroomDBHelper  extends SQLiteOpenHelper {
                 KEY_Frequency + " INT DEFAULT 0);");
         Log.i("LivingroomDBHelper", "Calling onCreate");
     }
-
+    //onupgrage with the database version
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + TABLENAME);
         onCreate(db);
         Log.i("LivingroomDBHelper", "Calling onUpgrade, oldVersion=" + oldVersion + "newVersion=" + newVersion);
     }
-
+    //ondowngrade with the database version
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion)
     {
         db.execSQL("DROP TABLE IF EXISTS " + TABLENAME);
